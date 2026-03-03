@@ -26,6 +26,7 @@ extensions = [
     'sphinx_design',
     'sphinx_inline_tabs',
     'sphinx.ext.apidoc',
+    "sphinx.ext.githubpages",
 ]
 
 myst_enable_extensions = ["colon_fence"]

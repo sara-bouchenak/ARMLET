@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - /experiment/example/KDD/kdd.yaml
+  - override /method/hyperparameters/model: mlp.yaml
+
+method:
+  hyperparameters:
+    client:
+      optimizer:
+        name: SGD
+        lr: 0.003
+        weight_decay: 0
+
+hydra:
+  sweeper:
+    params:
+      exp.seed: 101,202,303,404,505

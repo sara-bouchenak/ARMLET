@@ -1,0 +1,5 @@
+name: random
+client:
+  _target_: armlet.FL_pipeline.data_selection.methods.random.RandomDataSelection
+  sampling_perc: 0.1
+  select_every: 20

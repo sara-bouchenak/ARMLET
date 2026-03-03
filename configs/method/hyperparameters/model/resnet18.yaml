@@ -1,0 +1,11 @@
+# @package method.hyperparameters
+
+defaults:
+  - default.yaml
+
+model:
+  _target_: armlet.utils.net.ResNet18
+
+client:
+  loss: 
+    _target_: torch.nn.BCEWithLogitsLoss

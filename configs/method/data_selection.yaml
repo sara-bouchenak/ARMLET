@@ -1,0 +1,5 @@
+defaults:
+  - default.yaml
+  - hyperparameters/data_selection: full.yaml
+
+_target_: armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionCentralizedFL

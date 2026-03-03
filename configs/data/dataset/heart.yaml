@@ -1,0 +1,5 @@
+dataset_name: Heart
+_target_: armlet.data.datasets.load_${data.dataset.dataset_name}_dataset
+path: ${paths.data_dir}/${data.dataset.dataset_name}/raw_data/cardio_train.csv
+sensitive_attributes: ['gender', 'age']
+train_size: 0.8

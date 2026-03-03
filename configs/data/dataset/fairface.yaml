@@ -1,0 +1,5 @@
+dataset_name: FairFace
+_target_: armlet.data.datasets.load_${data.dataset.dataset_name}_dataset
+path: ${paths.data_dir}/${data.dataset.dataset_name}/raw_data
+sensitive_attributes: ['age', 'race']
+new_image_size: [64, 64]

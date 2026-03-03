@@ -1,0 +1,93 @@
+# @package _global_
+
+data:
+
+  cleaning:
+    missing_values:
+      _target_: armlet.data.cleaning.missing_values.MissingValuesDataCleaningMethod
+    name: default
+
+  dataset:
+    _target_: armlet.data.datasets.load_Adult_dataset
+    dataset_name: Adult
+    path: ./datasets/Adult/raw_data
+    sensitive_attributes: ['age', 'gender', 'race']
+
+  distribution:
+    _target_: armlet.data.splitter.ArmletDataSplitter.iid
+
+  others:
+    client_split: 0.2
+    client_val_split: 0.5
+    keep_test: false
+    sampling_perc: 1.0
+    server_split: 0.0
+    server_test: false
+    server_test_union: true
+    server_val_split: 0.0
+    uniform_test: false
+
+  seed: 42
+
+eval:
+  _target_: armlet.eval.evaluators.BinaryClassificationFairnessEval
+  eval_every: 1
+  locals: true
+  post_fit: true
+  pre_fit: true
+  server: true
+
+exp:
+  device: cpu
+  inmemory: true
+  mode: federation
+  seed: 42
+  train: true
+
+logger:
+  _target_: armlet.utils.log.ArmletLog
+  json_log_dir: ${paths.output_dir}
+
+method:
+
+  _target_: armlet.FL_pipeline.FL_algorithms.ArmletCentralizedFL
+
+  hyperparameters:
+
+    client:
+      batch_size: 128
+      local_epochs: 10
+      loss:
+        _target_: torch.nn.BCELoss
+      optimizer:
+        lr: 0.001
+        name: SGD
+        weight_decay: 0.01
+      scheduler:
+        gamma: 1
+        name: StepLR
+        step_size: 1
+
+    model:
+      _target_: armlet.utils.net.LogRegression
+      input_size: 99
+      num_classes: 1
+
+    server:
+      loss:
+        _target_: torch.nn.BCELoss
+      time_to_accuracy_target: null
+      weighted: true
+
+paths:
+  data_dir: ./datasets
+  log_dir: ./logs
+  output_dir: ${hydra:runtime.output_dir}
+  root_dir: .
+
+protocol:
+  eligible_perc: 1.0
+  n_clients: 10
+  n_rounds: 150
+
+save: {}

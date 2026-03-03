@@ -1,0 +1,12 @@
+__pycache__/
+/out/
+/tmp
+/.git/
+/outputs
+/multirun
+/scripts
+/traces
+/datasets
+/armlet/results_analysis/*_svg/
+armlet.egg-info/
+/build

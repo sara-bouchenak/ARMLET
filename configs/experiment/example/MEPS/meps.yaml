@@ -1,0 +1,18 @@
+# @package _global_
+defaults:
+  - /experiment/example/default.yaml
+  - override /data/dataset: meps.yaml
+  - override /data/others: union_clients_test_wo_val.yaml
+
+data:
+  seed: 38
+
+method:
+
+  hyperparameters:
+
+    server:
+      time_to_accuracy_target: 0.85
+
+    client:
+      batch_size: 128

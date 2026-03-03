@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - override /data/distribution: iid.yaml
+  - override /data/others: union_clients_test.yaml
+  - override /save: null
+  - override /eval: only_global_model.yaml
+  - override /method: default.yaml
+  - override /hydra: example.yaml
+
+protocol:
+  n_clients: 10
+  n_rounds: 150

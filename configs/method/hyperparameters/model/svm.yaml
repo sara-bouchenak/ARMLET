@@ -1,0 +1,11 @@
+# @package method.hyperparameters
+
+defaults:
+  - default.yaml
+
+model:
+  _target_: armlet.utils.net.SVM
+
+client:
+  loss:
+    _target_: armlet.utils.custom_loss.BinaryHingeLoss

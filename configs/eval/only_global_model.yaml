@@ -1,0 +1,6 @@
+_target_: armlet.eval.evaluators.BinaryClassificationFairnessEval
+eval_every: 1
+pre_fit: false
+post_fit: false
+locals: false
+server: true

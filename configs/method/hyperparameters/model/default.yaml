@@ -1,0 +1,6 @@
+# @package method.hyperparameters
+
+model:
+  _target_: null
+  input_size: null    # automatically loaded according to data properties
+  num_classes: null   # automatically loaded according to data properties

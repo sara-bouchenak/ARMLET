@@ -1,0 +1,9 @@
+sampling_perc: 1.0
+client_split: 0.0
+client_val_split: 0.0
+keep_test: true
+server_test: true
+server_test_union: false
+server_split: 0.2
+server_val_split: 0.0
+uniform_test: false

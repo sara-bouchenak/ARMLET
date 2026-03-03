@@ -1,0 +1,4 @@
+defaults:
+  - hyperparameters: default.yaml
+
+_target_: armlet.FL_pipeline.FL_algorithms.ArmletCentralizedFL

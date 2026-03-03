@@ -1,0 +1,6 @@
+run:
+  dir: ${paths.root_dir}/outputs/example/${now:%Y-%m-%d}_${now:%H-%M-%S}/dataset=${data.dataset.dataset_name}
+
+sweep:
+  dir: ${paths.root_dir}/outputs/example/${now:%Y-%m-%d}_${now:%H-%M-%S}/dataset=${data.dataset.dataset_name}
+  subdir: model=${keep_last_str:${method.hyperparameters.model._target_}}/exp_seed=${exp.seed},data_seed=${data.seed}

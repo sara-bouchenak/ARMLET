@@ -1,0 +1,3 @@
+name: StepLR
+gamma: 1
+step_size: 1

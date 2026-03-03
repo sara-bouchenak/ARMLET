@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - /experiment/example/Heart/heart.yaml
+  - override /method/hyperparameters/model: svm.yaml
+
+method:
+  hyperparameters:
+    client:
+      optimizer:
+        name: RMSprop
+        lr: 0.03
+        weight_decay: 0
+
+hydra:
+  sweeper:
+    params:
+      exp.seed: 101,202,303,404,505

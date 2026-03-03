@@ -1,0 +1,9 @@
+defaults:
+  - cleaning: default.yaml
+  - dataset: adult.yaml
+  - distribution: iid.yaml
+  #- loading: default.yaml
+  #- saving: default.yaml
+  - others: union_clients_test.yaml
+
+seed: 42

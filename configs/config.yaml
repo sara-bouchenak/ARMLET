@@ -1,0 +1,13 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data: default.yaml
+  - eval: all.yaml
+  - exp: fl.yaml
+  - hydra: default.yaml
+  - logger: default.yaml
+  - method: default.yaml
+  - paths: default.yaml
+  - protocol: default.yaml
+  - save: no_model_saving.yaml

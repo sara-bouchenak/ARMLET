@@ -1,0 +1,2 @@
+_target_: armlet.utils.log.ArmletLog
+json_log_dir: ${paths.output_dir}

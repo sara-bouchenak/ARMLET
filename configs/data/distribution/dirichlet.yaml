@@ -1,0 +1,2 @@
+_target_: armlet.data.splitter.ArmletDataSplitter.safe_label_dirichlet_skew
+alpha: 1.0

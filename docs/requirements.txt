@@ -1,0 +1,5 @@
+sphinx
+sphinx-design
+sphinx-inline-tabs
+myst-nb
+pydata-sphinx-theme

@@ -1,0 +1,4 @@
+name: Adagrad
+lr: 0.001
+#weight_decay: 0.01
+#lr_decay: 0.01

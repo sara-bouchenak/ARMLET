@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - /experiment/example/MEPS/meps.yaml
+  - override /method/hyperparameters/model: log_regression.yaml
+
+method:
+  hyperparameters:
+    client:
+      optimizer:
+        name: Adagrad
+        lr: 0.001
+        weight_decay: 0.01
+
+hydra:
+  sweeper:
+    params:
+      exp.seed: 101,202,303,404,505

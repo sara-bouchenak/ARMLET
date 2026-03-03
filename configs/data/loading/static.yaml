@@ -1,0 +1,2 @@
+static: True
+load_dir: ${paths.data_dir}/${data.dataset.dataset_name}/no_cleaning

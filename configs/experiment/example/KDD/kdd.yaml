@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - /experiment/example/default.yaml
+  - override /data/dataset: kdd.yaml
+
+data:
+  seed: 59
+
+method:
+
+  hyperparameters:
+
+    server:
+      time_to_accuracy_target: 0.9
+
+    client:
+      batch_size: 128

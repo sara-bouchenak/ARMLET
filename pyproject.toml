@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+license = "LGPL-2.1-or-later"
+license-files = ["LICENSE"]
+name = "armlet"
+version = "0.2.0"
+authors = [
+    {name = "Baudouin Naline", email = "baudouin.naline@liris.cnrs.fr"},
+]
+description = "Federated learning system multi-criteria benchmarking audit."
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["federated learning", "deep learning", "pytorch", "multi-criteria", "benchmarking", "audit"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    "Topic :: Software Development",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+  "fluke-fl>=0.7.9,<0.8.0",
+  "pyreadstat",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+doc = ["sphinx", "sphinx-design", "sphinx-inline-tabs", "myst-nb", "shibuya"]
+
+[project.scripts]
+armlet = "armlet.run:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "armlet",
+    "armlet.data",
+    "armlet.data.cleaning",
+    "armlet.data.cleaning.missing_values",
+    "armlet.eval",
+    "armlet.FL_pipeline",
+    "armlet.FL_pipeline.FL_algorithms",
+    "armlet.FL_pipeline.data_selection",
+    "armlet.FL_pipeline.data_selection.methods",
+    "armlet.FL_pipeline.data_selection.FL_algorithms",
+    "armlet.results_analysis",
+    "armlet.utils"
+]
+exclude = []

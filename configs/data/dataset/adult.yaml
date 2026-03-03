@@ -1,0 +1,4 @@
+dataset_name: Adult
+_target_: armlet.data.datasets.load_${data.dataset.dataset_name}_dataset
+path: ${paths.data_dir}/${data.dataset.dataset_name}/raw_data
+sensitive_attributes: ['age', 'gender', 'race']

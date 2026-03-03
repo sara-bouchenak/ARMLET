@@ -1,0 +1,3 @@
+name: full
+client:
+  _target_: armlet.FL_pipeline.data_selection.methods.full.FullDataSelection

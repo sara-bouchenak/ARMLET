@@ -1,0 +1,4 @@
+defaults:
+  - client: default.yaml
+  - server: default.yaml
+  - model: log_regression.yaml

@@ -1,0 +1,2 @@
+name: ExponentialLR
+gamma: 0.99

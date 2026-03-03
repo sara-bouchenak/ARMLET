@@ -1,0 +1,7 @@
+defaults:
+  - optimizer: sgd.yaml
+  - scheduler: step_lr.yaml
+
+batch_size: 128
+local_epochs: 10
+loss: null

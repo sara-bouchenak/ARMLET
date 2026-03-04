@@ -1,6 +1,6 @@
 (development)=
 
-# Contributing to **Armlet**
+# Contributing to **ARMLET**
 
 [TODO]
 

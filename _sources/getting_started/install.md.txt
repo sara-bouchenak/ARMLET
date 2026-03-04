@@ -2,7 +2,7 @@
 
 # Installation
 
-First, clone the **Armlet** repository:
+First, clone the **ARMLET** repository:
 
 ```bash
 git clone https://github.com/sara-bouchenak/ARMLET.git
@@ -19,7 +19,7 @@ conda create -n armlet python=3.13.5
 conda activate armlet
 ```
 
-## Install **Armlet**
+## Install **ARMLET**
 
 Install **``armlet``** using `pip`:
 
@@ -31,11 +31,11 @@ pip install .
 ```{eval-rst}
 
 .. important::
-	In the documentation, we use ``ARMLET_DIR`` to refer to the path of the **Armlet** project and ``PROJECT_DIR`` to the path of your current project in which you use **Armlet** and run the command ``armlet``.
+	In the documentation, we use ``ARMLET_DIR`` to refer to the path of the **ARMLET** project and ``PROJECT_DIR`` to the path of your current project in which you use **ARMLET** and run the command ``armlet``.
 
 ```
 
-Now everything is ready to [run your first experiment](run_first_exp) with **Armlet**.
+Now everything is ready to [run your first experiment](run_first_exp) with **ARMLET**.
 
 ## Software requirements
 

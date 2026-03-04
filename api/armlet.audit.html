@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>armlet.utils package &#8212; ARMLET 0.2 documentation</title>
+    <title>armlet.audit package &#8212; ARMLET 0.2 documentation</title>
   
   
   
@@ -46,11 +46,11 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/armlet.utils';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/armlet.audit';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="armlet.utils.configs module" href="armlet.utils.configs.html" />
-    <link rel="prev" title="armlet.eval.metrics module" href="armlet.eval.metrics.html" />
+    <link rel="next" title="armlet.data package" href="armlet.data.html" />
+    <link rel="prev" title="armlet.FL_pipeline.data_selection.methods.random module" href="armlet.FL_pipeline.data_selection.methods.random.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -294,7 +294,7 @@
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.audit.html">armlet.audit package</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">armlet.audit package</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="armlet.data.html">armlet.data package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="armlet.data.cleaning.html">armlet.data.cleaning package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.cleaning.missing_values.html">armlet.data.cleaning.missing_values package</a></li>
@@ -313,7 +313,7 @@
 <li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html">armlet.eval.metrics module</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">armlet.utils package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="armlet.utils.html">armlet.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="armlet.utils.configs.html">armlet.utils.configs module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.utils.custom_loss.html">armlet.utils.custom_loss module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.utils.log.html">armlet.utils.log module</a></li>
@@ -369,7 +369,7 @@
     
     <li class="breadcrumb-item"><a href="armlet.html" class="nav-link">armlet package</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">armlet.utils package</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">armlet.audit package</span></li>
   </ul>
 </nav>
 </div>
@@ -386,53 +386,11 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="armlet-utils-package">
-<h1>armlet.utils package<a class="headerlink" href="#armlet-utils-package" title="Link to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="armlet.utils.configs.html">armlet.utils.configs module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="armlet.utils.configs.html#armlet.utils.configs.ArmletConfiguration"><code class="docutils literal notranslate"><span class="pre">ArmletConfiguration</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="armlet.utils.custom_loss.html">armlet.utils.custom_loss module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="armlet.utils.custom_loss.html#armlet.utils.custom_loss.BinaryHingeLoss"><code class="docutils literal notranslate"><span class="pre">BinaryHingeLoss</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="armlet.utils.log.html">armlet.utils.log module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="armlet.utils.log.html#armlet.utils.log.ArmletLog"><code class="docutils literal notranslate"><span class="pre">ArmletLog</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="armlet.utils.log.html#armlet.utils.log.ArmletLog.close"><code class="docutils literal notranslate"><span class="pre">ArmletLog.close()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="armlet.utils.log.html#armlet.utils.log.ArmletLog.end_fit"><code class="docutils literal notranslate"><span class="pre">ArmletLog.end_fit()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="armlet.utils.net.html">armlet.utils.net module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="armlet.utils.net.html#armlet.utils.net.LogRegression"><code class="docutils literal notranslate"><span class="pre">LogRegression</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="armlet.utils.net.html#armlet.utils.net.LogRegression.forward"><code class="docutils literal notranslate"><span class="pre">LogRegression.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.utils.net.html#armlet.utils.net.MLP"><code class="docutils literal notranslate"><span class="pre">MLP</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="armlet.utils.net.html#armlet.utils.net.MLP.forward"><code class="docutils literal notranslate"><span class="pre">MLP.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.utils.net.html#armlet.utils.net.ResNet18"><code class="docutils literal notranslate"><span class="pre">ResNet18</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.utils.net.html#armlet.utils.net.SVM"><code class="docutils literal notranslate"><span class="pre">SVM</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="armlet.utils.net.html#armlet.utils.net.SVM.forward"><code class="docutils literal notranslate"><span class="pre">SVM.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.utils.net.html#armlet.utils.net.VGG11"><code class="docutils literal notranslate"><span class="pre">VGG11</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="armlet.utils.net.html#armlet.utils.net.VGG11.forward"><code class="docutils literal notranslate"><span class="pre">VGG11.forward()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</section>
-<section id="module-armlet.utils">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-armlet.utils" title="Link to this heading">#</a></h2>
+  <section id="armlet-audit-package">
+<h1>armlet.audit package<a class="headerlink" href="#armlet-audit-package" title="Link to this heading">#</a></h1>
+<section id="module-armlet.audit">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-armlet.audit" title="Link to this heading">#</a></h2>
+<p>This module contains the audit components for <code class="docutils literal notranslate"><span class="pre">armlet</span></code>.</p>
 </section>
 </section>
 
@@ -447,20 +405,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="armlet.eval.metrics.html"
+       href="armlet.FL_pipeline.data_selection.methods.random.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">armlet.eval.metrics module</p>
+        <p class="prev-next-title">armlet.FL_pipeline.data_selection.methods.random module</p>
       </div>
     </a>
     <a class="right-next"
-       href="armlet.utils.configs.html"
+       href="armlet.data.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">armlet.utils.configs module</p>
+        <p class="prev-next-title">armlet.data package</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -483,8 +441,7 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-armlet.utils">Module contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-armlet.audit">Module contents</a></li>
 </ul>
   </nav></div>
 
@@ -492,7 +449,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/armlet.utils.rst.txt"
+      <li><a href="../_sources/api/armlet.audit.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

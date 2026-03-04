@@ -3,7 +3,7 @@
 # Evaluation configuration
 
 In federated learning, the evaluation can be performed in different ways.
-**Armlet** offers the same options as the `eval` config group provided by [Fluke](https://makgyver.github.io/fluke/config_exp.html#evaluation-configuration), but allows users flexibility to determine the type of evaluation.
+**ARMLET** offers the same options as the `eval` config group provided by [Fluke](https://makgyver.github.io/fluke/config_exp.html#evaluation-configuration), but allows users flexibility to determine the type of evaluation.
 
 - `_target_`: the class corresponding to the type of evaluation to perform. 
 Note that only `armlet.eval.evaluators.BinaryClassificationFairnessEval` evaluator is implemented for the moment;

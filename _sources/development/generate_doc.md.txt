@@ -1,8 +1,8 @@
 (generate_doc)=
 
-# How to generate **Armlet** documentation
+# How to generate **ARMLET** documentation
 
-**Armlet** is based on [Sphinx](https://www.sphinx-doc.org/en/master/#) for managing the documentation.
+**ARMLET** is based on [Sphinx](https://www.sphinx-doc.org/en/master/#) for managing the documentation.
 
 First, go to the docs folder:
 

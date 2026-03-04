@@ -5,7 +5,7 @@
 The `hydra` configuration is specific to the operation of Hydra.
 Users can customize the Hydra config values by following this tutorial: [Configuring Hydra](https://hydra.cc/docs/configure_hydra/intro/).
 
-**Armlet** provides a default hydra config file that configures the path generation pattern of the `output_dir` config value:
+**ARMLET** provides a default hydra config file that configures the path generation pattern of the `output_dir` config value:
 
 ```yaml
 

@@ -33,20 +33,20 @@ Other config values can be specified according to the chosen loading function.
 ```{eval-rst}
 
 .. important::
-  By default, **Armlet** provides multiple dataset loading functions in ``armlet.data.datasets`` and pre-defined dataset YAML config files in the ``ARMLET_DIR/configs/data/dataset`` folder.
+  By default, **ARMLET** provides multiple dataset loading functions in ``armlet.data.datasets`` and pre-defined dataset YAML config files in the ``ARMLET_DIR/configs/data/dataset`` folder.
 
 ```
 
 ## Data distribution
 (config_data_distribution)=
 
-The `distribution` field is similar to the one provided by [Fluke](https://makgyver.github.io/fluke/config_data.html#data-distribution), but is adapted to the data format required by **Armlet**.
+The `distribution` field is similar to the one provided by [Fluke](https://makgyver.github.io/fluke/config_data.html#data-distribution), but is adapted to the data format required by **ARMLET**.
 The only mandatory config value is `_target_`, which is the distribution function used during the data splitting step.
 
 ```{eval-rst}
 
 .. important::
-  By default, **Armlet** provides some distribution functions in ``armlet.data.splitter`` and pre-defined distribution YAML config files in the ``ARMLET_DIR/configs/data/distribution`` folder.
+  By default, **ARMLET** provides some distribution functions in ``armlet.data.splitter`` and pre-defined distribution YAML config files in the ``ARMLET_DIR/configs/data/distribution`` folder.
 
 ```
 

@@ -2,7 +2,7 @@
 
 # Configuration
 
-In this page, we provide an overview of all the main configuration groups and values that can be used in **Armlet** when running experiments.
+In this page, we provide an overview of all the main configuration groups and values that can be used in **ARMLET** when running experiments.
 This way of managing configurations is based on the one proposed by [Fluke](https://makgyver.github.io/fluke/configuration.html) and relies on YAML.
 Nevertheless, we make several improvements to offer greater flexibility in managing experiments.
 
@@ -15,7 +15,7 @@ Nevertheless, we make several improvements to offer greater flexibility in manag
 
 ```
 
-In **Armlet**, we compose both config groups and config values to run experiments with the desired configurations.
+In **ARMLET**, we compose both config groups and config values to run experiments with the desired configurations.
 
 ## Main configuration categories
 

@@ -7,7 +7,7 @@ Unlike in [Fluke](https://makgyver.github.io/fluke/config_log.html), the logging
 
 - `_target_`: the class corresponding to the type of logging to perform.
 
-**Armlet** provides by default a minimal logger, named `armlet.utils.log.ArmletLog`, which saves the results in a JSON file.
+**ARMLET** provides by default a minimal logger, named `armlet.utils.log.ArmletLog`, which saves the results in a JSON file.
 
 ```{eval-rst}
 

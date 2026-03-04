@@ -3,17 +3,17 @@ requires = ["setuptools>=77.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-license = "LGPL-2.1-or-later"
+license = "GPL-3.0"
 license-files = ["LICENSE"]
 name = "armlet"
 version = "0.2.0"
 authors = [
-    {name = "Baudouin Naline", email = "baudouin.naline@liris.cnrs.fr"},
+    {name = "Baudouin Naline", email = "baudouin.naline@gmail.com"},
 ]
-description = "Federated learning system multi-criteria benchmarking audit."
+description = "Federated Learning System Multi-Criteria Benchmarking Audit"
 readme = "README.md"
 requires-python = ">=3.10"
-keywords = ["federated learning", "deep learning", "pytorch", "multi-criteria", "benchmarking", "audit"]
+keywords = ["federated learning", "deep learning", "pytorch", "multi-criteria benchmarking", "audit"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
@@ -41,6 +41,7 @@ armlet = "armlet.run:main"
 where = ["."]
 include = [
     "armlet",
+    "armlet.audit",
     "armlet.data",
     "armlet.data.cleaning",
     "armlet.data.cleaning.missing_values",

@@ -2,7 +2,7 @@
 
 # Run your first experiment
 
-**Armlet** is based on [Hydra](https://hydra.cc/) for simplifying the launch of experiments and ensuring high reproductibily with config files.
+**ARMLET** is based on [Hydra](https://hydra.cc/) for simplifying the launch of experiments and ensuring high reproductibily with config files.
 In the following, we provide few guidelines for running your first experiment.
 
 ```{eval-rst}

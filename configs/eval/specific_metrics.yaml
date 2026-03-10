@@ -1,0 +1,17 @@
+defaults:
+  - all.yaml
+
+metrics:
+
+  utility:
+    accuracy: torchmetrics.Accuracy
+    precision: torchmetrics.Precision
+    recall: torchmetrics.Recall
+    f1: torchmetrics.F1Score
+
+  fairness:
+    aod: armlet.eval.metrics.BinaryAOD
+    disc_index: armlet.eval.metrics.BinaryDcI
+    disp_impact: armlet.eval.metrics.BinaryDI
+    eod: armlet.eval.metrics.BinaryEOD
+    spd: armlet.eval.metrics.BinarySPD

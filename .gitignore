@@ -10,3 +10,5 @@ __pycache__/
 /armlet/results_analysis/*_svg/
 armlet.egg-info/
 /build
+*code-workspace
+/docs/build

@@ -13,7 +13,7 @@ def compute_metrics_name_dict(columns: list):
     all_utility_metrics = ['accuracy', 'precision', 'recall', 'f1', 'loss', "training_loss"]
     utility_metrics_list = [column for column in columns if column in all_utility_metrics]
 
-    all_fairness_metrics = ['disparate_impact', 'discr_index', 'eod', 'avg_odds', 'spd']
+    all_fairness_metrics = ['disp_impact', 'disc_index', 'eod', 'aod', 'spd']
     bias_metrics_dict = {}
     for column in columns:
         if ('_').join(column.split('_')[1:]) in all_fairness_metrics:
@@ -63,7 +63,7 @@ def preprocess_data(df: pd.DataFrame, metrics_by_cat: dict, other_columns: dict)
     for cat, metrics in metrics_by_cat.items():
         for metric in metrics:
             if metric in df.columns:
-                if "disparate_impact" in metric:
+                if "disp_impact" in metric:
                     df[metric] = df[metric].apply(lambda x: (x-1)/(x+1))
                     #df[metric] = df[metric].apply(lambda x: max(x, 1/x) if x != 0 else 10000)
                 if "loss" not in metric:
@@ -83,4 +83,15 @@ def aggregate_metrics_with_mean_of_last_rounds(
     metrics = [metric for key, sublist in metrics_by_cat.items() for metric in sublist]
     lambda_agg = lambda df_lambda: df_lambda.loc[df_lambda["round"] > df_lambda["round"].max() - n_last_rounds][metrics].mean()
     df_agg = df.groupby(other_columns["method_pars"], as_index=False).apply(lambda_agg)
+    return df_agg
+
+def keep_metrics_n_last_rounds(
+    df: pd.DataFrame,
+    other_columns: dict,
+    n_last_rounds: int,
+):
+    df = df[df["source"] == "server"]
+    lambda_agg = lambda df_lambda: df_lambda.loc[df_lambda["round"] > df_lambda["round"].max() - n_last_rounds]
+    df_agg = df.groupby(other_columns["method_pars"]).apply(lambda_agg)
+    df_agg = df_agg.reset_index(level=other_columns["method_pars"], drop=False)
     return df_agg

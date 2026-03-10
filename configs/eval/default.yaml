@@ -1,0 +1,9 @@
+_target_: armlet.eval.evaluators.MultiCriteriaBinaryClassEval
+eval_every: 1
+metrics:
+  fairness: armlet.eval.metrics.BinaryFairnessMetrics
+
+pre_fit: true
+post_fit: true
+locals: true
+server: true

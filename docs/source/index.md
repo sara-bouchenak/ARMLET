@@ -21,6 +21,7 @@ It is designed to be modular and flexible, so that adding features is meant to b
 ├── datasets/                       # Datasets
 ├── docs/                           # ARMLET documentation
 ├── outputs/                        # Experiments outputs
+├── tutorials/                      # Tutorials
 ├── LICENSE
 ├── README.md
 ├── pyproject.toml

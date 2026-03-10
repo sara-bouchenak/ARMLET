@@ -1,5 +1,6 @@
-_target_: armlet.eval.evaluators.BinaryClassificationFairnessEval
-eval_every: 1
+defaults:
+  - all.yaml
+
 pre_fit: false
 post_fit: false
 locals: false

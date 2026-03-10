@@ -3,7 +3,7 @@
 defaults:
   - _self_
   - data: default.yaml
-  - eval: all.yaml
+  - eval: default.yaml
   - exp: fl.yaml
   - hydra: default.yaml
   - logger: default.yaml

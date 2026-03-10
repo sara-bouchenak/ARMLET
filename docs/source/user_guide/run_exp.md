@@ -88,9 +88,11 @@ data:
   seed: 42
 
 eval:
-  _target_: armlet.eval.evaluators.BinaryClassificationFairnessEval
+  _target_: armlet.eval.evaluators.MultiCriteriaBinaryClassEval
   eval_every: 1
   locals: true
+  metrics:
+    fairness: armlet.eval.metrics.BinaryFairnessMetrics
   post_fit: true
   pre_fit: true
   server: true

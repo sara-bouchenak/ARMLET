@@ -8,6 +8,7 @@ Subpackages
    :maxdepth: 4
 
    armlet.FL_pipeline
+   armlet.audit
    armlet.data
    armlet.eval
    armlet.utils

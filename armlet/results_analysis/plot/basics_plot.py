@@ -13,10 +13,10 @@ METRIC_TO_LABEL = {
     'f1': "F1-score (%)",
     'loss': "Loss",
     'spd': "Statistical \n Parity \n Difference (%)",
-    'disparate_impact': "Disparate \n Impact (%)",
-    'discr_index': "Discrimination \n Index (%)",
+    'disp_impact': "Disparate \n Impact (%)",
+    'disc_index': "Discrimination \n Index (%)",
     'eod': "Equal \n Opportunity \n Difference (%)",
-    'avg_odds': "Average \n Odds \n Difference (%)",
+    'aod': "Average \n Odds \n Difference (%)",
 }
 
 COLORS = ['#A8D8B9', '#87CEEB', '#B47ECF', '#ECD266', '#F4A460', '#FF6347',

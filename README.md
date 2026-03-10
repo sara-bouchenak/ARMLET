@@ -72,13 +72,16 @@ You will find detailed information on how the package works, how to install and 
 
 ## Tutorials
 
-[IN PROGRESS]
+we provide several tutorials in **ARMLET** to help you get started with our framework:
+- [Understanding the **FL mode** in ``armlet``](https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/FL_mode.html)
+- [Understanding the **data pipeline** in ``armlet``](https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/data_pipeline.html)
 
 ## Authors and main contributors
 
-- [Baudouin Naline](https://github.com/bnaline), LIRIS Lab, CNRS & INSA Lyon - *Idealization*, *Design*, *Development*, and *Documentation*
+- [Baudouin Naline](https://github.com/bnaline), LIRIS Lab, CNRS & INSA Lyon - *Idealization*, *Design*, *Development*, *Tutorial*, and *Documentation*
 - [James Sudlow](https://github.com/JamesSudlow), LIRIS Lab, CNRS & INSA Lyon - *Development*
 - Artur Vieira Pereira, LIRIS Lab, CNRS & INSA Lyon - *Development*
+- [Sara Bouchenak](https://github.com/sara-bouchenak), LIRIS Lab, INSA Lyon - *Supervision*
 
 ## Acknowledgments
 

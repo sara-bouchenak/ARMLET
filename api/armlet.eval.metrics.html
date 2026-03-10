@@ -42,8 +42,8 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=10f1778b"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/armlet.eval.metrics';</script>
@@ -392,8 +392,84 @@
   <section id="module-armlet.eval.metrics">
 <span id="armlet-eval-metrics-module"></span><h1>armlet.eval.metrics module<a class="headerlink" href="#module-armlet.eval.metrics" title="Link to this heading">#</a></h1>
 <dl class="py class">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryAOD">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.eval.metrics.</span></span><span class="sig-name descname"><span class="pre">BinaryAOD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryAOD" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryAOD.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#armlet.eval.metrics.BinaryAOD.compute" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to compute the final metric value.</p>
+<p>This method will automatically synchronize state variables when running in distributed backend.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryAOD.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryAOD.update" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to update the state variables of your metric class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryDI">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.eval.metrics.</span></span><span class="sig-name descname"><span class="pre">BinaryDI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryDI" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryDI.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#armlet.eval.metrics.BinaryDI.compute" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to compute the final metric value.</p>
+<p>This method will automatically synchronize state variables when running in distributed backend.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryDI.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryDI.update" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to update the state variables of your metric class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryDcI">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.eval.metrics.</span></span><span class="sig-name descname"><span class="pre">BinaryDcI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryDcI" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryDcI.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#armlet.eval.metrics.BinaryDcI.compute" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to compute the final metric value.</p>
+<p>This method will automatically synchronize state variables when running in distributed backend.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryDcI.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryDcI.update" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to update the state variables of your metric class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryEOD">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.eval.metrics.</span></span><span class="sig-name descname"><span class="pre">BinaryEOD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryEOD" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryEOD.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#armlet.eval.metrics.BinaryEOD.compute" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to compute the final metric value.</p>
+<p>This method will automatically synchronize state variables when running in distributed backend.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinaryEOD.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryEOD.update" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to update the state variables of your metric class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="armlet.eval.metrics.BinaryFairnessMetrics">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">armlet.eval.metrics.</span></span><span class="sig-name descname"><span class="pre">BinaryFairnessMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensitive_attribute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryFairnessMetrics" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.eval.metrics.</span></span><span class="sig-name descname"><span class="pre">BinaryFairnessMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensitive_attribute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryFairnessMetrics" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="armlet.eval.metrics.BinaryFairnessMetrics.compute">
@@ -405,6 +481,25 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="armlet.eval.metrics.BinaryFairnessMetrics.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinaryFairnessMetrics.update" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to update the state variables of your metric class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinarySPD">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.eval.metrics.</span></span><span class="sig-name descname"><span class="pre">BinarySPD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinarySPD" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinarySPD.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#armlet.eval.metrics.BinarySPD.compute" title="Link to this definition">#</a></dt>
+<dd><p>Override this method to compute the final metric value.</p>
+<p>This method will automatically synchronize state variables when running in distributed backend.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.eval.metrics.BinarySPD.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.eval.metrics.BinarySPD.update" title="Link to this definition">#</a></dt>
 <dd><p>Override this method to update the state variables of your metric class.</p>
 </dd></dl>
 
@@ -464,9 +559,34 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryAOD"><code class="docutils literal notranslate"><span class="pre">BinaryAOD</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryAOD.compute"><code class="docutils literal notranslate"><span class="pre">BinaryAOD.compute()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryAOD.update"><code class="docutils literal notranslate"><span class="pre">BinaryAOD.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryDI"><code class="docutils literal notranslate"><span class="pre">BinaryDI</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryDI.compute"><code class="docutils literal notranslate"><span class="pre">BinaryDI.compute()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryDI.update"><code class="docutils literal notranslate"><span class="pre">BinaryDI.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryDcI"><code class="docutils literal notranslate"><span class="pre">BinaryDcI</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryDcI.compute"><code class="docutils literal notranslate"><span class="pre">BinaryDcI.compute()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryDcI.update"><code class="docutils literal notranslate"><span class="pre">BinaryDcI.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryEOD"><code class="docutils literal notranslate"><span class="pre">BinaryEOD</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryEOD.compute"><code class="docutils literal notranslate"><span class="pre">BinaryEOD.compute()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryEOD.update"><code class="docutils literal notranslate"><span class="pre">BinaryEOD.update()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryFairnessMetrics"><code class="docutils literal notranslate"><span class="pre">BinaryFairnessMetrics</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryFairnessMetrics.compute"><code class="docutils literal notranslate"><span class="pre">BinaryFairnessMetrics.compute()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinaryFairnessMetrics.update"><code class="docutils literal notranslate"><span class="pre">BinaryFairnessMetrics.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinarySPD"><code class="docutils literal notranslate"><span class="pre">BinarySPD</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinarySPD.compute"><code class="docutils literal notranslate"><span class="pre">BinarySPD.compute()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.BinarySPD.update"><code class="docutils literal notranslate"><span class="pre">BinarySPD.update()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.eval.metrics.div_default_zero"><code class="docutils literal notranslate"><span class="pre">div_default_zero()</span></code></a></li>
@@ -516,7 +636,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

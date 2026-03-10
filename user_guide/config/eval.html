@@ -42,8 +42,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=10f1778b"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/tabs.js?v=3ee01567"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/config/eval';</script>
@@ -367,12 +367,15 @@
 <strong>ARMLET</strong> offers the same options as the <code class="docutils literal notranslate"><span class="pre">eval</span></code> config group provided by <a class="reference external" href="https://makgyver.github.io/fluke/config_exp.html#evaluation-configuration">Fluke</a>, but allows users flexibility to determine the type of evaluation.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">_target_</span></code>: the class corresponding to the type of evaluation to perform.
-Note that only <code class="docutils literal notranslate"><span class="pre">armlet.eval.evaluators.BinaryClassificationFairnessEval</span></code> evaluator is implemented for the moment;</p></li>
+Note that only <code class="docutils literal notranslate"><span class="pre">armlet.eval.evaluators.MultiCriteriaBinaryClassEval</span></code> evaluator is implemented for the moment;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">eval_every</span></code>: the frequency of evaluating the models (in rounds);</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pre_fit</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code>, evaluation of the client model before the client local training starts. In most of the cases, this means testing the just received global model on the local test set;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">post_fit</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code>, evaluation of the client model after the client local training. This is useful to understand how the client model has improved during the local training;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">server</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code>, evaluation of the global model on a held out test set (that is kept server side);</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">locals</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code>, evaluation of the client local models on a held out test set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pre_fit</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code>, evaluation of the client model on the client side (with the client test set) before the client local training starts.
+In most of the cases, this means testing the just received global model on the local test set;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">post_fit</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code>, evaluation of the client model on the client side (with the client test set) once the client local training has been completed.
+This is useful to understand how the client model has improved during the local training;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">server</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code>, evaluation of the global model on the server side (with the server test set) after aggregation;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">locals</span></code>: <code class="docutils literal notranslate"><span class="pre">true</span></code>, evaluation of the client local models on the server side (with the server test set) after local updates;</p></li>
+<li><p>and extra parameters depending on the chosen evaluator class.</p></li>
 </ul>
 </section>
 
@@ -458,7 +461,7 @@ Note that only <code class="docutils literal notranslate"><span class="pre">arml
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

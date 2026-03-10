@@ -1,0 +1,1253 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Understanding the data pipeline in armlet &#8212; ARMLET 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/tabs.js?v=3ee01567"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/tutorials/data_pipeline';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="User Guide" href="../../user_guide/index.html" />
+    <link rel="prev" title="Understanding the FL mode in armlet" href="FL_mode.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ARMLET</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/modules.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../development/index.html">
+    Development
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/modules.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../development/index.html">
+    Development
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run_first_exp.html">Run your first experiment</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Tutorials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FL_mode.html">Understanding the <strong>FL mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Getting started</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="understanding-the-data-pipeline-in-armlet">
+<h1>Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code><a class="headerlink" href="#understanding-the-data-pipeline-in-armlet" title="Link to this heading">#</a></h1>
+<p>This tutorial details the different steps of the <strong>ARMLET</strong> <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/api/armlet.data.html#armlet.data.data_pipeline">data pipeline</a>.</p>
+<p>In this pipeline, you can:</p>
+<ul class="simple">
+<li><p>load the dataset from raw file(s);</p></li>
+<li><p>load static data (splitted, cleaned, tensors) that were save during previous experiments;</p></li>
+<li><p>save data at one or multiple specific steps of the data pipeline;</p></li>
+<li><p>split data across clients;</p></li>
+<li><p>split data into train, validation, and test sets;</p></li>
+<li><p>clean data;</p></li>
+<li><p>perform other preprocessing steps (normalization, encoding, etc.).</p></li>
+</ul>
+<section id="prerequisites-environment-configuration-and-installation">
+<h2>Prerequisites (environment configuration and installation)<a class="headerlink" href="#prerequisites-environment-configuration-and-installation" title="Link to this heading">#</a></h2>
+<p>If you have not configured the environment and installed <code class="docutils literal notranslate"><span class="pre">armlet</span></code> yet, you can first:</p>
+<ol class="arabic simple">
+<li><p>Install <a class="reference external" href="https://www.anaconda.com/docs/getting-started/main">conda</a> for managing the environments and run the following commands:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>armlet<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.13.5
+conda<span class="w"> </span>activate<span class="w"> </span>armlet
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Install <strong><code class="docutils literal notranslate"><span class="pre">armlet</span></code></strong> using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>ARMLET_DIR
+pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Then, fill the two following variables to detail the main paths and run the command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">ARMLET_DIR</span> <span class="o">=</span> <span class="s2">&quot;../../../../&quot;</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ARMLET_DIR</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">,</span> <span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="s2">&quot;data_pipeline&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prepare-the-configuration">
+<h2>Prepare the configuration<a class="headerlink" href="#prepare-the-configuration" title="Link to this heading">#</a></h2>
+<p>The data pipeline of <strong>ARMLET</strong> requires several configuration values.
+We define the dictionaries <code class="docutils literal notranslate"><span class="pre">cfg_paths</span></code>, <code class="docutils literal notranslate"><span class="pre">cfg_data</span></code>, <code class="docutils literal notranslate"><span class="pre">cfg_method</span></code>, and <code class="docutils literal notranslate"><span class="pre">cfg_protocol</span></code>, which are explained in details in the tutorial <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/FL_mode.html">Understanding the <strong>FL mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">omegaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">OmegaConf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.utils.configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArmletConfiguration</span>
+
+<span class="n">cfg_paths</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+  <span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ARMLET_DIR</span><span class="p">,</span> <span class="s2">&quot;datasets&quot;</span><span class="p">),</span>
+  <span class="s2">&quot;log_dir&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ARMLET_DIR</span><span class="p">,</span> <span class="s2">&quot;logs&quot;</span><span class="p">),</span>
+  <span class="s2">&quot;output_dir&quot;</span><span class="p">:</span> <span class="n">OUTPUT_DIR</span><span class="p">,</span>
+  <span class="s2">&quot;root_dir&quot;</span><span class="p">:</span> <span class="n">ARMLET_DIR</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">cfg_data</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;cleaning&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;missing_values&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.cleaning.missing_values.MissingValuesDataCleaningMethod&quot;</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.datasets.load_Adult_dataset&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dataset_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Adult&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cfg_paths</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">],</span> <span class="s2">&quot;Adult&quot;</span><span class="p">,</span> <span class="s2">&quot;raw_data&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;sensitive_attributes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.splitter.ArmletDataSplitter.iid&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;others&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;client_split&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="s2">&quot;client_val_split&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">&quot;keep_test&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;sampling_perc&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;server_split&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">&quot;server_test&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;server_test_union&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;server_val_split&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">&quot;uniform_test&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">cfg_method</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.FL_pipeline.FL_algorithms.ArmletCentralizedFL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hyperparameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;client&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+          <span class="s2">&quot;local_epochs&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+          <span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;torch.nn.BCELoss&quot;</span><span class="p">},</span>
+          <span class="s2">&quot;optimizer&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;SGD&quot;</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
+          <span class="s2">&quot;scheduler&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StepLR&quot;</span><span class="p">,</span> <span class="s2">&quot;step_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.utils.net.LogRegression&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;input_size&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># Automatically adjusted after data loading</span>
+          <span class="s2">&quot;num_classes&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># Automatically adjusted after data loading</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;server&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;torch.nn.BCELoss&quot;</span><span class="p">},</span>
+          <span class="s2">&quot;time_to_accuracy_target&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+          <span class="s2">&quot;weighted&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">})</span>
+
+<span class="n">cfg_protocol</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;eligible_perc&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;n_clients&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">&quot;n_rounds&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">cfg_data</span><span class="p">,</span>
+    <span class="c1">#&quot;eval&quot;: cfg_eval,</span>
+    <span class="c1">#&quot;exp&quot;: cfg_exp,</span>
+    <span class="c1">#&quot;logger&quot;: cfg_logger,</span>
+    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">cfg_method</span><span class="p">,</span>
+    <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="n">cfg_paths</span><span class="p">,</span>
+    <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="n">cfg_protocol</span><span class="p">,</span>
+    <span class="c1">#&quot;save&quot;: {},</span>
+<span class="p">})</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">ArmletConfiguration</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-pipeline-preparation">
+<h2>Data pipeline preparation<a class="headerlink" href="#data-pipeline-preparation" title="Link to this heading">#</a></h2>
+<p>In the beginning of the data pipeline, we fix the data seed and compute 3 boolean values that will be used at specific steps:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_static_loading</span></code> is used to load static data that has been saved during previous experiments;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_tensor_data</span></code> is used to dynamically load tensors instead of performing the first data processing steps;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_saving_mode</span></code> is used to save data at different steps of the pipeline.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_static_loading</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;loading&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;static&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loading</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loading</span><span class="o">.</span><span class="n">static</span>
+<span class="n">is_tensor_data</span> <span class="o">=</span> <span class="n">is_static_loading</span> <span class="ow">and</span> <span class="s2">&quot;tensors&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loading</span><span class="o">.</span><span class="n">load_dir</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">is_saving_mode</span> <span class="o">=</span> <span class="s2">&quot;saving&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-loading-and-partitionning">
+<h2>Data loading and partitionning<a class="headerlink" href="#data-loading-and-partitionning" title="Link to this heading">#</a></h2>
+<p>Then, if <code class="docutils literal notranslate"><span class="pre">is_static_loading</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, we perform the default data loading step.
+It instantiates and runs the dataset loading function specified in <code class="docutils literal notranslate"><span class="pre">cfg_data[&quot;dataset&quot;]</span></code>, and splits the data across clients by following the distribution specified in <code class="docutils literal notranslate"><span class="pre">cfg_data[&quot;distribution&quot;]</span></code>.
+When assigning data to clients, the server and the clients also split their data into training, validation, and test sets, according to the configuration values in <code class="docutils literal notranslate"><span class="pre">cfg_data[&quot;others&quot;]</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">is_static_loading</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, we load static data that has been saved during previous experiments from the folder specified in <code class="docutils literal notranslate"><span class="pre">cfg_data[&quot;loading&quot;]</span></code> and determine if the data is cleaned or not.</p>
+<p>Note that, in both cases, the output <code class="docutils literal notranslate"><span class="pre">splitted_data</span></code> is a dictionary that contains the server data (with the keys <code class="docutils literal notranslate"><span class="pre">server_val</span></code> and <code class="docutils literal notranslate"><span class="pre">server_test</span></code>) and the clients data (with the keys <code class="docutils literal notranslate"><span class="pre">clients_train</span></code>, <code class="docutils literal notranslate"><span class="pre">clients_val</span></code> and <code class="docutils literal notranslate"><span class="pre">clients_test</span></code>).
+At this step, all data are <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">DataFrames</a>, i.e., data structures provided by the <a class="reference external" href="https://pandas.pydata.org/docs/index.html">Pandas</a> library that contains labeled axes (rows and columns).</p>
+<p>In this tutorial, we do not activate the static loading and perform default data loading.
+Thus, we load the Adult dataset from raw data and split it across 4 clients.
+Each client has a training set with 80% of its data and a test set with 20%.
+The server has a test set, which is the union of the clients test sets.</p>
+<p>To illustrate this tutorial, we print the training DataFrame of the first client (only the features since the label is separated in a second DataFrame).
+You can see the different features of the Adult dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hydra</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.loading</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data_from_folder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.splitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArmletDataSplitter</span>
+
+<span class="k">if</span> <span class="n">is_static_loading</span><span class="p">:</span>
+
+    <span class="n">splitted_data</span><span class="p">,</span> <span class="n">is_data_cleaned</span> <span class="o">=</span> <span class="n">load_data_from_folder</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">cfg</span><span class="o">.</span><span class="n">protocol</span><span class="o">.</span><span class="n">n_clients</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="s2">&quot;dataset_name&quot;</span><span class="p">))</span>
+
+    <span class="n">data_splitter</span> <span class="o">=</span> <span class="n">ArmletDataSplitter</span><span class="p">(</span>
+        <span class="n">data_dict</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+        <span class="n">dist_cfg</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">distribution</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">others</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">splitted_data</span> <span class="o">=</span> <span class="n">data_splitter</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">protocol</span><span class="o">.</span><span class="n">n_clients</span><span class="p">)</span>
+    <span class="n">is_data_cleaned</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">splitted_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">][</span><span class="s2">&quot;client_0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>workclass</th>
+      <th>fnlwgt</th>
+      <th>education</th>
+      <th>education-num</th>
+      <th>marital-status</th>
+      <th>occupation</th>
+      <th>relationship</th>
+      <th>race</th>
+      <th>gender</th>
+      <th>capital-gain</th>
+      <th>capital-loss</th>
+      <th>hours-per-week</th>
+      <th>native-country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>NaN</td>
+      <td>90557</td>
+      <td>11th</td>
+      <td>7</td>
+      <td>Married-civ-spouse</td>
+      <td>NaN</td>
+      <td>Husband</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8</td>
+      <td>United-States</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>True</td>
+      <td>Private</td>
+      <td>36228</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Divorced</td>
+      <td>Transport-moving</td>
+      <td>Not-in-family</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0</td>
+      <td>0</td>
+      <td>44</td>
+      <td>United-States</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>True</td>
+      <td>Private</td>
+      <td>170651</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Wife</td>
+      <td>True</td>
+      <td>False</td>
+      <td>0</td>
+      <td>1977</td>
+      <td>38</td>
+      <td>United-States</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>True</td>
+      <td>Private</td>
+      <td>123430</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Married-civ-spouse</td>
+      <td>Farming-fishing</td>
+      <td>Husband</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0</td>
+      <td>0</td>
+      <td>65</td>
+      <td>United-States</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>False</td>
+      <td>Private</td>
+      <td>181655</td>
+      <td>Assoc-voc</td>
+      <td>11</td>
+      <td>Married-civ-spouse</td>
+      <td>Adm-clerical</td>
+      <td>Husband</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0</td>
+      <td>2377</td>
+      <td>45</td>
+      <td>United-States</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="data-cleaning">
+<h2>Data cleaning<a class="headerlink" href="#data-cleaning" title="Link to this heading">#</a></h2>
+<p>After loading the data, we perform data cleaning.
+For this purpose, we instantiate and run each cleaning methods (e.g., for missing values, outliers, label errors) that we provide in <code class="docutils literal notranslate"><span class="pre">cfg_data[&quot;cleaning&quot;]</span></code>.
+A JSON file (<code class="docutils literal notranslate"><span class="pre">data_cleaning_metrics.json</span></code>) is then saved with the data cleaning metrics.
+Moreover, depending on the chosen settings in <code class="docutils literal notranslate"><span class="pre">cfg_data[&quot;saving&quot;]</span></code>, data can be saved before or after cleaning.</p>
+<p>Just as for <code class="docutils literal notranslate"><span class="pre">splitted_data</span></code>, <code class="docutils literal notranslate"><span class="pre">cleaned_data</span></code> is a dictionary that contains the server data and the clients data, but cleaned.</p>
+<p>In this tutorial, we only delete missing values without activating the saving mode.
+After printing the clean training data of the first client, we can see that the first line of the previous DataFrame was deleted as it contains NaN values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.saving</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.cleaning</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean_data</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="s2">&quot;cleaning&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_data_cleaned</span><span class="p">:</span>
+
+    <span class="k">if</span> <span class="n">is_saving_mode</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;save_data_before_cleaning&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">saving</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">saving</span><span class="o">.</span><span class="n">save_data_before_cleaning</span><span class="p">):</span>
+        <span class="n">save_data</span><span class="p">(</span><span class="n">splitted_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;before_cleaning&quot;</span><span class="p">)</span>
+
+    <span class="n">cleaned_data</span><span class="p">,</span> <span class="n">data_cleaning_metrics</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">(</span><span class="n">splitted_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cleaning</span><span class="p">,</span> <span class="n">sensitive_attributes</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sensitive_attributes</span><span class="p">)</span>
+
+    <span class="n">data_cleaning_metrics_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;data_cleaning_metrics.json&quot;</span><span class="p">)</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data_cleaning_metrics</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_cleaning_metrics_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">is_saving_mode</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;save_data_after_cleaning&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">saving</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">saving</span><span class="o">.</span><span class="n">save_data_after_cleaning</span><span class="p">):</span>
+        <span class="n">save_data</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;after_cleaning&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">data_cleaning_metrics</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">cleaned_data</span> <span class="o">=</span> <span class="n">splitted_data</span>
+
+<span class="n">cleaned_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">][</span><span class="s2">&quot;client_0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>workclass</th>
+      <th>fnlwgt</th>
+      <th>education</th>
+      <th>education-num</th>
+      <th>marital-status</th>
+      <th>occupation</th>
+      <th>relationship</th>
+      <th>race</th>
+      <th>gender</th>
+      <th>capital-gain</th>
+      <th>capital-loss</th>
+      <th>hours-per-week</th>
+      <th>native-country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>True</td>
+      <td>Private</td>
+      <td>36228</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Divorced</td>
+      <td>Transport-moving</td>
+      <td>Not-in-family</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0</td>
+      <td>0</td>
+      <td>44</td>
+      <td>United-States</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>True</td>
+      <td>Private</td>
+      <td>170651</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Wife</td>
+      <td>True</td>
+      <td>False</td>
+      <td>0</td>
+      <td>1977</td>
+      <td>38</td>
+      <td>United-States</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>True</td>
+      <td>Private</td>
+      <td>123430</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Married-civ-spouse</td>
+      <td>Farming-fishing</td>
+      <td>Husband</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0</td>
+      <td>0</td>
+      <td>65</td>
+      <td>United-States</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>Private</td>
+      <td>181655</td>
+      <td>Assoc-voc</td>
+      <td>11</td>
+      <td>Married-civ-spouse</td>
+      <td>Adm-clerical</td>
+      <td>Husband</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0</td>
+      <td>2377</td>
+      <td>45</td>
+      <td>United-States</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>True</td>
+      <td>Local-gov</td>
+      <td>66278</td>
+      <td>Masters</td>
+      <td>14</td>
+      <td>Never-married</td>
+      <td>Prof-specialty</td>
+      <td>Not-in-family</td>
+      <td>True</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>45</td>
+      <td>United-States</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="data-preprocessing">
+<h2>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
+<p>The next step is to preprocess all data.
+In <strong>ARMLET</strong>, we:</p>
+<ul class="simple">
+<li><p>perform one hot encoding for the categorical features of each DataFrame;</p></li>
+<li><p>convert the boolean features and the features of type <code class="docutils literal notranslate"><span class="pre">category</span></code> to numeric (<code class="docutils literal notranslate"><span class="pre">category</span></code> is a special data type we use when loading the dataset to not convert the corresponding feature);</p></li>
+<li><p>normalize all features using a standard scaler (except for features tagged as sensitive attributes).</p></li>
+</ul>
+<p>By printing the training DataFrame of the first client, we can see the results of these data preprocessing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.processing</span><span class="w"> </span><span class="kn">import</span> <span class="n">one_hot_encoding</span><span class="p">,</span> <span class="n">convert_bool_and_cat_to_num</span><span class="p">,</span> <span class="n">normalization</span>
+
+
+<span class="n">one_hot_data</span> <span class="o">=</span> <span class="n">one_hot_encoding</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">)</span>
+<span class="n">numeric_data</span> <span class="o">=</span> <span class="n">convert_bool_and_cat_to_num</span><span class="p">(</span><span class="n">one_hot_data</span><span class="p">)</span>
+<span class="n">normalized_data</span> <span class="o">=</span> <span class="n">normalization</span><span class="p">(</span><span class="n">numeric_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sensitive_attributes</span><span class="p">)</span>
+
+<span class="n">normalized_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">][</span><span class="s2">&quot;client_0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>fnlwgt</th>
+      <th>education-num</th>
+      <th>race</th>
+      <th>gender</th>
+      <th>capital-gain</th>
+      <th>capital-loss</th>
+      <th>hours-per-week</th>
+      <th>workclass_Federal-gov</th>
+      <th>workclass_Local-gov</th>
+      <th>...</th>
+      <th>native-country_Portugal</th>
+      <th>native-country_Puerto-Rico</th>
+      <th>native-country_Scotland</th>
+      <th>native-country_South</th>
+      <th>native-country_Taiwan</th>
+      <th>native-country_Thailand</th>
+      <th>native-country_Trinadad&amp;Tobago</th>
+      <th>native-country_United-States</th>
+      <th>native-country_Vietnam</th>
+      <th>native-country_Yugoslavia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>-1.448676</td>
+      <td>-0.444587</td>
+      <td>1</td>
+      <td>1</td>
+      <td>-0.147528</td>
+      <td>-0.219043</td>
+      <td>0.254296</td>
+      <td>-0.180888</td>
+      <td>-0.270257</td>
+      <td>...</td>
+      <td>-0.037206</td>
+      <td>-0.059594</td>
+      <td>-0.020369</td>
+      <td>-0.047668</td>
+      <td>-0.034899</td>
+      <td>-0.027332</td>
+      <td>-0.025768</td>
+      <td>0.308004</td>
+      <td>-0.0434</td>
+      <td>-0.02467</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>-0.178552</td>
+      <td>1.128946</td>
+      <td>1</td>
+      <td>0</td>
+      <td>-0.147528</td>
+      <td>4.665356</td>
+      <td>-0.245010</td>
+      <td>-0.180888</td>
+      <td>-0.270257</td>
+      <td>...</td>
+      <td>-0.037206</td>
+      <td>-0.059594</td>
+      <td>-0.020369</td>
+      <td>-0.047668</td>
+      <td>-0.034899</td>
+      <td>-0.027332</td>
+      <td>-0.025768</td>
+      <td>0.308004</td>
+      <td>-0.0434</td>
+      <td>-0.02467</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>-0.624729</td>
+      <td>-0.444587</td>
+      <td>1</td>
+      <td>1</td>
+      <td>-0.147528</td>
+      <td>-0.219043</td>
+      <td>2.001870</td>
+      <td>-0.180888</td>
+      <td>-0.270257</td>
+      <td>...</td>
+      <td>-0.037206</td>
+      <td>-0.059594</td>
+      <td>-0.020369</td>
+      <td>-0.047668</td>
+      <td>-0.034899</td>
+      <td>-0.027332</td>
+      <td>-0.025768</td>
+      <td>0.308004</td>
+      <td>-0.0434</td>
+      <td>-0.02467</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>-0.074578</td>
+      <td>0.342179</td>
+      <td>1</td>
+      <td>1</td>
+      <td>-0.147528</td>
+      <td>5.653600</td>
+      <td>0.337514</td>
+      <td>-0.180888</td>
+      <td>-0.270257</td>
+      <td>...</td>
+      <td>-0.037206</td>
+      <td>-0.059594</td>
+      <td>-0.020369</td>
+      <td>-0.047668</td>
+      <td>-0.034899</td>
+      <td>-0.027332</td>
+      <td>-0.025768</td>
+      <td>0.308004</td>
+      <td>-0.0434</td>
+      <td>-0.02467</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>-1.164742</td>
+      <td>1.522329</td>
+      <td>1</td>
+      <td>0</td>
+      <td>-0.147528</td>
+      <td>-0.219043</td>
+      <td>0.337514</td>
+      <td>-0.180888</td>
+      <td>3.700177</td>
+      <td>...</td>
+      <td>-0.037206</td>
+      <td>-0.059594</td>
+      <td>-0.020369</td>
+      <td>-0.047668</td>
+      <td>-0.034899</td>
+      <td>-0.027332</td>
+      <td>-0.025768</td>
+      <td>0.308004</td>
+      <td>-0.0434</td>
+      <td>-0.02467</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 99 columns</p>
+</div></div></div>
+</div>
+<p>If the DataFrames have a feature named <code class="docutils literal notranslate"><span class="pre">image_path</span></code>, data is categorized as image.
+In this case, we load the images based on the column <code class="docutils literal notranslate"><span class="pre">image_path</span></code>, perform some image-specific transformations (e.g., resizing or normalization), and convert the images and labels to tensors.
+If data is not categorized as image, the dataframes are directly converted to tensors.</p>
+<p>We can see in the notebook output that the DataFrame were converted to tensors.
+Note that the sensitive attributes (specified in the <code class="docutils literal notranslate"><span class="pre">cfg_data</span></code> config file) have been moved to the last columns before tensor conversion so that they can be easily identified during the training/evaluation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.processing</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_dataframes_to_tensors</span><span class="p">,</span> <span class="n">load_and_convert_images_to_tensors</span>
+
+
+<span class="n">is_image_data</span> <span class="o">=</span> <span class="s2">&quot;image_path&quot;</span> <span class="ow">in</span> <span class="n">normalized_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">][</span><span class="s2">&quot;client_0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span>
+<span class="k">if</span> <span class="n">is_image_data</span><span class="p">:</span>
+    <span class="n">tensor_data</span> <span class="o">=</span> <span class="n">load_and_convert_images_to_tensors</span><span class="p">(</span><span class="n">normalized_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">tensor_data</span> <span class="o">=</span> <span class="n">convert_dataframes_to_tensors</span><span class="p">(</span><span class="n">normalized_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sensitive_attributes</span><span class="p">)</span>
+
+<span class="n">tensor_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">][</span><span class="s2">&quot;client_0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-1.4487, -0.4446, -0.1475,  ...,  1.0000,  1.0000,  1.0000],
+        [-0.1786,  1.1289, -0.1475,  ...,  1.0000,  0.0000,  1.0000],
+        [-0.6247, -0.4446, -0.1475,  ...,  1.0000,  1.0000,  1.0000],
+        ...,
+        [ 0.7367,  1.1289, -0.1475,  ...,  1.0000,  0.0000,  1.0000],
+        [ 0.1345,  0.3422, -0.1475,  ...,  1.0000,  1.0000,  1.0000],
+        [-0.4184, -1.2314, -0.1475,  ...,  1.0000,  0.0000,  1.0000]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Depending on the chosen settings in <code class="docutils literal notranslate"><span class="pre">cfg_data[&quot;saving&quot;]</span></code>, data can also be saved after conversion to tensors, which can be an interesting choice when dealing with images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">is_saving_mode</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;save_data_after_conversion_to_tensors&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">saving</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">saving</span><span class="o">.</span><span class="n">save_data_after_conversion_to_tensors</span><span class="p">):</span>
+    <span class="n">save_data</span><span class="p">(</span><span class="n">tensor_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;after_tensors&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong>: In the beginning of this tutorial, we compute the <code class="docutils literal notranslate"><span class="pre">is_tensor_data</span></code> boolean based on the configuration values.
+If this value is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, all previous steps will be skipped and the tensors will be directly loaded from folder.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">tensor_data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data_from_folder</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">cfg</span><span class="o">.</span><span class="n">protocol</span><span class="o">.</span><span class="n">n_clients</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note</strong>: A more flexible way of performing preprocessing is currently under development.
+It will consist of specifying the desired data preprocessing steps directly in the configuration values, allowing better control and compatibility with other data types.</p>
+</section>
+<section id="conversion-to-fluke-data-format">
+<h2>Conversion to Fluke data format<a class="headerlink" href="#conversion-to-fluke-data-format" title="Link to this heading">#</a></h2>
+<p>After data preprocessing, the final step is to transform the actual data (that is a dictionary of tensors) into the data format required by the FL process of Fluke (i.e., <a class="reference external" href="https://makgyver.github.io/fluke/fluke.data.html#fluke.data.DataSplitter">DataSplitter</a>).
+To do that, we first convert the tensors to <a class="reference external" href="https://makgyver.github.io/fluke/fluke.data.html#fluke.data.FastDataLoader">FastDataLoader</a>, then transform the dictionary into a <a class="reference external" href="https://makgyver.github.io/fluke/fluke.data.html#fluke.data.DummyDataContainer">DummyDataContainer</a>, and finally pack it in a <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/api/armlet.data.splitter.html#armlet.data.splitter.DummyDataSplitter">DummyDataSplitter</a>, which is a simplified version of Fluke’s DataSplitter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fluke.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DummyDataContainer</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.processing</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_tensors_to_fast_data_loaders</span>
+
+<span class="n">num_classes</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">tensor_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+<span class="n">final_data</span> <span class="o">=</span> <span class="n">convert_tensors_to_fast_data_loaders</span><span class="p">(</span><span class="n">tensor_data</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+
+<span class="n">dummy_data_container</span> <span class="o">=</span> <span class="n">DummyDataContainer</span><span class="p">(</span>
+    <span class="n">final_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">],</span>
+    <span class="n">final_data</span><span class="p">[</span><span class="s2">&quot;clients_test&quot;</span><span class="p">],</span>
+    <span class="n">final_data</span><span class="p">[</span><span class="s2">&quot;server_test&quot;</span><span class="p">],</span>
+    <span class="n">num_classes</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.splitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">DummyDataSplitter</span>
+
+<span class="n">data_splitter</span> <span class="o">=</span> <span class="n">DummyDataSplitter</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="n">dummy_data_container</span><span class="p">,</span>
+    <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">others</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="s2">&quot;client_val_split&quot;</span><span class="p">,</span> <span class="s2">&quot;server_test_union&quot;</span><span class="p">,</span> <span class="s2">&quot;server_val_split&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">val_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">final_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;clients_val&quot;</span><span class="p">,</span> <span class="s2">&quot;server_val&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="FL_mode.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Understanding the <strong>FL mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../user_guide/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">User Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-environment-configuration-and-installation">Prerequisites (environment configuration and installation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-configuration">Prepare the configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-pipeline-preparation">Data pipeline preparation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-partitionning">Data loading and partitionning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">Data cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-fluke-data-format">Conversion to Fluke data format</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/getting_started/tutorials/data_pipeline.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, Baudouin NALINE.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

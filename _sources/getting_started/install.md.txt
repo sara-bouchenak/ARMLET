@@ -12,7 +12,7 @@ git clone https://github.com/sara-bouchenak/ARMLET.git
 
 1. Install [conda](https://www.anaconda.com/docs/getting-started/main) for managing the environments.
 
-2. Run the following comands:
+2. Run the following commands:
 
 ```bash
 conda create -n armlet python=3.13.5

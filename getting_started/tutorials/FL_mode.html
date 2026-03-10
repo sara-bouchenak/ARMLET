@@ -1,0 +1,980 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Understanding the FL mode in armlet &#8212; ARMLET 0.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/tabs.js?v=3ee01567"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/tutorials/FL_mode';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Understanding the data pipeline in armlet" href="data_pipeline.html" />
+    <link rel="prev" title="Tutorials" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">ARMLET</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/modules.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../development/index.html">
+    Development
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/modules.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../development/index.html">
+    Development
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run_first_exp.html">Run your first experiment</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Tutorials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Understanding the <strong>FL mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_pipeline.html">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Getting started</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Understanding the <strong>FL mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="understanding-the-fl-mode-in-armlet">
+<h1>Understanding the <strong>FL mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code><a class="headerlink" href="#understanding-the-fl-mode-in-armlet" title="Link to this heading">#</a></h1>
+<p>This tutorial allows users to understand how the <strong>FL mode</strong> of <strong>ARMLET</strong> works (i.e., the default mode that serves to run federated learning experiments).
+It corresponds to the function that is called when running the command <code class="docutils literal notranslate"><span class="pre">armlet</span> <span class="pre">exp.mode=federation</span></code> (or just <code class="docutils literal notranslate"><span class="pre">armlet</span></code> as it is the default mode).</p>
+<section id="prerequisites-environment-configuration-and-installation">
+<h2>Prerequisites (environment configuration and installation)<a class="headerlink" href="#prerequisites-environment-configuration-and-installation" title="Link to this heading">#</a></h2>
+<p>If you have not configured the environment and installed <code class="docutils literal notranslate"><span class="pre">armlet</span></code> yet, you have to:</p>
+<ol class="arabic simple">
+<li><p>Install <a class="reference external" href="https://www.anaconda.com/docs/getting-started/main">conda</a> for managing the environments and run the following commands:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>armlet<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.13.5
+conda<span class="w"> </span>activate<span class="w"> </span>armlet
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Install <strong><code class="docutils literal notranslate"><span class="pre">armlet</span></code></strong> using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>ARMLET_DIR
+pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Then, fill the two following variables to detail the main paths and run the command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">ARMLET_DIR</span> <span class="o">=</span> <span class="s2">&quot;../../../../&quot;</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ARMLET_DIR</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">,</span> <span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="s2">&quot;FL_mode&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prepare-the-configuration">
+<h2>Prepare the configuration<a class="headerlink" href="#prepare-the-configuration" title="Link to this heading">#</a></h2>
+<p>Before calling the <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/api/armlet.run.html#armlet.run.run_federation">run_federation()</a> main function (in <code class="docutils literal notranslate"><span class="pre">ARMLET_DIR/armlet/run.py</span></code>), <strong>ARMLET</strong> uses the <a class="reference external" href="https://hydra.cc/">Hydra</a> framework to dynamically load the configurations. For further details about <strong>ARMLET</strong> configuration (such as the configuration groups and values), see <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/user_guide/config/index.html">Configuration</a> documentation page.</p>
+<p>In this tutorial, we directly prepare the configuration object in Python by creating dictionaries and using <a class="reference external" href="https://omegaconf.readthedocs.io/en/2.3_branch/">OmegaConf</a>, the YAML based hierarchical configuration system used in Hydra.</p>
+<p>The first config dictionary to create is the <code class="docutils literal notranslate"><span class="pre">cfg_paths</span></code>, which contains the main paths.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">omegaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">OmegaConf</span>
+
+<span class="n">cfg_paths</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+  <span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ARMLET_DIR</span><span class="p">,</span> <span class="s2">&quot;datasets&quot;</span><span class="p">),</span>
+  <span class="s2">&quot;log_dir&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ARMLET_DIR</span><span class="p">,</span> <span class="s2">&quot;logs&quot;</span><span class="p">),</span>
+  <span class="s2">&quot;output_dir&quot;</span><span class="p">:</span> <span class="n">OUTPUT_DIR</span><span class="p">,</span>
+  <span class="s2">&quot;root_dir&quot;</span><span class="p">:</span> <span class="n">ARMLET_DIR</span><span class="p">,</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, we need to provide in <code class="docutils literal notranslate"><span class="pre">cfg_data</span></code> information related to the data pipeline (dataset, data cleaning methods, train, validation, and test set splitting, distribution for the data partitioning, and data seed).
+With the following configurations, we will:
+(a) load the Adult dataset;
+(b) perform an IID data partitioning between X clients (the number of clients will be detailed after);
+(c) split each client dataset into a training set (80% of the client data) and a test set (20%);
+(d) concatenate the union of the clients test sets to form the server test set;
+and (e) clean all data by removing missing values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_data</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;cleaning&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;missing_values&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.cleaning.missing_values.MissingValuesDataCleaningMethod&quot;</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.datasets.load_Adult_dataset&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dataset_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Adult&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cfg_paths</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">],</span> <span class="s2">&quot;Adult&quot;</span><span class="p">,</span> <span class="s2">&quot;raw_data&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;sensitive_attributes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.splitter.ArmletDataSplitter.iid&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;others&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;client_split&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="s2">&quot;client_val_split&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">&quot;keep_test&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;sampling_perc&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;server_split&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">&quot;server_test&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;server_test_union&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;server_val_split&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">&quot;uniform_test&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cfg_eval</span></code> contains the configuration values related to the evaluation.
+In this tutorial, we use the <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/api/armlet.eval.evaluators.html#armlet.eval.evaluators.MultiCriteriaBinaryClassEval">armlet.eval.evaluators.MultiCriteriaBinaryClassEval</a> evaluation class and evaluate the global model at each round (on the server side with the server test set).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_eval</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.eval.evaluators.MultiCriteriaBinaryClassEval&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;eval_every&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;locals&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;post_fit&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;pre_fit&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;server&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cfg_exp</span></code> details information about how to run the experiment.
+Here, we choose the federation mode, enable training, specify cpu as the device, and fix an experiment seed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_exp</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;inmemory&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;federation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+    <span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cfg_logger</span></code> is required to specify the logging class to be used during the experiment.
+In this tutorial, we use <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/api/armlet.utils.log.html#armlet.utils.log.ArmletLog">armlet.utils.log.ArmletLog</a>, the minimal logger provided by <strong>ARMLET</strong> (it only saves the results in a JSON file).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_logger</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.utils.log.ArmletLog&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;json_log_dir&quot;</span><span class="p">:</span> <span class="n">cfg_paths</span><span class="p">[</span><span class="s2">&quot;output_dir&quot;</span><span class="p">],</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cfg_method</span></code> is used to specify the FL algorithm, the ML model, the client hyperparameters, and the server behavior.
+Here, we use <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/api/armlet.FL_pipeline.FL_algorithms.html#armlet.FL_pipeline.FL_algorithms.ArmletCentralizedFL">armlet.FL_pipeline.FL_algorithms.ArmletCentralized</a>, i.e., the standard FedAvg algorithm adapted to <strong>ARMLET</strong> pipeline, and consider a logistic regression model.
+Moreover, at each round, each client performs 10 local epochs by using a SGD optimizer with a learning rate of 0.001 and a weight decay of 0.01.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_method</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.FL_pipeline.FL_algorithms.ArmletCentralizedFL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hyperparameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;client&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+          <span class="s2">&quot;local_epochs&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+          <span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;torch.nn.BCELoss&quot;</span><span class="p">},</span>
+          <span class="s2">&quot;optimizer&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;SGD&quot;</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
+          <span class="s2">&quot;scheduler&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;StepLR&quot;</span><span class="p">,</span> <span class="s2">&quot;step_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.utils.net.LogRegression&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;input_size&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># Automatically adjusted after data loading</span>
+          <span class="s2">&quot;num_classes&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># Automatically adjusted after data loading</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;server&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;torch.nn.BCELoss&quot;</span><span class="p">},</span>
+          <span class="s2">&quot;time_to_accuracy_target&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+          <span class="s2">&quot;weighted&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cfg_protocol</span></code> details the protocol of the FL process.
+With these configuration values, we run a FL process with 4 clients, for a total of 2 rounds (as a toy example).
+During each round, all clients participate to training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfg_protocol</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;eligible_perc&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;n_clients&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">&quot;n_rounds&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we compose each of the previous configuration dictionaries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">armlet.utils.configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArmletConfiguration</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span>
+    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">cfg_data</span><span class="p">,</span>
+    <span class="s2">&quot;eval&quot;</span><span class="p">:</span> <span class="n">cfg_eval</span><span class="p">,</span>
+    <span class="s2">&quot;exp&quot;</span><span class="p">:</span> <span class="n">cfg_exp</span><span class="p">,</span>
+    <span class="s2">&quot;logger&quot;</span><span class="p">:</span> <span class="n">cfg_logger</span><span class="p">,</span>
+    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">cfg_method</span><span class="p">,</span>
+    <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="n">cfg_paths</span><span class="p">,</span>
+    <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="n">cfg_protocol</span><span class="p">,</span>
+    <span class="s2">&quot;save&quot;</span><span class="p">:</span> <span class="p">{},</span>
+<span class="p">})</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">ArmletConfiguration</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we are ready to investigate the <code class="docutils literal notranslate"><span class="pre">run_federation()</span></code> function, which is called when <code class="docutils literal notranslate"><span class="pre">exp.mode=federation</span></code>.</p>
+</section>
+<section id="run-the-data-pipeline">
+<h2>Run the data pipeline<a class="headerlink" href="#run-the-data-pipeline" title="Link to this heading">#</a></h2>
+<p>First, <strong>ARMLET</strong> runs the data pipeline to compute the <a class="reference external" href="https://makgyver.github.io/fluke/fluke.data.html#fluke.data.DataSplitter">DataSplitter</a>, i.e., the Fluke’s Python object that contains all data after processing (launching, data cleaning, train, validation, and test sets splitting, data partitioning, normalization, etc.).
+As the data pipeline is quite complex, we do not detail it in this tutorial. However, you can find some information about it in the following tutorial: <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/data_pipeline.html">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_pipeline</span>
+
+<span class="n">data_splitter</span><span class="p">,</span> <span class="n">val_data</span> <span class="o">=</span> <span class="n">data_pipeline</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="adjust-the-configurations-and-save-them">
+<h2>Adjust the configurations and save them<a class="headerlink" href="#adjust-the-configurations-and-save-them" title="Link to this heading">#</a></h2>
+<p>Once we have prepared data, we setup the Fluke environment and adjust some configuration values (which are related to data, such as the number of classes and the input size of the ML model).
+We can now save the configuration in a YAML file for allowing reproductibility.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fluke</span><span class="w"> </span><span class="kn">import</span> <span class="n">FlukeENV</span>
+
+<span class="n">FlukeENV</span><span class="p">()</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_size</span> <span class="o">=</span> <span class="n">data_splitter</span><span class="o">.</span><span class="n">data_container</span><span class="o">.</span><span class="n">clients_tr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">hyperparameters</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">input_size</span> <span class="o">=</span> <span class="n">input_size</span>
+<span class="k">if</span> <span class="n">data_splitter</span><span class="o">.</span><span class="n">data_container</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">hyperparameters</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">=</span> <span class="mi">1</span>  
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">hyperparameters</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">=</span> <span class="n">data_splitter</span><span class="o">.</span><span class="n">data_container</span><span class="o">.</span><span class="n">num_classes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;config.yaml&quot;</span><span class="p">)</span>
+<span class="n">cfg_to_save</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="n">cfg_to_save</span><span class="p">[</span><span class="s2">&quot;paths&quot;</span><span class="p">][</span><span class="s2">&quot;output_dir&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;${hydra:runtime.output_dir}&quot;</span>
+<span class="k">if</span> <span class="s2">&quot;json_log_dir&quot;</span> <span class="ow">in</span> <span class="n">cfg_to_save</span><span class="p">[</span><span class="s2">&quot;logger&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">cfg_to_save</span><span class="p">[</span><span class="s2">&quot;logger&quot;</span><span class="p">][</span><span class="s2">&quot;json_log_dir&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;$</span><span class="si">{paths.output_dir}</span><span class="s2">&quot;</span>
+<span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cfg_to_save</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="instantiate-the-fl-algorithm-evaluator-and-logger">
+<h2>Instantiate the FL algorithm, evaluator, and logger<a class="headerlink" href="#instantiate-the-fl-algorithm-evaluator-and-logger" title="Link to this heading">#</a></h2>
+<p>Then, we instantiate the FL algorithm we specified in the <code class="docutils literal notranslate"><span class="pre">cfg_method</span></code> dictionary by using Hydra.
+We do the same for the evaluator and the logger with the <code class="docutils literal notranslate"><span class="pre">cfg_eval</span></code> and <code class="docutils literal notranslate"><span class="pre">cfg_logger</span></code> dictionaries, and pass them to the Fluke environment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hydra</span>
+
+<span class="n">fl_algo</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+    <span class="n">n_clients</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">protocol</span><span class="o">.</span><span class="n">n_clients</span><span class="p">,</span>
+    <span class="n">data_splitter</span><span class="o">=</span><span class="n">data_splitter</span><span class="p">,</span>
+    <span class="n">val_data</span><span class="o">=</span><span class="n">val_data</span><span class="p">,</span>
+    <span class="n">_convert_</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+    <span class="n">_recursive_</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">eval</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="s2">&quot;locals&quot;</span><span class="p">,</span> <span class="s2">&quot;post_fit&quot;</span><span class="p">,</span> <span class="s2">&quot;pre_fit&quot;</span><span class="p">,</span> <span class="s2">&quot;server&quot;</span><span class="p">),</span> 
+    <span class="n">n_classes</span><span class="o">=</span><span class="n">data_splitter</span><span class="o">.</span><span class="n">data_container</span><span class="o">.</span><span class="n">num_classes</span><span class="p">,</span>
+    <span class="n">sensitive_attributes</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sensitive_attributes</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">FlukeENV</span><span class="p">()</span><span class="o">.</span><span class="n">set_evaluator</span><span class="p">(</span><span class="n">evaluator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fl_algo</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">fl_algo</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">]&quot;</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">hydra</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">log_name</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">,</span> <span class="n">exp_id</span><span class="o">=</span><span class="n">fl_algo</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="n">fl_algo</span><span class="o">.</span><span class="n">set_callbacks</span><span class="p">([</span><span class="n">log</span><span class="p">])</span>
+<span class="n">FlukeENV</span><span class="p">()</span><span class="o">.</span><span class="n">set_logger</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">╭───────────────────────────────────────── Configuration ──────────────────────────────────────────╮
+│ <span style="font-weight: bold">{</span>                                                                                                │
+│     <span style="color: #008000; text-decoration-color: #008000">'save'</span>: <span style="font-weight: bold">{}</span>,                                                                                  │
+│     <span style="color: #008000; text-decoration-color: #008000">'data'</span>: <span style="font-weight: bold">{</span>                                                                                    │
+│         <span style="color: #008000; text-decoration-color: #008000">'cleaning'</span>: <span style="font-weight: bold">{</span>                                                                            │
+│             <span style="color: #008000; text-decoration-color: #008000">'name'</span>: <span style="color: #008000; text-decoration-color: #008000">'default'</span>,                                                                   │
+│             <span style="color: #008000; text-decoration-color: #008000">'missing_values'</span>: <span style="font-weight: bold">{</span>                                                                  │
+│                 <span style="color: #008000; text-decoration-color: #008000">'_target_'</span>:                                                                      │
+│ <span style="color: #008000; text-decoration-color: #008000">'armlet.data.cleaning.missing_values.MissingValuesDataCleaningMethod'</span>                            │
+│             <span style="font-weight: bold">}</span>                                                                                    │
+│         <span style="font-weight: bold">}</span>,                                                                                       │
+│         <span style="color: #008000; text-decoration-color: #008000">'dataset'</span>: <span style="font-weight: bold">{</span>                                                                             │
+│             <span style="color: #008000; text-decoration-color: #008000">'_target_'</span>: <span style="color: #008000; text-decoration-color: #008000">'armlet.data.datasets.load_Adult_dataset'</span>,                               │
+│             <span style="color: #008000; text-decoration-color: #008000">'dataset_name'</span>: <span style="color: #008000; text-decoration-color: #008000">'Adult'</span>,                                                             │
+│             <span style="color: #008000; text-decoration-color: #008000">'path'</span>: <span style="color: #008000; text-decoration-color: #008000">'../../../../datasets/Adult/raw_data'</span>,                                       │
+│             <span style="color: #008000; text-decoration-color: #008000">'sensitive_attributes'</span>: <span style="font-weight: bold">[</span>                                                            │
+│                 <span style="color: #008000; text-decoration-color: #008000">'age'</span>,                                                                           │
+│                 <span style="color: #008000; text-decoration-color: #008000">'gender'</span>,                                                                        │
+│                 <span style="color: #008000; text-decoration-color: #008000">'race'</span>                                                                           │
+│             <span style="font-weight: bold">]</span>                                                                                    │
+│         <span style="font-weight: bold">}</span>,                                                                                       │
+│         <span style="color: #008000; text-decoration-color: #008000">'distribution'</span>: <span style="font-weight: bold">{</span>                                                                        │
+│             <span style="color: #008000; text-decoration-color: #008000">'_target_'</span>: <span style="color: #008000; text-decoration-color: #008000">'armlet.data.splitter.ArmletDataSplitter.iid'</span>                            │
+│         <span style="font-weight: bold">}</span>,                                                                                       │
+│         <span style="color: #008000; text-decoration-color: #008000">'others'</span>: <span style="font-weight: bold">{</span>                                                                              │
+│             <span style="color: #008000; text-decoration-color: #008000">'client_split'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.2</span>,                                                                 │
+│             <span style="color: #008000; text-decoration-color: #008000">'client_val_split'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>,                                                             │
+│             <span style="color: #008000; text-decoration-color: #008000">'keep_test'</span>: <span style="color: #ff0000; text-decoration-color: #ff0000; font-style: italic">False</span>,                                                                  │
+│             <span style="color: #008000; text-decoration-color: #008000">'sampling_perc'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.0</span>,                                                                │
+│             <span style="color: #008000; text-decoration-color: #008000">'server_split'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>,                                                                 │
+│             <span style="color: #008000; text-decoration-color: #008000">'server_test'</span>: <span style="color: #ff0000; text-decoration-color: #ff0000; font-style: italic">False</span>,                                                                │
+│             <span style="color: #008000; text-decoration-color: #008000">'server_test_union'</span>: <span style="color: #00ff00; text-decoration-color: #00ff00; font-style: italic">True</span>,                                                           │
+│             <span style="color: #008000; text-decoration-color: #008000">'server_val_split'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0</span>,                                                             │
+│             <span style="color: #008000; text-decoration-color: #008000">'uniform_test'</span>: <span style="color: #ff0000; text-decoration-color: #ff0000; font-style: italic">False</span>                                                                │
+│         <span style="font-weight: bold">}</span>,                                                                                       │
+│         <span style="color: #008000; text-decoration-color: #008000">'seed'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42</span>                                                                               │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'eval'</span>: <span style="font-weight: bold">{</span>                                                                                    │
+│         <span style="color: #008000; text-decoration-color: #008000">'_target_'</span>: <span style="color: #008000; text-decoration-color: #008000">'armlet.eval.evaluators.MultiCriteriaBinaryClassEval'</span>,                       │
+│         <span style="color: #008000; text-decoration-color: #008000">'eval_every'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,                                                                         │
+│         <span style="color: #008000; text-decoration-color: #008000">'locals'</span>: <span style="color: #ff0000; text-decoration-color: #ff0000; font-style: italic">False</span>,                                                                         │
+│         <span style="color: #008000; text-decoration-color: #008000">'post_fit'</span>: <span style="color: #ff0000; text-decoration-color: #ff0000; font-style: italic">False</span>,                                                                       │
+│         <span style="color: #008000; text-decoration-color: #008000">'pre_fit'</span>: <span style="color: #ff0000; text-decoration-color: #ff0000; font-style: italic">False</span>,                                                                        │
+│         <span style="color: #008000; text-decoration-color: #008000">'server'</span>: <span style="color: #00ff00; text-decoration-color: #00ff00; font-style: italic">True</span>                                                                           │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'exp'</span>: <span style="font-weight: bold">{</span>                                                                                     │
+│         <span style="color: #008000; text-decoration-color: #008000">'device'</span>: <span style="color: #008000; text-decoration-color: #008000">'cpu'</span>,                                                                         │
+│         <span style="color: #008000; text-decoration-color: #008000">'inmemory'</span>: <span style="color: #00ff00; text-decoration-color: #00ff00; font-style: italic">True</span>,                                                                        │
+│         <span style="color: #008000; text-decoration-color: #008000">'mode'</span>: <span style="color: #008000; text-decoration-color: #008000">'federation'</span>,                                                                    │
+│         <span style="color: #008000; text-decoration-color: #008000">'seed'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">42</span>,                                                                              │
+│         <span style="color: #008000; text-decoration-color: #008000">'train'</span>: <span style="color: #00ff00; text-decoration-color: #00ff00; font-style: italic">True</span>                                                                            │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'logger'</span>: <span style="font-weight: bold">{</span>                                                                                  │
+│         <span style="color: #008000; text-decoration-color: #008000">'_target_'</span>: <span style="color: #008000; text-decoration-color: #008000">'armlet.utils.log.ArmletLog'</span>,                                                │
+│         <span style="color: #008000; text-decoration-color: #008000">'json_log_dir'</span>: <span style="color: #008000; text-decoration-color: #008000">'../../../../outputs/tutorial/FL_mode'</span>                                   │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'method'</span>: <span style="font-weight: bold">{</span>                                                                                  │
+│         <span style="color: #008000; text-decoration-color: #008000">'_target_'</span>: <span style="color: #008000; text-decoration-color: #008000">'armlet.FL_pipeline.FL_algorithms.ArmletCentralizedFL'</span>,                      │
+│         <span style="color: #008000; text-decoration-color: #008000">'hyperparameters'</span>: <span style="font-weight: bold">{</span>                                                                     │
+│             <span style="color: #008000; text-decoration-color: #008000">'client'</span>: <span style="font-weight: bold">{</span>                                                                          │
+│                 <span style="color: #008000; text-decoration-color: #008000">'batch_size'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">128</span>,                                                               │
+│                 <span style="color: #008000; text-decoration-color: #008000">'local_epochs'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">10</span>,                                                              │
+│                 <span style="color: #008000; text-decoration-color: #008000">'loss'</span>: <span style="font-weight: bold">{</span>                                                                        │
+│                     <span style="color: #008000; text-decoration-color: #008000">'_target_'</span>: <span style="color: #008000; text-decoration-color: #008000">'torch.nn.BCELoss'</span>                                               │
+│                 <span style="font-weight: bold">}</span>,                                                                               │
+│                 <span style="color: #008000; text-decoration-color: #008000">'optimizer'</span>: <span style="font-weight: bold">{</span>                                                                   │
+│                     <span style="color: #008000; text-decoration-color: #008000">'lr'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.001</span>,                                                                 │
+│                     <span style="color: #008000; text-decoration-color: #008000">'name'</span>: <span style="color: #008000; text-decoration-color: #008000">'SGD'</span>,                                                               │
+│                     <span style="color: #008000; text-decoration-color: #008000">'weight_decay'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.01</span>                                                         │
+│                 <span style="font-weight: bold">}</span>,                                                                               │
+│                 <span style="color: #008000; text-decoration-color: #008000">'scheduler'</span>: <span style="font-weight: bold">{</span>                                                                   │
+│                     <span style="color: #008000; text-decoration-color: #008000">'gamma'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,                                                                  │
+│                     <span style="color: #008000; text-decoration-color: #008000">'name'</span>: <span style="color: #008000; text-decoration-color: #008000">'StepLR'</span>,                                                            │
+│                     <span style="color: #008000; text-decoration-color: #008000">'step_size'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>                                                               │
+│                 <span style="font-weight: bold">}</span>                                                                                │
+│             <span style="font-weight: bold">}</span>,                                                                                   │
+│             <span style="color: #008000; text-decoration-color: #008000">'model'</span>: <span style="font-weight: bold">{</span>                                                                           │
+│                 <span style="color: #008000; text-decoration-color: #008000">'_target_'</span>: <span style="color: #008000; text-decoration-color: #008000">'armlet.utils.net.LogRegression'</span>,                                    │
+│                 <span style="color: #008000; text-decoration-color: #008000">'input_size'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">99</span>,                                                                │
+│                 <span style="color: #008000; text-decoration-color: #008000">'num_classes'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>                                                                 │
+│             <span style="font-weight: bold">}</span>,                                                                                   │
+│             <span style="color: #008000; text-decoration-color: #008000">'server'</span>: <span style="font-weight: bold">{</span>                                                                          │
+│                 <span style="color: #008000; text-decoration-color: #008000">'loss'</span>: <span style="font-weight: bold">{</span>                                                                        │
+│                     <span style="color: #008000; text-decoration-color: #008000">'_target_'</span>: <span style="color: #008000; text-decoration-color: #008000">'torch.nn.BCELoss'</span>                                               │
+│                 <span style="font-weight: bold">}</span>,                                                                               │
+│                 <span style="color: #008000; text-decoration-color: #008000">'time_to_accuracy_target'</span>: <span style="color: #800080; text-decoration-color: #800080; font-style: italic">None</span>,                                                 │
+│                 <span style="color: #008000; text-decoration-color: #008000">'weighted'</span>: <span style="color: #00ff00; text-decoration-color: #00ff00; font-style: italic">True</span>                                                                 │
+│             <span style="font-weight: bold">}</span>                                                                                    │
+│         <span style="font-weight: bold">}</span>                                                                                        │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'paths'</span>: <span style="font-weight: bold">{</span>                                                                                   │
+│         <span style="color: #008000; text-decoration-color: #008000">'data_dir'</span>: <span style="color: #008000; text-decoration-color: #008000">'../../../../datasets'</span>,                                                      │
+│         <span style="color: #008000; text-decoration-color: #008000">'log_dir'</span>: <span style="color: #008000; text-decoration-color: #008000">'../../../../logs'</span>,                                                           │
+│         <span style="color: #008000; text-decoration-color: #008000">'output_dir'</span>: <span style="color: #008000; text-decoration-color: #008000">'../../../../outputs/tutorial/FL_mode'</span>,                                    │
+│         <span style="color: #008000; text-decoration-color: #008000">'root_dir'</span>: <span style="color: #008000; text-decoration-color: #008000">'../../../../'</span>                                                               │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'protocol'</span>: <span style="font-weight: bold">{</span>                                                                                │
+│         <span style="color: #008000; text-decoration-color: #008000">'eligible_perc'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.0</span>,                                                                    │
+│         <span style="color: #008000; text-decoration-color: #008000">'n_clients'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,                                                                          │
+│         <span style="color: #008000; text-decoration-color: #008000">'n_rounds'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>                                                                            │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'exp_id'</span>: <span style="color: #008000; text-decoration-color: #008000">'b20ee5ea1bad41a8be8ca2423e869268'</span>                                                 │
+│ <span style="font-weight: bold">}</span>                                                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+</pre>
+</div></div>
+</div>
+</section>
+<section id="run-the-fl-experiment">
+<h2>Run the FL experiment<a class="headerlink" href="#run-the-fl-experiment" title="Link to this heading">#</a></h2>
+<p>Finally, we call the <code class="docutils literal notranslate"><span class="pre">run()</span></code> function of the FL algorithm object and close the logger once the FL process is completed.
+As training progresses, you can follow the evaluation metrics that are computed at the end of each round.
+Moreover, by closing <code class="docutils literal notranslate"><span class="pre">ArmletLog</span></code>, all metrics are saved in a JSON file (<code class="docutils literal notranslate"><span class="pre">results.json</span></code>) that can be found in the <code class="docutils literal notranslate"><span class="pre">OUTPUT_DIR</span></code> folder (i.e., <code class="docutils literal notranslate"><span class="pre">ARMLET_DIR/outputs/tutorial/FL_mode</span></code> as defined in the beginning of the tutorial).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">fl_algo</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">protocol</span><span class="o">.</span><span class="n">n_rounds</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">protocol</span><span class="o">.</span><span class="n">eligible_perc</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">FlukeENV</span><span class="p">()</span><span class="o">.</span><span class="n">force_close</span><span class="p">()</span>
+    <span class="n">FlukeENV</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">FlukeENV</span><span class="p">()</span><span class="o">.</span><span class="n">close_cache</span><span class="p">()</span>
+    <span class="k">raise</span> <span class="n">e</span>
+<span class="n">log</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #ffff00; text-decoration-color: #ffff00">[UserWarning]</span> <span style="color: #0000ff; text-decoration-color: #0000ff">/home/bnaline/anaconda3/envs/armlet/lib/python3.13/site-packages/rich/live.py:260</span>
+<span style="color: #ffff00; text-decoration-color: #ffff00">install "ipywidgets" for Jupyter support</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">╭──────────────────────────────────────────── Round: 1 ────────────────────────────────────────────╮
+│ <span style="font-weight: bold">{</span>                                                                                                │
+│     <span style="color: #008000; text-decoration-color: #008000">'post-fit'</span>: <span style="font-weight: bold">{</span>                                                                                │
+│         <span style="color: #008000; text-decoration-color: #008000">'training_loss'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.60185</span>,                                                                │
+│         <span style="color: #008000; text-decoration-color: #008000">'support'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,                                                                            │
+│         <span style="color: #008000; text-decoration-color: #008000">'round'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>                                                                               │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'global'</span>: <span style="font-weight: bold">{</span>                                                                                  │
+│         <span style="color: #008000; text-decoration-color: #008000">'accuracy'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.78646</span>,                                                                     │
+│         <span style="color: #008000; text-decoration-color: #008000">'precision'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.56932</span>,                                                                    │
+│         <span style="color: #008000; text-decoration-color: #008000">'recall'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.56754</span>,                                                                       │
+│         <span style="color: #008000; text-decoration-color: #008000">'f1'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.56843</span>,                                                                           │
+│         <span style="color: #008000; text-decoration-color: #008000">'loss'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.5378</span>,                                                                          │
+│         <span style="color: #008000; text-decoration-color: #008000">'round'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>                                                                               │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'comm_cost'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">800</span>                                                                             │
+│ <span style="font-weight: bold">}</span>                                                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Memory usage: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">629.4</span> MB <span style="font-weight: bold">[</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.09</span> %<span style="font-weight: bold">]</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">╭──────────────────────────────────────────── Round: 2 ────────────────────────────────────────────╮
+│ <span style="font-weight: bold">{</span>                                                                                                │
+│     <span style="color: #008000; text-decoration-color: #008000">'post-fit'</span>: <span style="font-weight: bold">{</span>                                                                                │
+│         <span style="color: #008000; text-decoration-color: #008000">'training_loss'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.49904</span>,                                                                │
+│         <span style="color: #008000; text-decoration-color: #008000">'support'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,                                                                            │
+│         <span style="color: #008000; text-decoration-color: #008000">'round'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>                                                                               │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'global'</span>: <span style="font-weight: bold">{</span>                                                                                  │
+│         <span style="color: #008000; text-decoration-color: #008000">'accuracy'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.81407</span>,                                                                     │
+│         <span style="color: #008000; text-decoration-color: #008000">'precision'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.65054</span>,                                                                    │
+│         <span style="color: #008000; text-decoration-color: #008000">'recall'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.53946</span>,                                                                       │
+│         <span style="color: #008000; text-decoration-color: #008000">'f1'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.58981</span>,                                                                           │
+│         <span style="color: #008000; text-decoration-color: #008000">'loss'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.4717</span>,                                                                          │
+│         <span style="color: #008000; text-decoration-color: #008000">'round'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>                                                                               │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'comm_cost'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">800</span>                                                                             │
+│ <span style="font-weight: bold">}</span>                                                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Memory usage: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">629.4</span> MB <span style="font-weight: bold">[</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.09</span> %<span style="font-weight: bold">]</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">╭────────────────────────────────────── Overall Performance ───────────────────────────────────────╮
+│ <span style="font-weight: bold">{</span>                                                                                                │
+│     <span style="color: #008000; text-decoration-color: #008000">'post-fit'</span>: <span style="font-weight: bold">{</span>                                                                                │
+│         <span style="color: #008000; text-decoration-color: #008000">'training_loss'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.49904</span>,                                                                │
+│         <span style="color: #008000; text-decoration-color: #008000">'support'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,                                                                            │
+│         <span style="color: #008000; text-decoration-color: #008000">'round'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>                                                                               │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'global'</span>: <span style="font-weight: bold">{</span>                                                                                  │
+│         <span style="color: #008000; text-decoration-color: #008000">'accuracy'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.81407</span>,                                                                     │
+│         <span style="color: #008000; text-decoration-color: #008000">'precision'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.65054</span>,                                                                    │
+│         <span style="color: #008000; text-decoration-color: #008000">'recall'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.53946</span>,                                                                       │
+│         <span style="color: #008000; text-decoration-color: #008000">'f1'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.58981</span>,                                                                           │
+│         <span style="color: #008000; text-decoration-color: #008000">'loss'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.4717</span>,                                                                          │
+│         <span style="color: #008000; text-decoration-color: #008000">'round'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>                                                                               │
+│     <span style="font-weight: bold">}</span>,                                                                                           │
+│     <span style="color: #008000; text-decoration-color: #008000">'comm_costs'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2000</span>                                                                           │
+│ <span style="font-weight: bold">}</span>                                                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+</pre>
+</div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tutorials</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="data_pipeline.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-environment-configuration-and-installation">Prerequisites (environment configuration and installation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-configuration">Prepare the configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-data-pipeline">Run the data pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjust-the-configurations-and-save-them">Adjust the configurations and save them</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instantiate-the-fl-algorithm-evaluator-and-logger">Instantiate the FL algorithm, evaluator, and logger</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-fl-experiment">Run the FL experiment</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/getting_started/tutorials/FL_mode.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, Baudouin NALINE.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

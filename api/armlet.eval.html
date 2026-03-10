@@ -42,8 +42,8 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=10f1778b"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/armlet.eval';</script>
@@ -393,16 +393,41 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="armlet.eval.evaluators.html">armlet.eval.evaluators module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="armlet.eval.evaluators.html#armlet.eval.evaluators.BinaryClassificationFairnessEval"><code class="docutils literal notranslate"><span class="pre">BinaryClassificationFairnessEval</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="armlet.eval.evaluators.html#armlet.eval.evaluators.BinaryClassificationFairnessEval.evaluate"><code class="docutils literal notranslate"><span class="pre">BinaryClassificationFairnessEval.evaluate()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.eval.evaluators.html#armlet.eval.evaluators.MultiCriteriaBinaryClassEval"><code class="docutils literal notranslate"><span class="pre">MultiCriteriaBinaryClassEval</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.evaluators.html#armlet.eval.evaluators.MultiCriteriaBinaryClassEval.evaluate"><code class="docutils literal notranslate"><span class="pre">MultiCriteriaBinaryClassEval.evaluate()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="armlet.eval.metrics.html">armlet.eval.metrics module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryAOD"><code class="docutils literal notranslate"><span class="pre">BinaryAOD</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryAOD.compute"><code class="docutils literal notranslate"><span class="pre">BinaryAOD.compute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryAOD.update"><code class="docutils literal notranslate"><span class="pre">BinaryAOD.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryDI"><code class="docutils literal notranslate"><span class="pre">BinaryDI</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryDI.compute"><code class="docutils literal notranslate"><span class="pre">BinaryDI.compute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryDI.update"><code class="docutils literal notranslate"><span class="pre">BinaryDI.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryDcI"><code class="docutils literal notranslate"><span class="pre">BinaryDcI</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryDcI.compute"><code class="docutils literal notranslate"><span class="pre">BinaryDcI.compute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryDcI.update"><code class="docutils literal notranslate"><span class="pre">BinaryDcI.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryEOD"><code class="docutils literal notranslate"><span class="pre">BinaryEOD</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryEOD.compute"><code class="docutils literal notranslate"><span class="pre">BinaryEOD.compute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryEOD.update"><code class="docutils literal notranslate"><span class="pre">BinaryEOD.update()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryFairnessMetrics"><code class="docutils literal notranslate"><span class="pre">BinaryFairnessMetrics</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryFairnessMetrics.compute"><code class="docutils literal notranslate"><span class="pre">BinaryFairnessMetrics.compute()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinaryFairnessMetrics.update"><code class="docutils literal notranslate"><span class="pre">BinaryFairnessMetrics.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinarySPD"><code class="docutils literal notranslate"><span class="pre">BinarySPD</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinarySPD.compute"><code class="docutils literal notranslate"><span class="pre">BinarySPD.compute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.BinarySPD.update"><code class="docutils literal notranslate"><span class="pre">BinarySPD.update()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="armlet.eval.metrics.html#armlet.eval.metrics.div_default_zero"><code class="docutils literal notranslate"><span class="pre">div_default_zero()</span></code></a></li>
@@ -511,7 +536,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

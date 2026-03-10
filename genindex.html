@@ -41,8 +41,8 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=10f1778b"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/tabs.js?v=3ee01567"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
@@ -555,13 +555,21 @@
 </li>
       <li><a href="api/armlet.FL_pipeline.data_selection.methods.html#armlet.FL_pipeline.data_selection.methods.DataSelectionServerMethod.before_fit">before_fit() (armlet.FL_pipeline.data_selection.methods.DataSelectionServerMethod method)</a>
 </li>
-      <li><a href="api/armlet.eval.evaluators.html#armlet.eval.evaluators.BinaryClassificationFairnessEval">BinaryClassificationFairnessEval (class in armlet.eval.evaluators)</a>
+      <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryAOD">BinaryAOD (class in armlet.eval.metrics)</a>
+</li>
+      <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryDcI">BinaryDcI (class in armlet.eval.metrics)</a>
+</li>
+      <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryDI">BinaryDI (class in armlet.eval.metrics)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryEOD">BinaryEOD (class in armlet.eval.metrics)</a>
+</li>
       <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryFairnessMetrics">BinaryFairnessMetrics (class in armlet.eval.metrics)</a>
 </li>
       <li><a href="api/armlet.utils.custom_loss.html#armlet.utils.custom_loss.BinaryHingeLoss">BinaryHingeLoss (class in armlet.utils.custom_loss)</a>
+</li>
+      <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinarySPD">BinarySPD (class in armlet.eval.metrics)</a>
 </li>
       <li><a href="api/armlet.FL_pipeline.data_selection.FL_algorithms.html#armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionServer.broadcast_model">broadcast_model() (armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionServer method)</a>
 </li>
@@ -587,8 +595,20 @@
 </li>
       <li><a href="api/armlet.utils.log.html#armlet.utils.log.ArmletLog.close">close() (armlet.utils.log.ArmletLog method)</a>
 </li>
-      <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryFairnessMetrics.compute">compute() (armlet.eval.metrics.BinaryFairnessMetrics method)</a>
+      <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryAOD.compute">compute() (armlet.eval.metrics.BinaryAOD method)</a>
+
+      <ul>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryDcI.compute">(armlet.eval.metrics.BinaryDcI method)</a>
 </li>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryDI.compute">(armlet.eval.metrics.BinaryDI method)</a>
+</li>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryEOD.compute">(armlet.eval.metrics.BinaryEOD method)</a>
+</li>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryFairnessMetrics.compute">(armlet.eval.metrics.BinaryFairnessMetrics method)</a>
+</li>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinarySPD.compute">(armlet.eval.metrics.BinarySPD method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.DataCleaningMethod.compute_cleaning_metrics">compute_cleaning_metrics() (armlet.data.cleaning.DataCleaningMethod method)</a>
@@ -645,7 +665,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/armlet.utils.log.html#armlet.utils.log.ArmletLog.end_fit">end_fit() (armlet.utils.log.ArmletLog method)</a>
 </li>
-      <li><a href="api/armlet.eval.evaluators.html#armlet.eval.evaluators.BinaryClassificationFairnessEval.evaluate">evaluate() (armlet.eval.evaluators.BinaryClassificationFairnessEval method)</a>
+      <li><a href="api/armlet.eval.evaluators.html#armlet.eval.evaluators.MultiCriteriaBinaryClassEval.evaluate">evaluate() (armlet.eval.evaluators.MultiCriteriaBinaryClassEval method)</a>
 
       <ul>
         <li><a href="api/armlet.FL_pipeline.FL_algorithms.html#armlet.FL_pipeline.FL_algorithms.ArmletClient.evaluate">(armlet.FL_pipeline.FL_algorithms.ArmletClient method)</a>
@@ -837,6 +857,10 @@
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/armlet.eval.evaluators.html#armlet.eval.evaluators.MultiCriteriaBinaryClassEval">MultiCriteriaBinaryClassEval (class in armlet.eval.evaluators)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="N">N</h2>
@@ -914,8 +938,20 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryFairnessMetrics.update">update() (armlet.eval.metrics.BinaryFairnessMetrics method)</a>
+      <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryAOD.update">update() (armlet.eval.metrics.BinaryAOD method)</a>
+
+      <ul>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryDcI.update">(armlet.eval.metrics.BinaryDcI method)</a>
 </li>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryDI.update">(armlet.eval.metrics.BinaryDI method)</a>
+</li>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryEOD.update">(armlet.eval.metrics.BinaryEOD method)</a>
+</li>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryFairnessMetrics.update">(armlet.eval.metrics.BinaryFairnessMetrics method)</a>
+</li>
+        <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinarySPD.update">(armlet.eval.metrics.BinarySPD method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -977,7 +1013,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

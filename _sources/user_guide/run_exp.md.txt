@@ -85,6 +85,22 @@ data:
     server_val_split: 0.0
     uniform_test: false
 
+  processing:
+    one_hot_encoding:
+      _apply_directly_to_subdata_: false
+      _target_: armlet.data.processing.feature_encoding.one_hot_encoding_pipeline
+    conversion_to_num:
+      _apply_directly_to_subdata_: true
+      _target_: armlet.data.processing.format_conversion.convert_bool_and_cat_to_num
+    normalization:
+      _apply_directly_to_subdata_: false
+      _target_: armlet.data.processing.normalization.normalization_pipeline
+      cols_to_exclude: ${data.dataset.sensitive_attributes}
+    conversion_to_tensors:
+      _apply_directly_to_subdata_: true
+      _target_: armlet.data.processing.format_conversion.convert_dataframes_to_tensors
+      sensitive_attributes: ${data.dataset.sensitive_attributes}
+
   seed: 42
 
 eval:

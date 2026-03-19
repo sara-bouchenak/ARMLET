@@ -14,7 +14,7 @@ cd docs
 Then, activate the environment and install the needed dependencies:
 
 ```bash
-activate armlet
+conda activate armlet
 pip install -r requirements.txt
 ```
 

@@ -370,6 +370,7 @@ The configuration groups or values in <code class="docutils literal notranslate"
 <li><p><a class="reference internal" href="#config-data-distribution"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">distribution</span></code></span></a>: for specifying the data distribution when partitionning;</p></li>
 <li><p><a class="reference internal" href="#config-data-others"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">others</span></code></span></a>: for the others parameters used to split the data among the clients and the server;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">seed</span></code>: the seed for the random number generator in the data pipeline, which is essential for the experiment <strong>reproducibility</strong>;</p></li>
+<li><p><a class="reference internal" href="#config-data-processing"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">processing</span></code></span></a>: <strong>optional</strong>, for performing data processing;</p></li>
 <li><p><a class="reference internal" href="#config-data-cleaning"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">cleaning</span></code></span></a>: <strong>optional</strong>, for performing data cleaning;</p></li>
 <li><p><a class="reference internal" href="#config-data-loading"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">loading</span></code></span></a>: <strong>optional</strong>, for dynamically loading the splitted dataset that were saved during previous experiments;</p></li>
 <li><p><a class="reference internal" href="#config-data-saving"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">saving</span></code></span></a>: <strong>optional</strong>, for saving data at one or multiple specific steps of the data pipeline.</p></li>
@@ -416,6 +417,10 @@ It requires to set <code class="docutils literal notranslate"><span class="pre">
 <p class="admonition-title">See also</p>
 <p>For more information about <code class="docutils literal notranslate"><span class="pre">sampling_perc</span></code>, <code class="docutils literal notranslate"><span class="pre">keep_test</span></code>, <code class="docutils literal notranslate"><span class="pre">server_test</span></code>, <code class="docutils literal notranslate"><span class="pre">client_split</span></code>, <code class="docutils literal notranslate"><span class="pre">server_split</span></code>, and <code class="docutils literal notranslate"><span class="pre">uniform_test</span></code>, see <a class="reference external" href="https://makgyver.github.io/fluke/config_data.html#other-fields">Data configuration</a> from Fluke documentation.</p>
 </div>
+</section>
+<section id="data-processing-configuration">
+<h2>Data processing configuration<a class="headerlink" href="#data-processing-configuration" title="Link to this heading">#</a></h2>
+<p id="config-data-processing">[TODO]</p>
 </section>
 <section id="data-cleaning-configuration">
 <h2>Data cleaning configuration<a class="headerlink" href="#data-cleaning-configuration" title="Link to this heading">#</a></h2>
@@ -481,6 +486,7 @@ It requires to set <code class="docutils literal notranslate"><span class="pre">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-configuration">Dataset configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-distribution">Data distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#others-fields">Others fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing-configuration">Data processing configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-configuration">Data cleaning configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-configuration">Data loading configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-saving-configuration">Data saving configuration</a></li>

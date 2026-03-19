@@ -13,6 +13,8 @@ The configuration groups or values in `data` are:
 
 - `seed`: the seed for the random number generator in the data pipeline, which is essential for the experiment **reproducibility**;
 
+- [`processing`](config_data_processing): **optional**, for performing data processing;
+
 - [`cleaning`](config_data_cleaning): **optional**, for performing data cleaning;
 
 - [`loading`](config_data_loading): **optional**, for dynamically loading the splitted dataset that were saved during previous experiments;
@@ -81,6 +83,11 @@ It requires to set `server_test` and `keep_test` to `false`;
 	For more information about ``sampling_perc``, ``keep_test``, ``server_test``, ``client_split``, ``server_split``, and ``uniform_test``, see `Data configuration <https://makgyver.github.io/fluke/config_data.html#other-fields>`_ from Fluke documentation.
 
 ```
+
+## Data processing configuration
+(config_data_processing)=
+
+[TODO]
 
 ## Data cleaning configuration
 (config_data_cleaning)=

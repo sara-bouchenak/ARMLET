@@ -438,6 +438,26 @@ We define the dictionaries <code class="docutils literal notranslate"><span clas
         <span class="s2">&quot;server_val_split&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
         <span class="s2">&quot;uniform_test&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">},</span>
+    <span class="s2">&quot;processing&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;one_hot_encoding&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;_apply_directly_to_subdata_&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.processing.feature_encoding.one_hot_encoding_pipeline&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;conversion_to_num&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;_apply_directly_to_subdata_&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.processing.format_conversion.convert_bool_and_cat_to_num&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;normalization&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_apply_directly_to_subdata_&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.processing.normalization.normalization_pipeline&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;cols_to_exclude&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">],</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;conversion_to_tensors&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;_apply_directly_to_subdata_&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;_target_&quot;</span><span class="p">:</span> <span class="s2">&quot;armlet.data.processing.format_conversion.convert_dataframes_to_tensors&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sensitive_attributes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">],</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
     <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
 <span class="p">})</span>
 
@@ -698,14 +718,18 @@ After printing the clean training data of the first client, we can see that the 
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.saving</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_data</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.cleaning</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.cleaning</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_cleaning_pipeline</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;cleaning&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_data_cleaned</span><span class="p">:</span>
 
     <span class="k">if</span> <span class="n">is_saving_mode</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;save_data_before_cleaning&quot;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">saving</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">saving</span><span class="o">.</span><span class="n">save_data_before_cleaning</span><span class="p">):</span>
         <span class="n">save_data</span><span class="p">(</span><span class="n">splitted_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;before_cleaning&quot;</span><span class="p">)</span>
 
-    <span class="n">cleaned_data</span><span class="p">,</span> <span class="n">data_cleaning_metrics</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">(</span><span class="n">splitted_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cleaning</span><span class="p">,</span> <span class="n">sensitive_attributes</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sensitive_attributes</span><span class="p">)</span>
+    <span class="n">cleaned_data</span><span class="p">,</span> <span class="n">data_cleaning_metrics</span> <span class="o">=</span> <span class="n">data_cleaning_pipeline</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">splitted_data</span><span class="p">,</span>
+        <span class="n">cfg_cleaning</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cleaning</span><span class="p">,</span>
+        <span class="n">sensitive_attributes</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sensitive_attributes</span><span class="p">,</span>
+    <span class="p">)</span>
 
     <span class="n">data_cleaning_metrics_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;data_cleaning_metrics.json&quot;</span><span class="p">)</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data_cleaning_metrics</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_cleaning_metrics_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -849,209 +873,24 @@ After printing the clean training data of the first client, we can see that the 
 <section id="data-preprocessing">
 <h2>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
 <p>The next step is to preprocess all data.
-In <strong>ARMLET</strong>, we:</p>
+In <strong>ARMLET</strong>, we specify all preprocessing steps in the configuration values, as they are specific to the data types and the use cases.</p>
+<p>In this tutorial, we:</p>
 <ul class="simple">
 <li><p>perform one hot encoding for the categorical features of each DataFrame;</p></li>
 <li><p>convert the boolean features and the features of type <code class="docutils literal notranslate"><span class="pre">category</span></code> to numeric (<code class="docutils literal notranslate"><span class="pre">category</span></code> is a special data type we use when loading the dataset to not convert the corresponding feature);</p></li>
-<li><p>normalize all features using a standard scaler (except for features tagged as sensitive attributes).</p></li>
+<li><p>normalize all features using a standard scaler (except for features tagged as sensitive attributes);</p></li>
+<li><p>and convert the dataframes to tensors.</p></li>
 </ul>
-<p>By printing the training DataFrame of the first client, we can see the results of these data preprocessing.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.processing</span><span class="w"> </span><span class="kn">import</span> <span class="n">one_hot_encoding</span><span class="p">,</span> <span class="n">convert_bool_and_cat_to_num</span><span class="p">,</span> <span class="n">normalization</span>
-
-
-<span class="n">one_hot_data</span> <span class="o">=</span> <span class="n">one_hot_encoding</span><span class="p">(</span><span class="n">cleaned_data</span><span class="p">)</span>
-<span class="n">numeric_data</span> <span class="o">=</span> <span class="n">convert_bool_and_cat_to_num</span><span class="p">(</span><span class="n">one_hot_data</span><span class="p">)</span>
-<span class="n">normalized_data</span> <span class="o">=</span> <span class="n">normalization</span><span class="p">(</span><span class="n">numeric_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sensitive_attributes</span><span class="p">)</span>
-
-<span class="n">normalized_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">][</span><span class="s2">&quot;client_0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>fnlwgt</th>
-      <th>education-num</th>
-      <th>race</th>
-      <th>gender</th>
-      <th>capital-gain</th>
-      <th>capital-loss</th>
-      <th>hours-per-week</th>
-      <th>workclass_Federal-gov</th>
-      <th>workclass_Local-gov</th>
-      <th>...</th>
-      <th>native-country_Portugal</th>
-      <th>native-country_Puerto-Rico</th>
-      <th>native-country_Scotland</th>
-      <th>native-country_South</th>
-      <th>native-country_Taiwan</th>
-      <th>native-country_Thailand</th>
-      <th>native-country_Trinadad&amp;Tobago</th>
-      <th>native-country_United-States</th>
-      <th>native-country_Vietnam</th>
-      <th>native-country_Yugoslavia</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>-1.448676</td>
-      <td>-0.444587</td>
-      <td>1</td>
-      <td>1</td>
-      <td>-0.147528</td>
-      <td>-0.219043</td>
-      <td>0.254296</td>
-      <td>-0.180888</td>
-      <td>-0.270257</td>
-      <td>...</td>
-      <td>-0.037206</td>
-      <td>-0.059594</td>
-      <td>-0.020369</td>
-      <td>-0.047668</td>
-      <td>-0.034899</td>
-      <td>-0.027332</td>
-      <td>-0.025768</td>
-      <td>0.308004</td>
-      <td>-0.0434</td>
-      <td>-0.02467</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>-0.178552</td>
-      <td>1.128946</td>
-      <td>1</td>
-      <td>0</td>
-      <td>-0.147528</td>
-      <td>4.665356</td>
-      <td>-0.245010</td>
-      <td>-0.180888</td>
-      <td>-0.270257</td>
-      <td>...</td>
-      <td>-0.037206</td>
-      <td>-0.059594</td>
-      <td>-0.020369</td>
-      <td>-0.047668</td>
-      <td>-0.034899</td>
-      <td>-0.027332</td>
-      <td>-0.025768</td>
-      <td>0.308004</td>
-      <td>-0.0434</td>
-      <td>-0.02467</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>-0.624729</td>
-      <td>-0.444587</td>
-      <td>1</td>
-      <td>1</td>
-      <td>-0.147528</td>
-      <td>-0.219043</td>
-      <td>2.001870</td>
-      <td>-0.180888</td>
-      <td>-0.270257</td>
-      <td>...</td>
-      <td>-0.037206</td>
-      <td>-0.059594</td>
-      <td>-0.020369</td>
-      <td>-0.047668</td>
-      <td>-0.034899</td>
-      <td>-0.027332</td>
-      <td>-0.025768</td>
-      <td>0.308004</td>
-      <td>-0.0434</td>
-      <td>-0.02467</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>-0.074578</td>
-      <td>0.342179</td>
-      <td>1</td>
-      <td>1</td>
-      <td>-0.147528</td>
-      <td>5.653600</td>
-      <td>0.337514</td>
-      <td>-0.180888</td>
-      <td>-0.270257</td>
-      <td>...</td>
-      <td>-0.037206</td>
-      <td>-0.059594</td>
-      <td>-0.020369</td>
-      <td>-0.047668</td>
-      <td>-0.034899</td>
-      <td>-0.027332</td>
-      <td>-0.025768</td>
-      <td>0.308004</td>
-      <td>-0.0434</td>
-      <td>-0.02467</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>-1.164742</td>
-      <td>1.522329</td>
-      <td>1</td>
-      <td>0</td>
-      <td>-0.147528</td>
-      <td>-0.219043</td>
-      <td>0.337514</td>
-      <td>-0.180888</td>
-      <td>3.700177</td>
-      <td>...</td>
-      <td>-0.037206</td>
-      <td>-0.059594</td>
-      <td>-0.020369</td>
-      <td>-0.047668</td>
-      <td>-0.034899</td>
-      <td>-0.027332</td>
-      <td>-0.025768</td>
-      <td>0.308004</td>
-      <td>-0.0434</td>
-      <td>-0.02467</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 99 columns</p>
-</div></div></div>
-</div>
-<p>If the DataFrames have a feature named <code class="docutils literal notranslate"><span class="pre">image_path</span></code>, data is categorized as image.
-In this case, we load the images based on the column <code class="docutils literal notranslate"><span class="pre">image_path</span></code>, perform some image-specific transformations (e.g., resizing or normalization), and convert the images and labels to tensors.
-If data is not categorized as image, the dataframes are directly converted to tensors.</p>
 <p>We can see in the notebook output that the DataFrame were converted to tensors.
 Note that the sensitive attributes (specified in the <code class="docutils literal notranslate"><span class="pre">cfg_data</span></code> config file) have been moved to the last columns before tensor conversion so that they can be easily identified during the training/evaluation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.processing</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_dataframes_to_tensors</span><span class="p">,</span> <span class="n">load_and_convert_images_to_tensors</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.processing</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_processing_pipeline</span>
 
-
-<span class="n">is_image_data</span> <span class="o">=</span> <span class="s2">&quot;image_path&quot;</span> <span class="ow">in</span> <span class="n">normalized_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">][</span><span class="s2">&quot;client_0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span>
-<span class="k">if</span> <span class="n">is_image_data</span><span class="p">:</span>
-    <span class="n">tensor_data</span> <span class="o">=</span> <span class="n">load_and_convert_images_to_tensors</span><span class="p">(</span><span class="n">normalized_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">tensor_data</span> <span class="o">=</span> <span class="n">convert_dataframes_to_tensors</span><span class="p">(</span><span class="n">normalized_data</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sensitive_attributes</span><span class="p">)</span>
+<span class="n">tensor_data</span> <span class="o">=</span> <span class="n">data_processing_pipeline</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">cleaned_data</span><span class="p">,</span>
+    <span class="n">cfg_data</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="n">tensor_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">][</span><span class="s2">&quot;client_0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
@@ -1083,35 +922,29 @@ If this value is set to <code class="docutils literal notranslate"><span class="
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">tensor_data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data_from_folder</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">cfg</span><span class="o">.</span><span class="n">protocol</span><span class="o">.</span><span class="n">n_clients</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Note</strong>: A more flexible way of performing preprocessing is currently under development.
-It will consist of specifying the desired data preprocessing steps directly in the configuration values, allowing better control and compatibility with other data types.</p>
 </section>
 <section id="conversion-to-fluke-data-format">
 <h2>Conversion to Fluke data format<a class="headerlink" href="#conversion-to-fluke-data-format" title="Link to this heading">#</a></h2>
 <p>After data preprocessing, the final step is to transform the actual data (that is a dictionary of tensors) into the data format required by the FL process of Fluke (i.e., <a class="reference external" href="https://makgyver.github.io/fluke/fluke.data.html#fluke.data.DataSplitter">DataSplitter</a>).
-To do that, we first convert the tensors to <a class="reference external" href="https://makgyver.github.io/fluke/fluke.data.html#fluke.data.FastDataLoader">FastDataLoader</a>, then transform the dictionary into a <a class="reference external" href="https://makgyver.github.io/fluke/fluke.data.html#fluke.data.DummyDataContainer">DummyDataContainer</a>, and finally pack it in a <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/api/armlet.data.splitter.html#armlet.data.splitter.DummyDataSplitter">DummyDataSplitter</a>, which is a simplified version of Fluke’s DataSplitter.</p>
+To do that, through the <code class="docutils literal notranslate"><span class="pre">convert_tensors_to_fluke_data_format()</span></code> function, we first convert the tensors to <a class="reference external" href="https://makgyver.github.io/fluke/fluke.data.html#fluke.data.FastDataLoader">FastDataLoader</a>, then transform the dictionary into a <a class="reference external" href="https://makgyver.github.io/fluke/fluke.data.html#fluke.data.DummyDataContainer">DummyDataContainer</a>, and finally pack it in a <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/api/armlet.data.splitter.html#armlet.data.splitter.DummyDataSplitter">DummyDataSplitter</a>, which is a simplified version of Fluke’s DataSplitter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fluke.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DummyDataContainer</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.processing</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_tensors_to_fast_data_loaders</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.processing.format_conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_tensors_to_fast_data_loaders</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.splitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">DummyDataSplitter</span>
+
+<span class="c1"># The following lines are included in the convert_tensors_to_fluke_data_format() function</span>
 
 <span class="n">num_classes</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">tensor_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
-<span class="n">final_data</span> <span class="o">=</span> <span class="n">convert_tensors_to_fast_data_loaders</span><span class="p">(</span><span class="n">tensor_data</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+<span class="n">fast_data_loaders</span> <span class="o">=</span> <span class="n">convert_tensors_to_fast_data_loaders</span><span class="p">(</span><span class="n">tensor_data</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
 
 <span class="n">dummy_data_container</span> <span class="o">=</span> <span class="n">DummyDataContainer</span><span class="p">(</span>
-    <span class="n">final_data</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">],</span>
-    <span class="n">final_data</span><span class="p">[</span><span class="s2">&quot;clients_test&quot;</span><span class="p">],</span>
-    <span class="n">final_data</span><span class="p">[</span><span class="s2">&quot;server_test&quot;</span><span class="p">],</span>
+    <span class="n">fast_data_loaders</span><span class="p">[</span><span class="s2">&quot;clients_train&quot;</span><span class="p">],</span>
+    <span class="n">fast_data_loaders</span><span class="p">[</span><span class="s2">&quot;clients_test&quot;</span><span class="p">],</span>
+    <span class="n">fast_data_loaders</span><span class="p">[</span><span class="s2">&quot;server_test&quot;</span><span class="p">],</span>
     <span class="n">num_classes</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">armlet.data.splitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">DummyDataSplitter</span>
 
 <span class="n">data_splitter</span> <span class="o">=</span> <span class="n">DummyDataSplitter</span><span class="p">(</span>
     <span class="n">dataset</span><span class="o">=</span><span class="n">dummy_data_container</span><span class="p">,</span>
@@ -1119,7 +952,7 @@ To do that, we first convert the tensors to <a class="reference external" href="
     <span class="o">**</span><span class="n">cfg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">others</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="s2">&quot;client_val_split&quot;</span><span class="p">,</span> <span class="s2">&quot;server_test_union&quot;</span><span class="p">,</span> <span class="s2">&quot;server_val_split&quot;</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="n">val_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">final_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;clients_val&quot;</span><span class="p">,</span> <span class="s2">&quot;server_val&quot;</span><span class="p">]}</span>
+<span class="n">val_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">fast_data_loaders</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;clients_val&quot;</span><span class="p">,</span> <span class="s2">&quot;server_val&quot;</span><span class="p">]}</span>
 </pre></div>
 </div>
 </div>

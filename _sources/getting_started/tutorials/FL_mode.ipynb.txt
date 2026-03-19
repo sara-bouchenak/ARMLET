@@ -78,13 +78,14 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Then, we need to provide in `cfg_data` information related to the data pipeline (dataset, data cleaning methods, train, validation, and test set splitting, distribution for the data partitioning, and data seed).\n",
+    "Then, we need to provide in `cfg_data` information related to the data pipeline (dataset, data cleaning methods, train, validation, and test set splitting, distribution for the data partitioning, many other data processing, and data seed).\n",
     "With the following configurations, we will:\n",
     "(a) load the Adult dataset;\n",
     "(b) perform an IID data partitioning between X clients (the number of clients will be detailed after);\n",
     "(c) split each client dataset into a training set (80% of the client data) and a test set (20%);\n",
     "(d) concatenate the union of the clients test sets to form the server test set;\n",
-    "and (e) clean all data by removing missing values."
+    "(e) clean all data by removing missing values;\n",
+    "and (f) perform standard preprocessing for tabular data."
    ]
   },
   {
@@ -115,6 +116,26 @@
     "        \"server_test_union\": True,\n",
     "        \"server_val_split\": 0.0,\n",
     "        \"uniform_test\": False,\n",
+    "    },\n",
+    "    \"processing\": {\n",
+    "        \"one_hot_encoding\": {\n",
+    "            \"_apply_directly_to_subdata_\": False,\n",
+    "            \"_target_\": \"armlet.data.processing.feature_encoding.one_hot_encoding_pipeline\",\n",
+    "        },\n",
+    "        \"conversion_to_num\": {\n",
+    "            \"_apply_directly_to_subdata_\": True,\n",
+    "            \"_target_\": \"armlet.data.processing.format_conversion.convert_bool_and_cat_to_num\",\n",
+    "        },\n",
+    "        \"normalization\": {\n",
+    "        \"_apply_directly_to_subdata_\": False,\n",
+    "            \"_target_\": \"armlet.data.processing.normalization.normalization_pipeline\",\n",
+    "            \"cols_to_exclude\": ['age', 'gender', 'race'],\n",
+    "        },\n",
+    "        \"conversion_to_tensors\": {\n",
+    "            \"_apply_directly_to_subdata_\": True,\n",
+    "            \"_target_\": \"armlet.data.processing.format_conversion.convert_dataframes_to_tensors\",\n",
+    "            \"sensitive_attributes\": ['age', 'gender', 'race'],\n",
+    "        },\n",
     "    },\n",
     "    \"seed\": 42,\n",
     "})"
@@ -441,6 +462,36 @@
        "│             <span style=\"color: #008000; text-decoration-color: #008000\">'server_val_split'</span>: <span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">0.0</span>,                                                             │\n",
        "│             <span style=\"color: #008000; text-decoration-color: #008000\">'uniform_test'</span>: <span style=\"color: #ff0000; text-decoration-color: #ff0000; font-style: italic\">False</span>                                                                │\n",
        "│         <span style=\"font-weight: bold\">}</span>,                                                                                       │\n",
+       "│         <span style=\"color: #008000; text-decoration-color: #008000\">'processing'</span>: <span style=\"font-weight: bold\">{</span>                                                                          │\n",
+       "│             <span style=\"color: #008000; text-decoration-color: #008000\">'one_hot_encoding'</span>: <span style=\"font-weight: bold\">{</span>                                                                │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'_apply_directly_to_subdata_'</span>: <span style=\"color: #ff0000; text-decoration-color: #ff0000; font-style: italic\">False</span>,                                            │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'_target_'</span>: <span style=\"color: #008000; text-decoration-color: #008000\">'armlet.data.processing.feature_encoding.one_hot_encoding_pipeline'</span>  │\n",
+       "│             <span style=\"font-weight: bold\">}</span>,                                                                                   │\n",
+       "│             <span style=\"color: #008000; text-decoration-color: #008000\">'conversion_to_num'</span>: <span style=\"font-weight: bold\">{</span>                                                               │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'_apply_directly_to_subdata_'</span>: <span style=\"color: #00ff00; text-decoration-color: #00ff00; font-style: italic\">True</span>,                                             │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'_target_'</span>:                                                                      │\n",
+       "│ <span style=\"color: #008000; text-decoration-color: #008000\">'armlet.data.processing.format_conversion.convert_bool_and_cat_to_num'</span>                           │\n",
+       "│             <span style=\"font-weight: bold\">}</span>,                                                                                   │\n",
+       "│             <span style=\"color: #008000; text-decoration-color: #008000\">'normalization'</span>: <span style=\"font-weight: bold\">{</span>                                                                   │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'_apply_directly_to_subdata_'</span>: <span style=\"color: #ff0000; text-decoration-color: #ff0000; font-style: italic\">False</span>,                                            │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'_target_'</span>: <span style=\"color: #008000; text-decoration-color: #008000\">'armlet.data.processing.normalization.normalization_pipeline'</span>,       │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'cols_to_exclude'</span>: <span style=\"font-weight: bold\">[</span>                                                             │\n",
+       "│                     <span style=\"color: #008000; text-decoration-color: #008000\">'age'</span>,                                                                       │\n",
+       "│                     <span style=\"color: #008000; text-decoration-color: #008000\">'gender'</span>,                                                                    │\n",
+       "│                     <span style=\"color: #008000; text-decoration-color: #008000\">'race'</span>                                                                       │\n",
+       "│                 <span style=\"font-weight: bold\">]</span>                                                                                │\n",
+       "│             <span style=\"font-weight: bold\">}</span>,                                                                                   │\n",
+       "│             <span style=\"color: #008000; text-decoration-color: #008000\">'conversion_to_tensors'</span>: <span style=\"font-weight: bold\">{</span>                                                           │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'_apply_directly_to_subdata_'</span>: <span style=\"color: #00ff00; text-decoration-color: #00ff00; font-style: italic\">True</span>,                                             │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'_target_'</span>:                                                                      │\n",
+       "│ <span style=\"color: #008000; text-decoration-color: #008000\">'armlet.data.processing.format_conversion.convert_dataframes_to_tensors'</span>,                        │\n",
+       "│                 <span style=\"color: #008000; text-decoration-color: #008000\">'sensitive_attributes'</span>: <span style=\"font-weight: bold\">[</span>                                                        │\n",
+       "│                     <span style=\"color: #008000; text-decoration-color: #008000\">'age'</span>,                                                                       │\n",
+       "│                     <span style=\"color: #008000; text-decoration-color: #008000\">'gender'</span>,                                                                    │\n",
+       "│                     <span style=\"color: #008000; text-decoration-color: #008000\">'race'</span>                                                                       │\n",
+       "│                 <span style=\"font-weight: bold\">]</span>                                                                                │\n",
+       "│             <span style=\"font-weight: bold\">}</span>                                                                                    │\n",
+       "│         <span style=\"font-weight: bold\">}</span>,                                                                                       │\n",
        "│         <span style=\"color: #008000; text-decoration-color: #008000\">'seed'</span>: <span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">42</span>                                                                               │\n",
        "│     <span style=\"font-weight: bold\">}</span>,                                                                                           │\n",
        "│     <span style=\"color: #008000; text-decoration-color: #008000\">'eval'</span>: <span style=\"font-weight: bold\">{</span>                                                                                    │\n",
@@ -507,7 +558,7 @@
        "│         <span style=\"color: #008000; text-decoration-color: #008000\">'n_clients'</span>: <span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">4</span>,                                                                          │\n",
        "│         <span style=\"color: #008000; text-decoration-color: #008000\">'n_rounds'</span>: <span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">2</span>                                                                            │\n",
        "│     <span style=\"font-weight: bold\">}</span>,                                                                                           │\n",
-       "│     <span style=\"color: #008000; text-decoration-color: #008000\">'exp_id'</span>: <span style=\"color: #008000; text-decoration-color: #008000\">'04e89aecd5c24dadbbe351e56a8f80c6'</span>                                                 │\n",
+       "│     <span style=\"color: #008000; text-decoration-color: #008000\">'exp_id'</span>: <span style=\"color: #008000; text-decoration-color: #008000\">'16016ed727174cd19719c05654849004'</span>                                                 │\n",
        "│ <span style=\"font-weight: bold\">}</span>                                                                                                │\n",
        "╰──────────────────────────────────────────────────────────────────────────────────────────────────╯\n",
        "</pre>\n"
@@ -547,6 +598,36 @@
        "│             \u001b[32m'server_test_union'\u001b[0m: \u001b[3;92mTrue\u001b[0m,                                                           │\n",
        "│             \u001b[32m'server_val_split'\u001b[0m: \u001b[1;36m0.0\u001b[0m,                                                             │\n",
        "│             \u001b[32m'uniform_test'\u001b[0m: \u001b[3;91mFalse\u001b[0m                                                                │\n",
+       "│         \u001b[1m}\u001b[0m,                                                                                       │\n",
+       "│         \u001b[32m'processing'\u001b[0m: \u001b[1m{\u001b[0m                                                                          │\n",
+       "│             \u001b[32m'one_hot_encoding'\u001b[0m: \u001b[1m{\u001b[0m                                                                │\n",
+       "│                 \u001b[32m'_apply_directly_to_subdata_'\u001b[0m: \u001b[3;91mFalse\u001b[0m,                                            │\n",
+       "│                 \u001b[32m'_target_'\u001b[0m: \u001b[32m'armlet.data.processing.feature_encoding.one_hot_encoding_pipeline'\u001b[0m  │\n",
+       "│             \u001b[1m}\u001b[0m,                                                                                   │\n",
+       "│             \u001b[32m'conversion_to_num'\u001b[0m: \u001b[1m{\u001b[0m                                                               │\n",
+       "│                 \u001b[32m'_apply_directly_to_subdata_'\u001b[0m: \u001b[3;92mTrue\u001b[0m,                                             │\n",
+       "│                 \u001b[32m'_target_'\u001b[0m:                                                                      │\n",
+       "│ \u001b[32m'armlet.data.processing.format_conversion.convert_bool_and_cat_to_num'\u001b[0m                           │\n",
+       "│             \u001b[1m}\u001b[0m,                                                                                   │\n",
+       "│             \u001b[32m'normalization'\u001b[0m: \u001b[1m{\u001b[0m                                                                   │\n",
+       "│                 \u001b[32m'_apply_directly_to_subdata_'\u001b[0m: \u001b[3;91mFalse\u001b[0m,                                            │\n",
+       "│                 \u001b[32m'_target_'\u001b[0m: \u001b[32m'armlet.data.processing.normalization.normalization_pipeline'\u001b[0m,       │\n",
+       "│                 \u001b[32m'cols_to_exclude'\u001b[0m: \u001b[1m[\u001b[0m                                                             │\n",
+       "│                     \u001b[32m'age'\u001b[0m,                                                                       │\n",
+       "│                     \u001b[32m'gender'\u001b[0m,                                                                    │\n",
+       "│                     \u001b[32m'race'\u001b[0m                                                                       │\n",
+       "│                 \u001b[1m]\u001b[0m                                                                                │\n",
+       "│             \u001b[1m}\u001b[0m,                                                                                   │\n",
+       "│             \u001b[32m'conversion_to_tensors'\u001b[0m: \u001b[1m{\u001b[0m                                                           │\n",
+       "│                 \u001b[32m'_apply_directly_to_subdata_'\u001b[0m: \u001b[3;92mTrue\u001b[0m,                                             │\n",
+       "│                 \u001b[32m'_target_'\u001b[0m:                                                                      │\n",
+       "│ \u001b[32m'armlet.data.processing.format_conversion.convert_dataframes_to_tensors'\u001b[0m,                        │\n",
+       "│                 \u001b[32m'sensitive_attributes'\u001b[0m: \u001b[1m[\u001b[0m                                                        │\n",
+       "│                     \u001b[32m'age'\u001b[0m,                                                                       │\n",
+       "│                     \u001b[32m'gender'\u001b[0m,                                                                    │\n",
+       "│                     \u001b[32m'race'\u001b[0m                                                                       │\n",
+       "│                 \u001b[1m]\u001b[0m                                                                                │\n",
+       "│             \u001b[1m}\u001b[0m                                                                                    │\n",
        "│         \u001b[1m}\u001b[0m,                                                                                       │\n",
        "│         \u001b[32m'seed'\u001b[0m: \u001b[1;36m42\u001b[0m                                                                               │\n",
        "│     \u001b[1m}\u001b[0m,                                                                                           │\n",
@@ -614,7 +695,7 @@
        "│         \u001b[32m'n_clients'\u001b[0m: \u001b[1;36m4\u001b[0m,                                                                          │\n",
        "│         \u001b[32m'n_rounds'\u001b[0m: \u001b[1;36m2\u001b[0m                                                                            │\n",
        "│     \u001b[1m}\u001b[0m,                                                                                           │\n",
-       "│     \u001b[32m'exp_id'\u001b[0m: \u001b[32m'04e89aecd5c24dadbbe351e56a8f80c6'\u001b[0m                                                 │\n",
+       "│     \u001b[32m'exp_id'\u001b[0m: \u001b[32m'16016ed727174cd19719c05654849004'\u001b[0m                                                 │\n",
        "│ \u001b[1m}\u001b[0m                                                                                                │\n",
        "╰──────────────────────────────────────────────────────────────────────────────────────────────────╯\n"
       ]
@@ -712,11 +793,11 @@
     {
      "data": {
       "text/html": [
-       "<pre style=\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace\">  Memory usage: <span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">613.6</span> MB <span style=\"font-weight: bold\">[</span><span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">6.10</span> %<span style=\"font-weight: bold\">]</span>\n",
+       "<pre style=\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace\">  Memory usage: <span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">588.6</span> MB <span style=\"font-weight: bold\">[</span><span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">6.04</span> %<span style=\"font-weight: bold\">]</span>\n",
        "</pre>\n"
       ],
       "text/plain": [
-       "  Memory usage: \u001b[1;36m613.6\u001b[0m MB \u001b[1m[\u001b[0m\u001b[1;36m6.10\u001b[0m %\u001b[1m]\u001b[0m\n"
+       "  Memory usage: \u001b[1;36m588.6\u001b[0m MB \u001b[1m[\u001b[0m\u001b[1;36m6.04\u001b[0m %\u001b[1m]\u001b[0m\n"
       ]
      },
      "metadata": {},
@@ -772,11 +853,11 @@
     {
      "data": {
       "text/html": [
-       "<pre style=\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace\">  Memory usage: <span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">613.6</span> MB <span style=\"font-weight: bold\">[</span><span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">6.10</span> %<span style=\"font-weight: bold\">]</span>\n",
+       "<pre style=\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace\">  Memory usage: <span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">592.1</span> MB <span style=\"font-weight: bold\">[</span><span style=\"color: #008080; text-decoration-color: #008080; font-weight: bold\">6.06</span> %<span style=\"font-weight: bold\">]</span>\n",
        "</pre>\n"
       ],
       "text/plain": [
-       "  Memory usage: \u001b[1;36m613.6\u001b[0m MB \u001b[1m[\u001b[0m\u001b[1;36m6.10\u001b[0m %\u001b[1m]\u001b[0m\n"
+       "  Memory usage: \u001b[1;36m592.1\u001b[0m MB \u001b[1m[\u001b[0m\u001b[1;36m6.06\u001b[0m %\u001b[1m]\u001b[0m\n"
       ]
      },
      "metadata": {},

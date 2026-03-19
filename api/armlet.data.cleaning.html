@@ -300,9 +300,16 @@
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.cleaning.missing_values.html">armlet.data.cleaning.missing_values package</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="armlet.data.processing.html">armlet.data.processing package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.feature_encoding.html">armlet.data.processing.feature_encoding module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.format_conversion.html">armlet.data.processing.format_conversion module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.image_loading.html">armlet.data.processing.image_loading module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.normalization.html">armlet.data.processing.normalization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.utils.html">armlet.data.processing.utils module</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.datasets.html">armlet.data.datasets module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.loading.html">armlet.data.loading module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="armlet.data.processing.html">armlet.data.processing module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.saving.html">armlet.data.saving module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.splitter.html">armlet.data.splitter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.utils.html">armlet.data.utils module</a></li>
@@ -456,8 +463,13 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="armlet.data.cleaning.clean_data">
-<span class="sig-prename descclassname"><span class="pre">armlet.data.cleaning.</span></span><span class="sig-name descname"><span class="pre">clean_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_attributes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.cleaning.clean_data" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="armlet.data.cleaning.compute_global_stat_values">
+<span class="sig-prename descclassname"><span class="pre">armlet.data.cleaning.</span></span><span class="sig-name descname"><span class="pre">compute_global_stat_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clients_data_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.cleaning.compute_global_stat_values" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="armlet.data.cleaning.data_cleaning_pipeline">
+<span class="sig-prename descclassname"><span class="pre">armlet.data.cleaning.</span></span><span class="sig-name descname"><span class="pre">data_cleaning_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg_cleaning</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_attributes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.cleaning.data_cleaning_pipeline" title="Link to this definition">#</a></dt>
 <dd><p>Clean the data by following the data cleaning pipeline.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -465,11 +477,6 @@
 Missing values cleaning methods can also be used with image datasets.</p>
 </div>
 </dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="armlet.data.cleaning.compute_global_stat_values">
-<span class="sig-prename descclassname"><span class="pre">armlet.data.cleaning.</span></span><span class="sig-name descname"><span class="pre">compute_global_stat_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clients_data_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.cleaning.compute_global_stat_values" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
 
 </section>
 </section>
@@ -533,8 +540,8 @@ Missing values cleaning methods can also be used with image datasets.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.cleaning.DataCleaningMethod.init_counters"><code class="docutils literal notranslate"><span class="pre">DataCleaningMethod.init_counters()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.cleaning.clean_data"><code class="docutils literal notranslate"><span class="pre">clean_data()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.cleaning.compute_global_stat_values"><code class="docutils literal notranslate"><span class="pre">compute_global_stat_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.cleaning.data_cleaning_pipeline"><code class="docutils literal notranslate"><span class="pre">data_cleaning_pipeline()</span></code></a></li>
 </ul>
 </li>
 </ul>

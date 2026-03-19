@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>armlet.data.processing module &#8212; ARMLET 0.2 documentation</title>
+    <title>armlet.data.processing package &#8212; ARMLET 0.2 documentation</title>
   
   
   
@@ -49,8 +49,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/armlet.data.processing';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="armlet.data.saving module" href="armlet.data.saving.html" />
-    <link rel="prev" title="armlet.data.loading module" href="armlet.data.loading.html" />
+    <link rel="next" title="armlet.data.processing.feature_encoding module" href="armlet.data.processing.feature_encoding.html" />
+    <link rel="prev" title="armlet.data.cleaning.missing_values package" href="armlet.data.cleaning.missing_values.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -300,9 +300,16 @@
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.cleaning.missing_values.html">armlet.data.cleaning.missing_values package</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3 current active has-children"><a class="current reference internal" href="#">armlet.data.processing package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.feature_encoding.html">armlet.data.processing.feature_encoding module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.format_conversion.html">armlet.data.processing.format_conversion module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.image_loading.html">armlet.data.processing.image_loading module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.normalization.html">armlet.data.processing.normalization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.utils.html">armlet.data.processing.utils module</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.datasets.html">armlet.data.datasets module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.loading.html">armlet.data.loading module</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">armlet.data.processing module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.saving.html">armlet.data.saving module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.splitter.html">armlet.data.splitter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.utils.html">armlet.data.utils module</a></li>
@@ -372,7 +379,7 @@
     
     <li class="breadcrumb-item"><a href="armlet.data.html" class="nav-link">armlet.data package</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">armlet.data.processing module</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">armlet.data.processing package</span></li>
   </ul>
 </nav>
 </div>
@@ -389,44 +396,51 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-armlet.data.processing">
-<span id="armlet-data-processing-module"></span><h1>armlet.data.processing module<a class="headerlink" href="#module-armlet.data.processing" title="Link to this heading">#</a></h1>
+  <section id="armlet-data-processing-package">
+<h1>armlet.data.processing package<a class="headerlink" href="#armlet-data-processing-package" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="armlet.data.processing.feature_encoding.html">armlet.data.processing.feature_encoding module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.feature_encoding.html#armlet.data.processing.feature_encoding.one_hot_encoding_pipeline"><code class="docutils literal notranslate"><span class="pre">one_hot_encoding_pipeline()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.feature_encoding.html#armlet.data.processing.feature_encoding.transform_data_with_one_hot_encoding"><code class="docutils literal notranslate"><span class="pre">transform_data_with_one_hot_encoding()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="armlet.data.processing.format_conversion.html">armlet.data.processing.format_conversion module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_bool_and_cat_to_num"><code class="docutils literal notranslate"><span class="pre">convert_bool_and_cat_to_num()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_dataframes_to_tensors"><code class="docutils literal notranslate"><span class="pre">convert_dataframes_to_tensors()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_tensors_to_fast_data_loaders"><code class="docutils literal notranslate"><span class="pre">convert_tensors_to_fast_data_loaders()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_tensors_to_fluke_data_format"><code class="docutils literal notranslate"><span class="pre">convert_tensors_to_fluke_data_format()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="armlet.data.processing.image_loading.html">armlet.data.processing.image_loading module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.image_loading.html#armlet.data.processing.image_loading.load_and_convert_images_to_tensors"><code class="docutils literal notranslate"><span class="pre">load_and_convert_images_to_tensors()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.image_loading.html#armlet.data.processing.image_loading.load_images_tensor_from_df"><code class="docutils literal notranslate"><span class="pre">load_images_tensor_from_df()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="armlet.data.processing.normalization.html">armlet.data.processing.normalization module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.normalization.html#armlet.data.processing.normalization.normalization_pipeline"><code class="docutils literal notranslate"><span class="pre">normalization_pipeline()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.normalization.html#armlet.data.processing.normalization.transform_data_with_scaler"><code class="docutils literal notranslate"><span class="pre">transform_data_with_scaler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="armlet.data.processing.utils.html">armlet.data.processing.utils module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.utils.html#armlet.data.processing.utils.apply_processing_to_data"><code class="docutils literal notranslate"><span class="pre">apply_processing_to_data()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.utils.html#armlet.data.processing.utils.merge_all_X_data"><code class="docutils literal notranslate"><span class="pre">merge_all_X_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-armlet.data.processing">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-armlet.data.processing" title="Link to this heading">#</a></h2>
 <p>This module contains the data processing functions.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="armlet.data.processing.convert_bool_and_cat_to_num">
-<span class="sig-prename descclassname"><span class="pre">armlet.data.processing.</span></span><span class="sig-name descname"><span class="pre">convert_bool_and_cat_to_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.processing.convert_bool_and_cat_to_num" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="armlet.data.processing.data_processing_pipeline">
+<span class="sig-prename descclassname"><span class="pre">armlet.data.processing.</span></span><span class="sig-name descname"><span class="pre">data_processing_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.processing.data_processing_pipeline" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="armlet.data.processing.convert_dataframes_to_tensors">
-<span class="sig-prename descclassname"><span class="pre">armlet.data.processing.</span></span><span class="sig-name descname"><span class="pre">convert_dataframes_to_tensors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_attributes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.processing.convert_dataframes_to_tensors" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="armlet.data.processing.convert_tensors_to_fast_data_loaders">
-<span class="sig-prename descclassname"><span class="pre">armlet.data.processing.</span></span><span class="sig-name descname"><span class="pre">convert_tensors_to_fast_data_loaders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.processing.convert_tensors_to_fast_data_loaders" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="armlet.data.processing.load_and_convert_images_to_tensors">
-<span class="sig-prename descclassname"><span class="pre">armlet.data.processing.</span></span><span class="sig-name descname"><span class="pre">load_and_convert_images_to_tensors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg_dataset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.processing.load_and_convert_images_to_tensors" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="armlet.data.processing.load_images_tensor_from_df">
-<span class="sig-prename descclassname"><span class="pre">armlet.data.processing.</span></span><span class="sig-name descname"><span class="pre">load_images_tensor_from_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.processing.load_images_tensor_from_df" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="armlet.data.processing.normalization">
-<span class="sig-prename descclassname"><span class="pre">armlet.data.processing.</span></span><span class="sig-name descname"><span class="pre">normalization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_attributes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.processing.normalization" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="armlet.data.processing.one_hot_encoding">
-<span class="sig-prename descclassname"><span class="pre">armlet.data.processing.</span></span><span class="sig-name descname"><span class="pre">one_hot_encoding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.data.processing.one_hot_encoding" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
+</section>
 </section>
 
 
@@ -440,20 +454,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="armlet.data.loading.html"
+       href="armlet.data.cleaning.missing_values.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">armlet.data.loading module</p>
+        <p class="prev-next-title">armlet.data.cleaning.missing_values package</p>
       </div>
     </a>
     <a class="right-next"
-       href="armlet.data.saving.html"
+       href="armlet.data.processing.feature_encoding.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">armlet.data.saving module</p>
+        <p class="prev-next-title">armlet.data.processing.feature_encoding module</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -476,13 +490,11 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.processing.convert_bool_and_cat_to_num"><code class="docutils literal notranslate"><span class="pre">convert_bool_and_cat_to_num()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.processing.convert_dataframes_to_tensors"><code class="docutils literal notranslate"><span class="pre">convert_dataframes_to_tensors()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.processing.convert_tensors_to_fast_data_loaders"><code class="docutils literal notranslate"><span class="pre">convert_tensors_to_fast_data_loaders()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.processing.load_and_convert_images_to_tensors"><code class="docutils literal notranslate"><span class="pre">load_and_convert_images_to_tensors()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.processing.load_images_tensor_from_df"><code class="docutils literal notranslate"><span class="pre">load_images_tensor_from_df()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.processing.normalization"><code class="docutils literal notranslate"><span class="pre">normalization()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.processing.one_hot_encoding"><code class="docutils literal notranslate"><span class="pre">one_hot_encoding()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-armlet.data.processing">Module contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.data.processing.data_processing_pipeline"><code class="docutils literal notranslate"><span class="pre">data_processing_pipeline()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -321,6 +321,7 @@
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  
@@ -335,6 +336,8 @@
       <li><a href="api/armlet.FL_pipeline.data_selection.methods.html#armlet.FL_pipeline.data_selection.methods.DataSelectionClientMethod.after_fit">after_fit() (armlet.FL_pipeline.data_selection.methods.DataSelectionClientMethod method)</a>
 </li>
       <li><a href="api/armlet.FL_pipeline.data_selection.FL_algorithms.html#armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionServer.aggregate">aggregate() (armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionServer method)</a>
+</li>
+      <li><a href="api/armlet.data.processing.utils.html#armlet.data.processing.utils.apply_processing_to_data">apply_processing_to_data() (in module armlet.data.processing.utils)</a>
 </li>
       <li>
     armlet
@@ -393,6 +396,41 @@
 </li>
       </ul></li>
       <li>
+    armlet.data.processing.feature_encoding
+
+      <ul>
+        <li><a href="api/armlet.data.processing.feature_encoding.html#module-armlet.data.processing.feature_encoding">module</a>
+</li>
+      </ul></li>
+      <li>
+    armlet.data.processing.format_conversion
+
+      <ul>
+        <li><a href="api/armlet.data.processing.format_conversion.html#module-armlet.data.processing.format_conversion">module</a>
+</li>
+      </ul></li>
+      <li>
+    armlet.data.processing.image_loading
+
+      <ul>
+        <li><a href="api/armlet.data.processing.image_loading.html#module-armlet.data.processing.image_loading">module</a>
+</li>
+      </ul></li>
+      <li>
+    armlet.data.processing.normalization
+
+      <ul>
+        <li><a href="api/armlet.data.processing.normalization.html#module-armlet.data.processing.normalization">module</a>
+</li>
+      </ul></li>
+      <li>
+    armlet.data.processing.utils
+
+      <ul>
+        <li><a href="api/armlet.data.processing.utils.html#module-armlet.data.processing.utils">module</a>
+</li>
+      </ul></li>
+      <li>
     armlet.data.saving
 
       <ul>
@@ -420,6 +458,8 @@
         <li><a href="api/armlet.eval.html#module-armlet.eval">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     armlet.eval.evaluators
 
@@ -441,8 +481,6 @@
         <li><a href="api/armlet.FL_pipeline.html#module-armlet.FL_pipeline">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     armlet.FL_pipeline.data_selection
 
@@ -581,8 +619,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.DataCleaningMethod.clean_client_errors">clean_client_errors() (armlet.data.cleaning.DataCleaningMethod method)</a>
 </li>
-      <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.clean_data">clean_data() (in module armlet.data.cleaning)</a>
-</li>
       <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.DataCleaningMethod.clean_errors">clean_errors() (armlet.data.cleaning.DataCleaningMethod method)</a>
 </li>
       <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.DataCleaningMethod.clean_errors_dataloader">clean_errors_dataloader() (armlet.data.cleaning.DataCleaningMethod method)</a>
@@ -617,11 +653,13 @@
 </li>
       <li><a href="api/armlet.FL_pipeline.data_selection.methods.html#armlet.FL_pipeline.data_selection.methods.DataSelectionServerMethod.compute_other_metrics">compute_other_metrics() (armlet.FL_pipeline.data_selection.methods.DataSelectionServerMethod method)</a>
 </li>
-      <li><a href="api/armlet.data.processing.html#armlet.data.processing.convert_bool_and_cat_to_num">convert_bool_and_cat_to_num() (in module armlet.data.processing)</a>
+      <li><a href="api/armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_bool_and_cat_to_num">convert_bool_and_cat_to_num() (in module armlet.data.processing.format_conversion)</a>
 </li>
-      <li><a href="api/armlet.data.processing.html#armlet.data.processing.convert_dataframes_to_tensors">convert_dataframes_to_tensors() (in module armlet.data.processing)</a>
+      <li><a href="api/armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_dataframes_to_tensors">convert_dataframes_to_tensors() (in module armlet.data.processing.format_conversion)</a>
 </li>
-      <li><a href="api/armlet.data.processing.html#armlet.data.processing.convert_tensors_to_fast_data_loaders">convert_tensors_to_fast_data_loaders() (in module armlet.data.processing)</a>
+      <li><a href="api/armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_tensors_to_fast_data_loaders">convert_tensors_to_fast_data_loaders() (in module armlet.data.processing.format_conversion)</a>
+</li>
+      <li><a href="api/armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_tensors_to_fluke_data_format">convert_tensors_to_fluke_data_format() (in module armlet.data.processing.format_conversion)</a>
 </li>
       <li><a href="api/armlet.data.cleaning.missing_values.html#armlet.data.cleaning.missing_values.MissingValuesDataCleaningMethod.count_n_detected_errors_by_sensitive_attributes">count_n_detected_errors_by_sensitive_attributes() (armlet.data.cleaning.missing_values.MissingValuesDataCleaningMethod method)</a>
 </li>
@@ -633,7 +671,11 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.data_cleaning_pipeline">data_cleaning_pipeline() (in module armlet.data.cleaning)</a>
+</li>
       <li><a href="api/armlet.data.html#armlet.data.data_pipeline">data_pipeline() (in module armlet.data)</a>
+</li>
+      <li><a href="api/armlet.data.processing.html#armlet.data.processing.data_processing_pipeline">data_processing_pipeline() (in module armlet.data.processing)</a>
 </li>
       <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.DataCleaningMethod">DataCleaningMethod (class in armlet.data.cleaning)</a>
 </li>
@@ -641,10 +683,10 @@
 </li>
       <li><a href="api/armlet.data.utils.html#armlet.data.utils.dataframe_train_test_split">dataframe_train_test_split() (in module armlet.data.utils)</a>
 </li>
-      <li><a href="api/armlet.FL_pipeline.data_selection.FL_algorithms.html#armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionCentralizedFL">DataSelectionCentralizedFL (class in armlet.FL_pipeline.data_selection.FL_algorithms)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/armlet.FL_pipeline.data_selection.FL_algorithms.html#armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionCentralizedFL">DataSelectionCentralizedFL (class in armlet.FL_pipeline.data_selection.FL_algorithms)</a>
+</li>
       <li><a href="api/armlet.FL_pipeline.data_selection.FL_algorithms.html#armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionClient">DataSelectionClient (class in armlet.FL_pipeline.data_selection.FL_algorithms)</a>
 </li>
       <li><a href="api/armlet.FL_pipeline.data_selection.methods.html#armlet.FL_pipeline.data_selection.methods.DataSelectionClientMethod">DataSelectionClientMethod (class in armlet.FL_pipeline.data_selection.methods)</a>
@@ -757,7 +799,7 @@
 </li>
       <li><a href="api/armlet.data.datasets.html#armlet.data.datasets.load_Adult_dataset">load_Adult_dataset() (in module armlet.data.datasets)</a>
 </li>
-      <li><a href="api/armlet.data.processing.html#armlet.data.processing.load_and_convert_images_to_tensors">load_and_convert_images_to_tensors() (in module armlet.data.processing)</a>
+      <li><a href="api/armlet.data.processing.image_loading.html#armlet.data.processing.image_loading.load_and_convert_images_to_tensors">load_and_convert_images_to_tensors() (in module armlet.data.processing.image_loading)</a>
 </li>
       <li><a href="api/armlet.data.datasets.html#armlet.data.datasets.load_ARS_dataset">load_ARS_dataset() (in module armlet.data.datasets)</a>
 </li>
@@ -773,7 +815,7 @@
 </li>
       <li><a href="api/armlet.data.datasets.html#armlet.data.datasets.load_Heart_dataset">load_Heart_dataset() (in module armlet.data.datasets)</a>
 </li>
-      <li><a href="api/armlet.data.processing.html#armlet.data.processing.load_images_tensor_from_df">load_images_tensor_from_df() (in module armlet.data.processing)</a>
+      <li><a href="api/armlet.data.processing.image_loading.html#armlet.data.processing.image_loading.load_images_tensor_from_df">load_images_tensor_from_df() (in module armlet.data.processing.image_loading)</a>
 </li>
       <li><a href="api/armlet.data.datasets.html#armlet.data.datasets.load_KDD_dataset">load_KDD_dataset() (in module armlet.data.datasets)</a>
 </li>
@@ -792,6 +834,8 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/armlet.run.html#armlet.run.main">main() (in module armlet.run)</a>
+</li>
+      <li><a href="api/armlet.data.processing.utils.html#armlet.data.processing.utils.merge_all_X_data">merge_all_X_data() (in module armlet.data.processing.utils)</a>
 </li>
       <li><a href="api/armlet.data.cleaning.missing_values.html#armlet.data.cleaning.missing_values.MissingValuesDataCleaningMethod">MissingValuesDataCleaningMethod (class in armlet.data.cleaning.missing_values)</a>
 </li>
@@ -816,6 +860,16 @@
         <li><a href="api/armlet.data.loading.html#module-armlet.data.loading">armlet.data.loading</a>
 </li>
         <li><a href="api/armlet.data.processing.html#module-armlet.data.processing">armlet.data.processing</a>
+</li>
+        <li><a href="api/armlet.data.processing.feature_encoding.html#module-armlet.data.processing.feature_encoding">armlet.data.processing.feature_encoding</a>
+</li>
+        <li><a href="api/armlet.data.processing.format_conversion.html#module-armlet.data.processing.format_conversion">armlet.data.processing.format_conversion</a>
+</li>
+        <li><a href="api/armlet.data.processing.image_loading.html#module-armlet.data.processing.image_loading">armlet.data.processing.image_loading</a>
+</li>
+        <li><a href="api/armlet.data.processing.normalization.html#module-armlet.data.processing.normalization">armlet.data.processing.normalization</a>
+</li>
+        <li><a href="api/armlet.data.processing.utils.html#module-armlet.data.processing.utils">armlet.data.processing.utils</a>
 </li>
         <li><a href="api/armlet.data.saving.html#module-armlet.data.saving">armlet.data.saving</a>
 </li>
@@ -866,7 +920,7 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/armlet.data.processing.html#armlet.data.processing.normalization">normalization() (in module armlet.data.processing)</a>
+      <li><a href="api/armlet.data.processing.normalization.html#armlet.data.processing.normalization.normalization_pipeline">normalization_pipeline() (in module armlet.data.processing.normalization)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -874,7 +928,7 @@
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/armlet.data.processing.html#armlet.data.processing.one_hot_encoding">one_hot_encoding() (in module armlet.data.processing)</a>
+      <li><a href="api/armlet.data.processing.feature_encoding.html#armlet.data.processing.feature_encoding.one_hot_encoding_pipeline">one_hot_encoding_pipeline() (in module armlet.data.processing.feature_encoding)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -931,6 +985,18 @@
       <li><a href="api/armlet.FL_pipeline.data_selection.methods.html#armlet.FL_pipeline.data_selection.methods.DataSelectionServerMethod.setup_hooks">setup_hooks() (armlet.FL_pipeline.data_selection.methods.DataSelectionServerMethod method)</a>
 </li>
       <li><a href="api/armlet.utils.net.html#armlet.utils.net.SVM">SVM (class in armlet.utils.net)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/armlet.data.processing.feature_encoding.html#armlet.data.processing.feature_encoding.transform_data_with_one_hot_encoding">transform_data_with_one_hot_encoding() (in module armlet.data.processing.feature_encoding)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/armlet.data.processing.normalization.html#armlet.data.processing.normalization.transform_data_with_scaler">transform_data_with_scaler() (in module armlet.data.processing.normalization)</a>
 </li>
   </ul></td>
 </tr></table>

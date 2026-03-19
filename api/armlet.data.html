@@ -300,9 +300,16 @@
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.cleaning.missing_values.html">armlet.data.cleaning.missing_values package</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="armlet.data.processing.html">armlet.data.processing package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.feature_encoding.html">armlet.data.processing.feature_encoding module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.format_conversion.html">armlet.data.processing.format_conversion module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.image_loading.html">armlet.data.processing.image_loading module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.normalization.html">armlet.data.processing.normalization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.utils.html">armlet.data.processing.utils module</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.datasets.html">armlet.data.datasets module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.loading.html">armlet.data.loading module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="armlet.data.processing.html">armlet.data.processing module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.saving.html">armlet.data.saving module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.splitter.html">armlet.data.splitter module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.utils.html">armlet.data.utils module</a></li>
@@ -411,8 +418,45 @@
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.cleaning.html#armlet.data.cleaning.DataCleaningMethod.init_counters"><code class="docutils literal notranslate"><span class="pre">DataCleaningMethod.init_counters()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="armlet.data.cleaning.html#armlet.data.cleaning.clean_data"><code class="docutils literal notranslate"><span class="pre">clean_data()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.data.cleaning.html#armlet.data.cleaning.compute_global_stat_values"><code class="docutils literal notranslate"><span class="pre">compute_global_stat_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.data.cleaning.html#armlet.data.cleaning.data_cleaning_pipeline"><code class="docutils literal notranslate"><span class="pre">data_cleaning_pipeline()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="armlet.data.processing.html">armlet.data.processing package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.data.processing.feature_encoding.html">armlet.data.processing.feature_encoding module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.feature_encoding.html#armlet.data.processing.feature_encoding.one_hot_encoding_pipeline"><code class="docutils literal notranslate"><span class="pre">one_hot_encoding_pipeline()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.feature_encoding.html#armlet.data.processing.feature_encoding.transform_data_with_one_hot_encoding"><code class="docutils literal notranslate"><span class="pre">transform_data_with_one_hot_encoding()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.data.processing.format_conversion.html">armlet.data.processing.format_conversion module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_bool_and_cat_to_num"><code class="docutils literal notranslate"><span class="pre">convert_bool_and_cat_to_num()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_dataframes_to_tensors"><code class="docutils literal notranslate"><span class="pre">convert_dataframes_to_tensors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_tensors_to_fast_data_loaders"><code class="docutils literal notranslate"><span class="pre">convert_tensors_to_fast_data_loaders()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.format_conversion.html#armlet.data.processing.format_conversion.convert_tensors_to_fluke_data_format"><code class="docutils literal notranslate"><span class="pre">convert_tensors_to_fluke_data_format()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.data.processing.image_loading.html">armlet.data.processing.image_loading module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.image_loading.html#armlet.data.processing.image_loading.load_and_convert_images_to_tensors"><code class="docutils literal notranslate"><span class="pre">load_and_convert_images_to_tensors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.image_loading.html#armlet.data.processing.image_loading.load_images_tensor_from_df"><code class="docutils literal notranslate"><span class="pre">load_images_tensor_from_df()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.data.processing.normalization.html">armlet.data.processing.normalization module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.normalization.html#armlet.data.processing.normalization.normalization_pipeline"><code class="docutils literal notranslate"><span class="pre">normalization_pipeline()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.normalization.html#armlet.data.processing.normalization.transform_data_with_scaler"><code class="docutils literal notranslate"><span class="pre">transform_data_with_scaler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.data.processing.utils.html">armlet.data.processing.utils module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.utils.html#armlet.data.processing.utils.apply_processing_to_data"><code class="docutils literal notranslate"><span class="pre">apply_processing_to_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.utils.html#armlet.data.processing.utils.merge_all_X_data"><code class="docutils literal notranslate"><span class="pre">merge_all_X_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.html#module-armlet.data.processing">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.data.processing.html#armlet.data.processing.data_processing_pipeline"><code class="docutils literal notranslate"><span class="pre">data_processing_pipeline()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -439,16 +483,6 @@
 <li class="toctree-l2"><a class="reference internal" href="armlet.data.loading.html#armlet.data.loading.load_data_from_folder"><code class="docutils literal notranslate"><span class="pre">load_data_from_folder()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="armlet.data.loading.html#armlet.data.loading.load_pkl_data"><code class="docutils literal notranslate"><span class="pre">load_pkl_data()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="armlet.data.loading.html#armlet.data.loading.load_pt_data"><code class="docutils literal notranslate"><span class="pre">load_pt_data()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="armlet.data.processing.html">armlet.data.processing module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.html#armlet.data.processing.convert_bool_and_cat_to_num"><code class="docutils literal notranslate"><span class="pre">convert_bool_and_cat_to_num()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.html#armlet.data.processing.convert_dataframes_to_tensors"><code class="docutils literal notranslate"><span class="pre">convert_dataframes_to_tensors()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.html#armlet.data.processing.convert_tensors_to_fast_data_loaders"><code class="docutils literal notranslate"><span class="pre">convert_tensors_to_fast_data_loaders()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.html#armlet.data.processing.load_and_convert_images_to_tensors"><code class="docutils literal notranslate"><span class="pre">load_and_convert_images_to_tensors()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.html#armlet.data.processing.load_images_tensor_from_df"><code class="docutils literal notranslate"><span class="pre">load_images_tensor_from_df()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.html#armlet.data.processing.normalization"><code class="docutils literal notranslate"><span class="pre">normalization()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="armlet.data.processing.html#armlet.data.processing.one_hot_encoding"><code class="docutils literal notranslate"><span class="pre">one_hot_encoding()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="armlet.data.saving.html">armlet.data.saving module</a><ul>

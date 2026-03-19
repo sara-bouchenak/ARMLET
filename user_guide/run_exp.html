@@ -427,6 +427,22 @@ In that case, add <code class="docutils literal notranslate"><span class="pre">#
 <span class="w">    </span><span class="nt">server_val_split</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">    </span><span class="nt">uniform_test</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 
+<span class="w">  </span><span class="nt">processing</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">one_hot_encoding</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">_apply_directly_to_subdata_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">armlet.data.processing.feature_encoding.one_hot_encoding_pipeline</span>
+<span class="w">    </span><span class="nt">conversion_to_num</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">_apply_directly_to_subdata_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">armlet.data.processing.format_conversion.convert_bool_and_cat_to_num</span>
+<span class="w">    </span><span class="nt">normalization</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">_apply_directly_to_subdata_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">armlet.data.processing.normalization.normalization_pipeline</span>
+<span class="w">      </span><span class="nt">cols_to_exclude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${data.dataset.sensitive_attributes}</span>
+<span class="w">    </span><span class="nt">conversion_to_tensors</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">_apply_directly_to_subdata_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">_target_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">armlet.data.processing.format_conversion.convert_dataframes_to_tensors</span>
+<span class="w">      </span><span class="nt">sensitive_attributes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${data.dataset.sensitive_attributes}</span>
+
 <span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span>
 
 <span class="nt">eval</span><span class="p">:</span>

@@ -1,0 +1,17 @@
+one_hot_encoding:
+  _target_: armlet.data.processing.feature_encoding.one_hot_encoding_pipeline
+  _apply_directly_to_subdata_: False
+
+conversion_to_num:
+  _target_: armlet.data.processing.format_conversion.convert_bool_and_cat_to_num
+  _apply_directly_to_subdata_: True
+
+normalization:
+  _target_: armlet.data.processing.normalization.normalization_pipeline
+  _apply_directly_to_subdata_: False
+  cols_to_exclude: ${data.dataset.sensitive_attributes}
+
+conversion_to_tensors:
+  _target_: armlet.data.processing.format_conversion.convert_dataframes_to_tensors
+  _apply_directly_to_subdata_: True
+  sensitive_attributes: ${data.dataset.sensitive_attributes}

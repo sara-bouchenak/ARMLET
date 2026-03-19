@@ -8,6 +8,7 @@ Subpackages
    :maxdepth: 4
 
    armlet.data.cleaning
+   armlet.data.processing
 
 Submodules
 ----------
@@ -17,7 +18,6 @@ Submodules
 
    armlet.data.datasets
    armlet.data.loading
-   armlet.data.processing
    armlet.data.saving
    armlet.data.splitter
    armlet.data.utils

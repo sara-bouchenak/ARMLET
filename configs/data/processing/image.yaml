@@ -1,0 +1,20 @@
+conversion_to_num:
+  _target_: armlet.data.processing.format_conversion.convert_bool_and_cat_to_num
+  _apply_directly_to_subdata_: True
+
+normalization:
+  _target_: armlet.data.processing.normalization.normalization_pipeline
+  _apply_directly_to_subdata_: False
+  cols_to_exclude: ${concat:${data.dataset.sensitive_attributes},["image_path"]}
+
+image_loading_and_conversion_to_tensors:
+  _target_: armlet.data.processing.image_loading.load_and_convert_images_to_tensors
+  _apply_directly_to_subdata_: True
+  sensitive_attributes: ${data.dataset.sensitive_attributes}
+  transforms:
+    - _target_: torchvision.transforms.Resize
+      size: [128, 128]
+    - _target_: torchvision.transforms.ToTensor
+    - _target_: torchvision.transforms.Normalize
+      mean: [0.5, 0.5, 0.5]
+      std: [0.5, 0.5, 0.5]

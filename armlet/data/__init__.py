@@ -10,14 +10,13 @@ import numpy as np
 import hydra
 
 from fluke import DDict
-from fluke.data import DummyDataContainer
 
 from armlet.data.splitter import ArmletDataSplitter, DummyDataSplitter
-from armlet.data.processing import one_hot_encoding, convert_bool_and_cat_to_num, normalization
-from armlet.data.processing import convert_dataframes_to_tensors, load_and_convert_images_to_tensors, convert_tensors_to_fast_data_loaders
+from armlet.data.processing import data_processing_pipeline
+from armlet.data.processing.format_conversion import convert_tensors_to_fluke_data_format
 from armlet.data.loading import load_data_from_folder
 from armlet.data.saving import save_data
-from armlet.data.cleaning import clean_data
+from armlet.data.cleaning import data_cleaning_pipeline
 
 
 def data_pipeline(cfg: DDict) -> Tuple[DummyDataSplitter, dict]:
@@ -61,7 +60,11 @@ def data_pipeline(cfg: DDict) -> Tuple[DummyDataSplitter, dict]:
             if is_saving_mode and ("save_data_before_cleaning" in cfg.data.saving.keys()) and (cfg.data.saving.save_data_before_cleaning):
                 save_data(splitted_data, cfg.to_dict()["data"], mode="before_cleaning")
 
-            cleaned_data, data_cleaning_metrics = clean_data(splitted_data, cfg=cfg.data.cleaning, sensitive_attributes=cfg.data.dataset.sensitive_attributes)
+            cleaned_data, data_cleaning_metrics = data_cleaning_pipeline(
+                data=splitted_data,
+                cfg_cleaning=cfg.data.cleaning,
+                sensitive_attributes=cfg.data.dataset.sensitive_attributes,
+            )
 
             data_cleaning_metrics_path = os.path.join(cfg.paths.output_dir, "data_cleaning_metrics.json")
             json.dump(data_cleaning_metrics, open(data_cleaning_metrics_path, "w"), indent=4)
@@ -72,15 +75,10 @@ def data_pipeline(cfg: DDict) -> Tuple[DummyDataSplitter, dict]:
         else:
             cleaned_data = splitted_data
 
-        one_hot_data = one_hot_encoding(cleaned_data)
-        numeric_data = convert_bool_and_cat_to_num(one_hot_data)
-        normalized_data = normalization(numeric_data, cfg.data.dataset.sensitive_attributes)
-
-        is_image_data = "image_path" in normalized_data["clients_train"]["client_0"][0].columns
-        if is_image_data:
-            tensor_data = load_and_convert_images_to_tensors(normalized_data, cfg.data.dataset)
-        else:
-            tensor_data = convert_dataframes_to_tensors(normalized_data, cfg.data.dataset.sensitive_attributes)
+        tensor_data = data_processing_pipeline(
+            data=cleaned_data,
+            cfg_data=cfg.data,
+        )
 
         if is_saving_mode and ("save_data_after_conversion_to_tensors" in cfg.data.saving.keys()) and (cfg.data.saving.save_data_after_conversion_to_tensors):
             save_data(tensor_data, cfg.to_dict()["data"], mode="after_tensors")
@@ -88,21 +86,5 @@ def data_pipeline(cfg: DDict) -> Tuple[DummyDataSplitter, dict]:
     else:
         tensor_data, _ = load_data_from_folder(cfg.to_dict()["data"], cfg.protocol.n_clients)
 
-    num_classes = max([len(val[1].squeeze(1).unique()) for val in tensor_data["clients_train"].values()])
-    final_data = convert_tensors_to_fast_data_loaders(tensor_data, cfg, num_classes)
-
-    dummy_data_container = DummyDataContainer(
-        final_data["clients_train"],
-        final_data["clients_test"],
-        final_data["server_test"],
-        num_classes,
-    )
-
-    data_splitter = DummyDataSplitter(
-        dataset=dummy_data_container,
-        distribution="",
-        **cfg.data.others.exclude("client_val_split", "server_test_union", "server_val_split"),
-    )
-
-    val_data = {k: v for k, v in final_data.items() if k in ["clients_val", "server_val"]}
+    data_splitter, val_data = convert_tensors_to_fluke_data_format(tensor_data, cfg)
     return data_splitter, val_data

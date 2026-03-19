@@ -9,7 +9,7 @@ import hydra
 from abc import ABC, abstractmethod
 
 
-def clean_data(data, cfg, sensitive_attributes):
+def data_cleaning_pipeline(data, cfg_cleaning, sensitive_attributes):
     """Clean the data by following the data cleaning pipeline.
 
     Warning:
@@ -21,7 +21,7 @@ def clean_data(data, cfg, sensitive_attributes):
 
     start_cleaning_time = time.time()
 
-    for cleaning_cat, cfg_cleaning_cat in cfg.items():
+    for cleaning_cat, cfg_cleaning_cat in cfg_cleaning.items():
         if cleaning_cat != "name":
             cleaning_method = hydra.utils.instantiate(
                 cfg_cleaning_cat,

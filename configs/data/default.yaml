@@ -3,7 +3,8 @@ defaults:
   - dataset: adult.yaml
   - distribution: iid.yaml
   #- loading: default.yaml
-  #- saving: default.yaml
   - others: union_clients_test.yaml
+  - processing: tabular.yaml
+  #- saving: default.yaml
 
 seed: 42

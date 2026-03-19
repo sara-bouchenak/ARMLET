@@ -1,5 +1,4 @@
 import os
-import yaml
 import hydra
 
 from omegaconf import DictConfig, OmegaConf
@@ -10,6 +9,7 @@ from armlet.data import data_pipeline
 
 OmegaConf.register_new_resolver("sanitize_override_dirname", lambda x: x.replace(os.path.sep, "_"))
 OmegaConf.register_new_resolver("keep_last_str", lambda x: x.split(".")[-1])
+OmegaConf.register_new_resolver("concat", lambda x, y: x+y)
 
 
 def run_federation(cfg: DDict) -> None:
@@ -27,12 +27,13 @@ def run_federation(cfg: DDict) -> None:
         cfg.method.hyperparameters.model.num_classes = data_splitter.data_container.num_classes
 
     # Save config file
-    config_path = os.path.join(cfg.paths.output_dir, "config.yaml")
     cfg_to_save = cfg.to_dict()
     cfg_to_save["paths"]["output_dir"] = "${hydra:runtime.output_dir}"
     if "json_log_dir" in cfg_to_save["logger"].keys():
         cfg_to_save["logger"]["json_log_dir"] = "${paths.output_dir}"
-    yaml.dump(cfg_to_save, open(config_path, "w"))
+    config_path = os.path.join(cfg.paths.output_dir, "config.yaml")
+    with open(config_path, 'w') as config_file:
+        OmegaConf.save(config=cfg_to_save, f=config_file.name)
 
     if cfg.exp.train:
 

@@ -45,6 +45,7 @@ include = [
     "armlet.data",
     "armlet.data.cleaning",
     "armlet.data.cleaning.missing_values",
+    "armlet.data.processing",
     "armlet.eval",
     "armlet.FL_pipeline",
     "armlet.FL_pipeline.FL_algorithms",

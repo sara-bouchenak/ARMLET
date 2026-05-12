@@ -26,19 +26,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="_static/documentation_options.js?v=10f1778b"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
@@ -46,25 +46,32 @@
     <script src="_static/tabs.js?v=3ee01567"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -90,7 +97,7 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
   <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
@@ -354,6 +361,13 @@
 </li>
       </ul></li>
       <li>
+    armlet.audit.auditor
+
+      <ul>
+        <li><a href="api/armlet.audit.auditor.html#module-armlet.audit.auditor">module</a>
+</li>
+      </ul></li>
+      <li>
     armlet.data
 
       <ul>
@@ -583,6 +597,10 @@
         <li><a href="api/armlet.data.splitter.html#armlet.data.splitter.DummyDataSplitter.assign">(armlet.data.splitter.DummyDataSplitter method)</a>
 </li>
       </ul></li>
+      <li><a href="api/armlet.audit.auditor.html#armlet.audit.auditor.PostHocAuditor.audit_df_results">audit_df_results() (armlet.audit.auditor.PostHocAuditor method)</a>
+</li>
+      <li><a href="api/armlet.audit.html#armlet.audit.audit_model_from_results_json">audit_model_from_results_json() (in module armlet.audit)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -631,6 +649,8 @@
 </li>
       <li><a href="api/armlet.utils.log.html#armlet.utils.log.ArmletLog.close">close() (armlet.utils.log.ArmletLog method)</a>
 </li>
+      <li><a href="api/armlet.audit.auditor.html#armlet.audit.auditor.compare_metric_values_with_threshold">compare_metric_values_with_threshold() (in module armlet.audit.auditor)</a>
+</li>
       <li><a href="api/armlet.eval.metrics.html#armlet.eval.metrics.BinaryAOD.compute">compute() (armlet.eval.metrics.BinaryAOD method)</a>
 
       <ul>
@@ -648,6 +668,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.DataCleaningMethod.compute_cleaning_metrics">compute_cleaning_metrics() (armlet.data.cleaning.DataCleaningMethod method)</a>
+</li>
+      <li><a href="api/armlet.audit.auditor.html#armlet.audit.auditor.compute_df_result_with_error">compute_df_result_with_error() (in module armlet.audit.auditor)</a>
 </li>
       <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.compute_global_stat_values">compute_global_stat_values() (in module armlet.data.cleaning)</a>
 </li>
@@ -787,6 +809,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/armlet.data.cleaning.html#armlet.data.cleaning.DataCleaningMethod.init_counters">init_counters() (armlet.data.cleaning.DataCleaningMethod method)</a>
 </li>
+      <li><a href="api/armlet.audit.auditor.html#armlet.audit.auditor.init_metrics_props_by_cat">init_metrics_props_by_cat() (in module armlet.audit.auditor)</a>
+</li>
       <li><a href="api/armlet.FL_pipeline.FL_algorithms.html#armlet.FL_pipeline.FL_algorithms.ArmletCentralizedFL.init_server">init_server() (armlet.FL_pipeline.FL_algorithms.ArmletCentralizedFL method)</a>
 </li>
   </ul></td>
@@ -848,6 +872,8 @@
         <li><a href="api/armlet.html#module-armlet">armlet</a>
 </li>
         <li><a href="api/armlet.audit.html#module-armlet.audit">armlet.audit</a>
+</li>
+        <li><a href="api/armlet.audit.auditor.html#module-armlet.audit.auditor">armlet.audit.auditor</a>
 </li>
         <li><a href="api/armlet.data.html#module-armlet.data">armlet.data</a>
 </li>
@@ -936,6 +962,10 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/armlet.audit.auditor.html#armlet.audit.auditor.PostHocAuditor">PostHocAuditor (class in armlet.audit.auditor)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/armlet.FL_pipeline.data_selection.methods.html#armlet.FL_pipeline.data_selection.methods.DataSelectionClientMethod.pre_selection">pre_selection() (armlet.FL_pipeline.data_selection.methods.DataSelectionClientMethod method)</a>
 </li>
   </ul></td>
@@ -948,11 +978,15 @@
 </li>
       <li><a href="api/armlet.FL_pipeline.data_selection.FL_algorithms.html#armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionServer.receive_client_models">receive_client_models() (armlet.FL_pipeline.data_selection.FL_algorithms.DataSelectionServer method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/armlet.data.cleaning.missing_values.html#armlet.data.cleaning.missing_values.remove_missing_values">remove_missing_values() (in module armlet.data.cleaning.missing_values)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/armlet.data.cleaning.missing_values.html#armlet.data.cleaning.missing_values.RemoveMV">RemoveMV (class in armlet.data.cleaning.missing_values)</a>
+</li>
       <li><a href="api/armlet.utils.net.html#armlet.utils.net.ResNet18">ResNet18 (class in armlet.utils.net)</a>
+</li>
+      <li><a href="api/armlet.run.html#armlet.run.run_audit">run_audit() (in module armlet.run)</a>
 </li>
       <li><a href="api/armlet.run.html#armlet.run.run_federation">run_federation() (in module armlet.run)</a>
 </li>
@@ -1058,8 +1092,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1093,7 +1127,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.17.1.
 </p></div>
       
     </div>

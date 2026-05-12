@@ -1,6 +1,6 @@
 (run_first_exp)=
 
-# Run your first experiment
+# Run your FL first experiment
 
 **ARMLET** is based on [Hydra](https://hydra.cc/) for simplifying the launch of experiments and ensuring high reproductibily with config files.
 In the following, we provide few guidelines for running your first experiment.
@@ -12,7 +12,7 @@ In the following, we provide few guidelines for running your first experiment.
 
 ```
 
-Run `armlet` to launch a single experiment with the default configuration values.
+Run `armlet` to launch a single FL experiment with the default configuration values.
 
 ```bash
 armlet
@@ -28,7 +28,7 @@ armlet exp.seed=1 data/dataset=ars +data/loading=default
 ```{eval-rst}
 
 .. seealso::
-	For more information about configuration files, config values, or config groups, see :ref:`Configuration <config>`.
+	For more information about configuration files, config values, or config groups, see :ref:`Configuration prerequisites <config>` as well as :ref:`Configuration for federation mode <config_federation_mode>`.
 
 ```
 
@@ -36,6 +36,6 @@ armlet exp.seed=1 data/dataset=ars +data/loading=default
 
 .. tip::
 	You can also run multiple experiments sequentially in a single command-line or use experiment config files.
-	For more information, see :ref:`Running experiments <run_exp>`.
+	For more information, see :ref:`Running FL experiments <run_federation>`.
 
 ```

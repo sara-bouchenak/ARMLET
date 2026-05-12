@@ -2,7 +2,7 @@
 
 # Getting started
 
-[TODO]
+On these subpages, you will find everything you need to get started with **ARMLET** (installation, run your first FL experiment, and many tutorials).
 
 ```{eval-rst}
 

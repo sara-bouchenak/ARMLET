@@ -9,7 +9,7 @@ It is designed to be modular and flexible, so that adding features is meant to b
 
 ```bash
 ├── armlet/
-│   ├── audit/                      # [Coming soon] Module for performing post-hoc audit
+│   ├── audit/                      # Module for performing post-hoc audit
 │   ├── data/                       # Data loading pipeline (loading, splitting, cleaning, processing, ...)
 │   ├── eval/                       # Evaluator for binary classification, including multi-criteria metrics
 │   ├── FL_pipeline/                # Modules occuring during the FL process

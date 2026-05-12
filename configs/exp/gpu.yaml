@@ -1,5 +1,5 @@
 defaults:
-  - fl.yaml
+  - default.yaml
 
 device: cuda
 inmemory: true

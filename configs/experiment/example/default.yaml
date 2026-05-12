@@ -1,8 +1,8 @@
 # @package _global_
 defaults:
-  - override /data/distribution: iid.yaml
-  - override /data/others: union_clients_test.yaml
-  - override /save: null
+  - override /data/splitter: union_clients_test.yaml
+  - override /data/splitter/distribution: iid.yaml
+  - override /save: no_model_saving.yaml
   - override /eval: only_global_model.yaml
   - override /method: default.yaml
   - override /hydra: example.yaml

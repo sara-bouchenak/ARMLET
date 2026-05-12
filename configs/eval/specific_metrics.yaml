@@ -1,5 +1,5 @@
 defaults:
-  - all.yaml
+  - default.yaml
 
 metrics:
 

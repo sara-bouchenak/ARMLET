@@ -1,10 +1,10 @@
 import os
 from typing import Any
 
-from load_metrics import load_df_multirun
-from utils import compute_metrics_name_dict, preprocess_data
-from utils import aggregate_metrics_with_mean_of_last_rounds, keep_metrics_n_last_rounds
-from t_tests import compute_t_tests, aggregate_df_t_tests_for_joint_impact, aggregate_df_t_tests_by
+from armlet.results_analysis.load_metrics import load_df_multirun
+from armlet.results_analysis.utils import compute_metrics_name_dict, preprocess_data
+from armlet.results_analysis.utils import filter_and_aggregate_metrics
+from armlet.results_analysis.t_tests import compute_t_tests, aggregate_df_t_tests_for_joint_impact, aggregate_df_t_tests_by
 
 
 def main() -> Any:
@@ -13,9 +13,8 @@ def main() -> Any:
     exp_dir = os.path.join(project_dir, "traces", exp_name)
 
     df, metrics_by_cat, other_columns = load_df_results(exp_dir)
-    
-    #df_agg = aggregate_metrics_with_mean_of_last_rounds(df, metrics_by_cat, other_columns, n_last_rounds=20)
-    df_agg = keep_metrics_n_last_rounds(df, other_columns, n_last_rounds=20)
+
+    df_agg = filter_and_aggregate_metrics(df, metrics_by_cat, other_columns, last_n_rounds=20, agg_func=None)
 
     df_t_tests = compute_t_tests(
         df_agg,

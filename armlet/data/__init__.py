@@ -11,7 +11,7 @@ import hydra
 
 from fluke import DDict
 
-from armlet.data.splitter import ArmletDataSplitter, DummyDataSplitter
+from armlet.data.splitter import DummyDataSplitter
 from armlet.data.processing import data_processing_pipeline
 from armlet.data.processing.format_conversion import convert_tensors_to_fluke_data_format
 from armlet.data.loading import load_data_from_folder
@@ -33,10 +33,10 @@ def data_pipeline(cfg: DDict) -> Tuple[DummyDataSplitter, dict]:
     random.seed(cfg.data.seed)
 
     is_static_loading = ("loading" in cfg.data.keys()) and ("static" in cfg.data.loading.keys()) and cfg.data.loading.static
-    is_tensor_data = is_static_loading and "tensors" in cfg.data.loading.load_dir.split("/")[-1]
+    is_processed_data = is_static_loading and "processing" in cfg.data.loading.load_dir.split("/")[-1]
     is_saving_mode = "saving" in cfg.data.keys()
 
-    if not is_tensor_data:
+    if not is_processed_data:
 
         if is_static_loading:
 
@@ -46,10 +46,10 @@ def data_pipeline(cfg: DDict) -> Tuple[DummyDataSplitter, dict]:
 
             data = hydra.utils.instantiate(cfg.data.dataset.exclude("dataset_name"))
 
-            data_splitter = ArmletDataSplitter(
+            data_splitter = hydra.utils.instantiate(
+                cfg.data.splitter,
                 data_dict=data,
-                dist_cfg=cfg.data.distribution,
-                **cfg.data.others,
+                _recursive_=False,
             )
 
             splitted_data = data_splitter.assign(cfg.protocol.n_clients)
@@ -80,8 +80,8 @@ def data_pipeline(cfg: DDict) -> Tuple[DummyDataSplitter, dict]:
             cfg_data=cfg.data,
         )
 
-        if is_saving_mode and ("save_data_after_conversion_to_tensors" in cfg.data.saving.keys()) and (cfg.data.saving.save_data_after_conversion_to_tensors):
-            save_data(tensor_data, cfg.to_dict()["data"], mode="after_tensors")
+        if is_saving_mode and ("save_data_after_processing" in cfg.data.saving.keys()) and (cfg.data.saving.save_data_after_processing):
+            save_data(tensor_data, cfg.to_dict()["data"], mode="after_processing")
 
     else:
         tensor_data, _ = load_data_from_folder(cfg.to_dict()["data"], cfg.protocol.n_clients)

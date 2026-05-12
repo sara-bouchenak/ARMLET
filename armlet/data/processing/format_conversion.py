@@ -40,7 +40,12 @@ def convert_tensors_to_fluke_data_format(tensor_data, cfg):
     data_splitter = DummyDataSplitter(
         dataset=dummy_data_container,
         distribution="",
-        **cfg.data.others.exclude("client_val_split", "server_test_union", "server_val_split"),
+        client_split=cfg.data.splitter.client_split,
+        sampling_perc=cfg.data.others.sampling_perc,
+        server_test=cfg.data.splitter.server_test,
+        keep_test=cfg.data.splitter.keep_test,
+        server_split=cfg.data.splitter.server_split,
+        uniform_test=cfg.data.splitter.uniform_test,
     )
 
     val_data = {k: v for k, v in fast_data_loaders.items() if k in ["clients_val", "server_val"]}

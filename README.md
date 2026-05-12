@@ -73,7 +73,7 @@ You will find detailed information on how the package works, how to install and 
 ## Tutorials
 
 we provide several tutorials in **ARMLET** to help you get started with our framework:
-- [Understanding the **FL mode** in ``armlet``](https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/FL_mode.html)
+- [Understanding the **federation mode** in ``armlet``](https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/federation_mode.html)
 - [Understanding the **data pipeline** in ``armlet``](https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/data_pipeline.html)
 
 ## Authors and main contributors

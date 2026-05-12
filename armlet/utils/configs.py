@@ -10,7 +10,7 @@ class ArmletConfiguration(Configuration):
         self,
         cfg: DictConfig,
     ):
-        super().__init__()
+        super().__init__(force_validation=False)
 
         cfg_dict = OmegaConf.to_container(cfg, resolve=True)
         cfg_ddict = DDict(cfg_dict)

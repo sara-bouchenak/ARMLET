@@ -5,9 +5,6 @@
 The general experiment configuration are related to how the experiment is run.
 Specifically, users can define:
 
-- `mode`: the way of running the experiment. It can be in a federated or a centralized fashion.
-Note that only the `federation` mode is implemented for the moment;
-
 - `train`: for performing the training step or not;
 
 - `seed`: the seed for the random number generator, which is essential for the experiment **reproducibility**.

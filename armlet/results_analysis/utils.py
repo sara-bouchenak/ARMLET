@@ -1,6 +1,10 @@
 import pandas as pd
 
 
+UTILITY_METRICS = ["accuracy", "precision", "recall", "f1", "loss", "training_loss"]
+FAIRNESS_METRICS = ["spd", "disp_impact", "disc_index", "eod", "aod"]
+
+
 def compute_metrics_name_dict(columns: list):
 
     other_columns = {}
@@ -9,14 +13,14 @@ def compute_metrics_name_dict(columns: list):
         other_columns["info"].append("round")
     if "source" in columns:
         other_columns["info"].append("source")
+    if "metrics_type" in columns:
+        other_columns["info"].append("metrics_type")
 
-    all_utility_metrics = ['accuracy', 'precision', 'recall', 'f1', 'loss', "training_loss"]
-    utility_metrics_list = [column for column in columns if column in all_utility_metrics]
+    utility_metrics_list = [column for column in columns if column in UTILITY_METRICS]
 
-    all_fairness_metrics = ['disp_impact', 'disc_index', 'eod', 'aod', 'spd']
     bias_metrics_dict = {}
     for column in columns:
-        if ('_').join(column.split('_')[1:]) in all_fairness_metrics:
+        if ('_').join(column.split('_')[1:]) in FAIRNESS_METRICS:
             sens_attr = column.split('_')[0]
             if sens_attr not in bias_metrics_dict.keys():
                 bias_metrics_dict[sens_attr] = [column]
@@ -73,25 +77,30 @@ def preprocess_data(df: pd.DataFrame, metrics_by_cat: dict, other_columns: dict)
 
     return df
 
-def aggregate_metrics_with_mean_of_last_rounds(
+def filter_and_aggregate_metrics(
     df: pd.DataFrame,
     metrics_by_cat: dict,
-    other_columns: dict,
-    n_last_rounds: int,
+    other_columns: dict = {"method_pars": []},
+    last_n_rounds: int | None = 1,
+    agg_func: str | None = None,
 ):
-    df = df[df["source"] == "server"]
-    metrics = [metric for key, sublist in metrics_by_cat.items() for metric in sublist]
-    lambda_agg = lambda df_lambda: df_lambda.loc[df_lambda["round"] > df_lambda["round"].max() - n_last_rounds][metrics].mean()
-    df_agg = df.groupby(other_columns["method_pars"], as_index=False).apply(lambda_agg)
-    return df_agg
 
-def keep_metrics_n_last_rounds(
-    df: pd.DataFrame,
-    other_columns: dict,
-    n_last_rounds: int,
-):
-    df = df[df["source"] == "server"]
-    lambda_agg = lambda df_lambda: df_lambda.loc[df_lambda["round"] > df_lambda["round"].max() - n_last_rounds]
-    df_agg = df.groupby(other_columns["method_pars"]).apply(lambda_agg)
-    df_agg = df_agg.reset_index(level=other_columns["method_pars"], drop=False)
+    info_columns = [col for col in other_columns["info"] if col != "round"]
+    group_by_columns = other_columns["method_pars"] + info_columns
+    metrics = [metric for key, sublist in metrics_by_cat.items() for metric in sublist]
+
+    if last_n_rounds is not None:
+        lambda_filter = lambda df_lambda: df_lambda.loc[df_lambda["round"] > df_lambda["round"].max() - last_n_rounds]
+        df_filter = df.groupby(group_by_columns).apply(lambda_filter)
+        df_filter = df_filter.reset_index(level=group_by_columns, drop=False)
+    else:
+        df_filter = df
+
+    if agg_func is not None:
+        lambda_agg = lambda df_lambda: df_lambda[metrics].aggregate(agg_func)
+        df_agg = df_filter.groupby(group_by_columns).apply(lambda_agg)
+        df_agg = df_agg.reset_index(level=group_by_columns, drop=False)
+    else:
+        df_agg = df_filter
+
     return df_agg

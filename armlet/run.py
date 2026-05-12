@@ -1,5 +1,8 @@
 import os
 import hydra
+import rich
+from rich.panel import Panel
+from rich.pretty import Pretty
 
 from omegaconf import DictConfig, OmegaConf
 from fluke import FlukeENV, DDict
@@ -48,7 +51,6 @@ def run_federation(cfg: DDict) -> None:
 
         log_name = f"{fl_algo.__class__.__name__} [{fl_algo.id}]"
         log = hydra.utils.instantiate(cfg.logger, name=log_name)
-        log.init(**cfg, exp_id=fl_algo.id)
         fl_algo.set_callbacks([log])
         FlukeENV().set_logger(log)
 
@@ -71,13 +73,23 @@ def run_federation(cfg: DDict) -> None:
 
         log.close()
 
+def run_audit(cfg: DDict) -> None:
 
-@hydra.main(version_base=None, config_path="../configs", config_name="config")
+    hydra.utils.instantiate(
+        cfg.audit,
+        cfg_paths=cfg.paths,
+    )
+
+
+@hydra.main(version_base=None, config_path="../configs", config_name="federation")
 def main(cfg : DictConfig) -> None:
-    custom_cfg = ArmletConfiguration(cfg)
+    armlet_cfg = ArmletConfiguration(cfg)
+    rich.print(Panel(Pretty(armlet_cfg, expand_all=True), title="Configuration", width=200))
 
-    if cfg.exp.mode == "federation":
-        run_federation(custom_cfg)
+    if cfg.armlet.mode == "federation":
+        run_federation(armlet_cfg)
+    elif cfg.armlet.mode == "audit":
+        run_audit(armlet_cfg)
     else:
         pass
 

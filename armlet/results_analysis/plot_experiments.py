@@ -1,10 +1,10 @@
 import os
 from typing import Any
 
-from load_metrics import load_df_multirun
-from utils import compute_metrics_name_dict, preprocess_data, aggregate_metrics_with_mean_of_last_rounds
+from armlet.results_analysis.load_metrics import load_df_multirun
+from armlet.results_analysis.utils import compute_metrics_name_dict, preprocess_data, filter_and_aggregate_metrics
 
-from plot.specific_plot import plot_metrics_per_FL_rounds, plot_bar_aggregated_metrics
+from armlet.results_analysis.plot.specific_plot import plot_metrics_per_FL_rounds, plot_bar_aggregated_metrics
 
 
 def main() -> Any:
@@ -20,14 +20,14 @@ def main() -> Any:
         "data_cleaning": ["OL-std-mean-L", "OL-std-mean-G"],
     }
     for key, val in filter.items():
-        df = df[df[key].isin(filter[key])]
+        df = df[df[key].isin(val)]
 
     group_by = ["model", "data_cleaning"]
     x_bar_groups = ["dataset"]
 
     plot_metrics_per_FL_rounds(df, metrics_by_cat, other_columns["method_pars"], group_by)
 
-    df_agg = aggregate_metrics_with_mean_of_last_rounds(df, metrics_by_cat, other_columns, n_last_rounds=10)
+    df_agg = filter_and_aggregate_metrics(df, metrics_by_cat, other_columns, agg_func="mean", last_n_rounds=10)
 
     plot_bar_aggregated_metrics(df_agg, metrics_by_cat, other_columns["method_pars"], x_bar_groups, group_by)
 

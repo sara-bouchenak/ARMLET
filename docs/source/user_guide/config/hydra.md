@@ -10,10 +10,10 @@ Users can customize the Hydra config values by following this tutorial: [Configu
 ```yaml
 
 run:
-  dir: ${paths.root_dir}/outputs/default/${now:%Y-%m-%d}_${now:%H-%M-%S}/dataset=${data.dataset.dataset_name}
+  dir: ${paths.root_dir}/outputs/default/${now:%Y-%m-%d}_${now:%H-%M-%S}
 
 sweep:
-  dir: ${paths.root_dir}/outputs/default/${now:%Y-%m-%d}_${now:%H-%M-%S}/dataset=${data.dataset.dataset_name}
+  dir: ${paths.root_dir}/outputs/default/${now:%Y-%m-%d}_${now:%H-%M-%S}
   subdir: ${hydra.job.num}_${sanitize_override_dirname:${hydra.job.override_dirname}}
 
 job:
@@ -23,3 +23,5 @@ job:
         - experiment
 
 ```
+
+It also provides several variants for specific needs (audit mode, tutorials, etc.).

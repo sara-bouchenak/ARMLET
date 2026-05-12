@@ -38,6 +38,8 @@ def load_df(json_metrics_path: str, metrics_type: str):
         df = compute_perf_prefit_postfit_metrics(metrics_subdict)
     else:
         raise TypeError("metrics_type '{}' is unknown!".format(metrics_type))
+
+    df["metrics_type"] = metrics_type.replace("perf_", "")
     return df
 
 def compute_perf_global_metrics(perf_global_dict: dict):
@@ -62,10 +64,10 @@ def compute_perf_locals_metrics(perf_local_dict: dict):
             if columns == []:
                 columns = list(metrics.keys())
             line = [metric for metric in metrics.values()]
-            line.append(id_client)
+            line.append("client_{}".format(id_client))
             line.append(round)
             lines.append(line)
-    columns.extend(["id_client", "round"])
+    columns.extend(["source", "round"])
     df_metrics = pd.DataFrame(data=lines, columns=columns)
     return df_metrics
 
@@ -77,9 +79,9 @@ def compute_perf_prefit_postfit_metrics(perf_dict: dict):
             if columns == []:
                 columns = list(metrics.keys())
             line = [metric for metric in metrics.values()]
-            line.append(id_client)
+            line.append("client_{}".format(id_client))
             line.append(round)
             lines.append(line)
-    columns.extend(["id_client", "round"])
+    columns.extend(["source", "round"])
     df_metrics = pd.DataFrame(data=lines, columns=columns)
     return df_metrics

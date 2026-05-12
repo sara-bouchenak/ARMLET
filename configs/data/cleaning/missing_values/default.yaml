@@ -1,1 +1,1 @@
-_target_: armlet.data.cleaning.missing_values.MissingValuesDataCleaningMethod
+_target_: armlet.data.cleaning.missing_values.RemoveMV

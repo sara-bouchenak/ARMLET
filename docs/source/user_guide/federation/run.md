@@ -1,9 +1,9 @@
-(run_exp)=
+(run_federation)=
 
-# Running experiments
+# Running FL experiments
 
 **ARMLET** is based on [Hydra](https://hydra.cc/) for simplifying the launch of experiments and ensuring high reproductibily with config files.
-In the following, we provide examples that illustrate how to efficiently run experiments with our framework, via simple command-line (A) or through experiment config files (B).
+In the following, we provide examples that illustrate how to efficiently run FL experiments with our framework, via simple command-line (A) or through experiment config files (B).
 
 ```{eval-rst}
 
@@ -12,9 +12,9 @@ In the following, we provide examples that illustrate how to efficiently run exp
 
 ```
 
-## A- Run experiment(s) from command-line
+## A- Run FL experiment(s) from command-line
 
-Run `armlet` to launch a single experiment with the default configuration values.
+Run `armlet` to launch a single FL experiment with the default configuration values.
 
 ```bash
 armlet
@@ -30,18 +30,18 @@ armlet exp.seed=1 data/dataset=ars +data/loading=default
 ```{eval-rst}
 
 .. seealso::
-	For more information about configuration files, config values, or config groups, see :ref:`Configuration <config>`.
+	For more information about configuration files, config values, or config groups see :ref:`Configuration prerequisites <config>` as well as :ref:`Configuration for the federation mode <config_federation_mode>`.
 
 ```
 
-Multiple experiments can also be run sequentially by first adding the option `-m` to the command line and then providing multiple values (separated by a comma) for the config values or the config groups.
+Multiple FL experiments can also be run sequentially by first adding the option `-m` to the command line and then providing multiple values (separated by a comma) for the config values or the config groups.
 In this case, all combinations of values to be sweeped will be crossed to launch a batch of experiments.
 
 ```bash
 armlet -m exp.seed=1,2,3,4,5 data/dataset=ars,heart
 ```
 
-## B- Run experiment(s) from a YAML experiment config file
+## B- Run FL experiment(s) from a YAML experiment config file
 
 1. Create a YAML configuration file in `PROJECT_DIR/configs/experiment/` by copying, pasting, and overriding `ARMLET_DIR/configs/experiment/template.yaml`.
 
@@ -58,71 +58,73 @@ armlet -m exp.seed=1,2,3,4,5 data/dataset=ars,heart
 ```yaml
 # @package _global_
 
+armlet:
+  mode: federation
+
+paths:
+  root_dir: .
+  data_dir: ./datasets
+  log_dir: ./logs
+  output_dir: ${hydra:runtime.output_dir}
+
+
 data:
 
-  cleaning:
-    missing_values:
-      _target_: armlet.data.cleaning.missing_values.MissingValuesDataCleaningMethod
-    name: default
-
   dataset:
-    _target_: armlet.data.datasets.load_Adult_dataset
     dataset_name: Adult
+    _target_: armlet.data.datasets.load_Adult_dataset
     path: ./datasets/Adult/raw_data
-    sensitive_attributes: ['age', 'gender', 'race']
+    sensitive_attributes: [age, gender, race]
 
-  distribution:
-    _target_: armlet.data.splitter.ArmletDataSplitter.iid
-
-  others:
+  splitter:
+    distribution:
+      _target_: armlet.data.splitter.ArmletDataSplitter.iid
+    _target_: armlet.data.splitter.ArmletDataSplitter
     client_split: 0.2
     client_val_split: 0.5
     keep_test: false
-    sampling_perc: 1.0
-    server_split: 0.0
     server_test: false
     server_test_union: true
+    server_split: 0.0
     server_val_split: 0.0
     uniform_test: false
 
+  cleaning:
+    missing_values:
+      _target_: armlet.data.cleaning.missing_values.RemoveMV
+    name: default
+
   processing:
     one_hot_encoding:
-      _apply_directly_to_subdata_: false
       _target_: armlet.data.processing.feature_encoding.one_hot_encoding_pipeline
-    conversion_to_num:
-      _apply_directly_to_subdata_: true
-      _target_: armlet.data.processing.format_conversion.convert_bool_and_cat_to_num
-    normalization:
       _apply_directly_to_subdata_: false
+    conversion_to_num:
+      _target_: armlet.data.processing.format_conversion.convert_bool_and_cat_to_num
+      _apply_directly_to_subdata_: true
+    normalization:
       _target_: armlet.data.processing.normalization.normalization_pipeline
+      _apply_directly_to_subdata_: false
       cols_to_exclude: ${data.dataset.sensitive_attributes}
     conversion_to_tensors:
-      _apply_directly_to_subdata_: true
       _target_: armlet.data.processing.format_conversion.convert_dataframes_to_tensors
+      _apply_directly_to_subdata_: true
       sensitive_attributes: ${data.dataset.sensitive_attributes}
 
-  seed: 42
+  others:
+    sampling_perc: 1.0
 
-eval:
-  _target_: armlet.eval.evaluators.MultiCriteriaBinaryClassEval
-  eval_every: 1
-  locals: true
-  metrics:
-    fairness: armlet.eval.metrics.BinaryFairnessMetrics
-  post_fit: true
-  pre_fit: true
-  server: true
+  seed: 42
 
 exp:
   device: cpu
-  inmemory: true
-  mode: federation
   seed: 42
+  inmemory: true
   train: true
 
-logger:
-  _target_: armlet.utils.log.ArmletLog
-  json_log_dir: ${paths.output_dir}
+protocol:
+  eligible_perc: 1.0
+  n_clients: 10
+  n_rounds: 150
 
 method:
 
@@ -155,16 +157,19 @@ method:
       time_to_accuracy_target: null
       weighted: true
 
-paths:
-  data_dir: ./datasets
-  log_dir: ./logs
-  output_dir: ${hydra:runtime.output_dir}
-  root_dir: .
+eval:
+  _target_: armlet.eval.evaluators.MultiCriteriaBinaryClassEval
+  eval_every: 1
+  locals: true
+  metrics:
+    fairness: armlet.eval.metrics.BinaryFairnessMetrics
+  post_fit: true
+  pre_fit: true
+  server: true
 
-protocol:
-  eligible_perc: 1.0
-  n_clients: 10
-  n_rounds: 150
+logger:
+  _target_: armlet.utils.log.ArmletLog
+  json_log_dir: ${paths.output_dir}
 
 save: {}
 
@@ -173,7 +178,7 @@ save: {}
 ```{eval-rst}
 
 .. important::
-  Just as command line mode, config values that are specified in the experiment config file override the default configuration.
+  Just as from command-line, config values that are specified in the experiment config file override the default configuration.
   Thus, config values that are not provided in this file will be set to their default values.
 
 ```
@@ -183,9 +188,9 @@ For greater efficiency, another way of creating experiment config files is to di
 ```yaml
 
 defaults:
-  - override /data/distribution: dirichlet.yaml
-  - override /data/others: union_clients_test.yaml
-  - override /save: null
+  - override /data/splitter: union_clients_test.yaml
+  - override /data/splitter/distribution: dirichlet.yaml
+  - override /save: no_model_saving.yaml
   - override /eval: all.yaml
 
 ```

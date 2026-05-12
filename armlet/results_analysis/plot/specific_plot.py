@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from plot.basics_plot import plot_metrics
+from armlet.results_analysis.plot.basics_plot import plot_metrics
 
 
 def plot_metrics_per_FL_rounds(

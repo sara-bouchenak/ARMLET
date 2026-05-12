@@ -32,6 +32,12 @@ class MissingValuesDataCleaningMethod(DataCleaningMethod):
             self.n_detected_errors[sens_attr]["group_B"] += n_group_B
 
 
+class RemoveMV(MissingValuesDataCleaningMethod):
+
+    def __init__(self, sensitive_attributes: list[str]):
+        super().__init__(sensitive_attributes)
+
+
 def remove_missing_values(data: tuple[pd.DataFrame, pd.DataFrame]) -> tuple[pd.DataFrame, pd.DataFrame]:
     df = pd.concat(data, axis=1).dropna().reset_index(drop=True)
     X_cleaned = df.iloc[:, :-1]

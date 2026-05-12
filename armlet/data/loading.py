@@ -44,37 +44,37 @@ def load_data_from_folder(
         "server_val": None,
     }
 
-    is_tensor_data = "tensors" in load_dir.split(os.path.sep)[-1]
+    is_processed_data = "processing" in load_dir.split(os.path.sep)[-1]
 
     for id_client in range(n_clients):
         id_client = "client_{}".format(id_client)
         client_path = os.path.join(load_dir, id_client)
 
-        if is_tensor_data:
+        if is_processed_data:
             data["clients_train"][id_client] = load_pt_data(client_path, id_client, "tr")
         else:
             data["clients_train"][id_client] = load_pkl_data(client_path, id_client, "tr")
 
         for (data_key, data_type, split_name) in [("clients_test", "te", "client_split"), ("clients_val", "val", "client_val_split")]:
-            if data_cfg_dict["others"][split_name] > 0:
-                if is_tensor_data:
+            if data_cfg_dict["splitter"][split_name] > 0:
+                if is_processed_data:
                     data[data_key][id_client] = load_pt_data(client_path, id_client, data_type)
                 else:
                     data[data_key][id_client] = load_pkl_data(client_path, id_client, data_type)
             else:
                 data[data_key][id_client] = None
 
-    if data_cfg_dict["others"]["server_test"] or data_cfg_dict["others"]["server_test_union"]:
+    if data_cfg_dict["splitter"]["server_test"] or data_cfg_dict["splitter"]["server_test_union"]:
         server_path = os.path.join(load_dir, "server")
 
-        if is_tensor_data:
+        if is_processed_data:
             data["server_test"] = load_pt_data(server_path, "server", "te")
         else:
             data["server_test"] = load_pkl_data(server_path, "server", "te")
 
-        condition = data_cfg_dict["others"]["server_test_union"] and data_cfg_dict["others"]["client_val_split"] > 0
-        if data_cfg_dict["others"]["server_val_split"] > 0 or condition:
-            if is_tensor_data:
+        condition = data_cfg_dict["splitter"]["server_test_union"] and data_cfg_dict["splitter"]["client_val_split"] > 0
+        if data_cfg_dict["splitter"]["server_val_split"] > 0 or condition:
+            if is_processed_data:
                 data["server_val"] = load_pt_data(server_path, "server", "val")
             else:
                 data["server_val"] = load_pkl_data(server_path, "server", "val")

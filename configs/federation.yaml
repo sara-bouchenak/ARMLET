@@ -2,12 +2,13 @@
 
 defaults:
   - _self_
-  - data: default.yaml
-  - eval: default.yaml
-  - exp: fl.yaml
+  - armlet: federation.yaml
   - hydra: default.yaml
-  - logger: default.yaml
-  - method: default.yaml
   - paths: default.yaml
+  - data: default.yaml
+  - exp: default.yaml
   - protocol: default.yaml
+  - method: default.yaml
+  - eval: default.yaml
+  - logger: default.yaml
   - save: no_model_saving.yaml

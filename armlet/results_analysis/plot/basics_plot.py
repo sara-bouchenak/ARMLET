@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 from matplotlib.ticker import MaxNLocator
 
-from plot.utils import save_plot_to_png
+from armlet.results_analysis.plot.utils import save_plot_to_png
 
 
 METRIC_TO_LABEL = {
@@ -56,7 +56,7 @@ def plot_metrics(
         fig.suptitle(title, fontsize=14)
 
     for i, metric in enumerate(metrics):
-        ax = axes[i] if len(metrics) > 2 else axes
+        ax = axes[i] if len(metrics) >= 2 else axes
         if plot_type == 'bar':
             plot_bar_metric(df, metric, ax, i, metrics_cat, group_by, x_bar_groups)
         elif plot_type == 'plot_per_rounds':

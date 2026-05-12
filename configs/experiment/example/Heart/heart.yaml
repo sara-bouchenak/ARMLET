@@ -2,7 +2,6 @@
 defaults:
   - /experiment/example/default.yaml
   - override /data/dataset: heart.yaml
-  - override /data/others: union_clients_test_wo_val.yaml
 
 data:
   seed: 200

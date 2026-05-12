@@ -1,0 +1,12 @@
+run:
+  dir: ${paths.root_dir}/outputs/default/${now:%Y-%m-%d}_${now:%H-%M-%S}/dataset=${data.dataset.dataset_name}
+
+sweep:
+  dir: ${paths.root_dir}/outputs/default/${now:%Y-%m-%d}_${now:%H-%M-%S}/dataset=${data.dataset.dataset_name}
+  subdir: ${hydra.job.num}_${sanitize_override_dirname:${hydra.job.override_dirname}}
+
+job:
+  config:
+    override_dirname:
+      exclude_keys:
+        - experiment

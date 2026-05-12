@@ -38,7 +38,7 @@ def save_data(
     for id_client, client_tr in data["clients_train"].items():
         client_path = os.path.join(save_subdir, "{}".format(id_client))
         os.mkdir(client_path)
-        if mode == "after_tensors":
+        if mode == "after_processing":
             save_tensors_to_pt(client_tr, client_path, id_client, "tr")
         else:
             save_data_to_pkl(client_tr, client_path, id_client, "tr")
@@ -46,7 +46,7 @@ def save_data(
         for (data_key, data_type) in [("clients_test", "te"), ("clients_val", "val")]:
             client_data = data[data_key][id_client]
             if client_data is not None:
-                if mode == "after_tensors":
+                if mode == "after_processing":
                     save_tensors_to_pt(client_data, client_path, id_client, data_type)
                 else:
                     save_data_to_pkl(client_data, client_path, id_client, data_type)
@@ -56,7 +56,7 @@ def save_data(
 
     for (data_key, data_type) in [("server_test", "te"), ("server_val", "val")]:
         if data[data_key] is not None:
-            if mode == "after_tensors":
+            if mode == "after_processing":
                 save_tensors_to_pt(data[data_key], server_path, "server", data_type)
             else:
                 save_data_to_pkl(data[data_key], server_path, "server", data_type)

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>How to extend armlet &#8212; ARMLET 0.2 documentation</title>
+    <title>How to extend armlet &#8212; ARMLET 0.3.2 documentation</title>
   
   
   
@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>
@@ -51,7 +51,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="armlet" href="../api/modules.html" />
-    <link rel="prev" title="Audit configuration" href="audit/config/audit.html" />
+    <link rel="prev" title="Plot module" href="plot_module.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -297,36 +297,53 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="config/index.html">Configuration prerequisites</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="config/armlet.html">Armlet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config/experiment.html">Experiment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config/hydra.html">Hydra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config/paths.html">Paths</a></li>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Benchmark &amp; FL experiments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="federation/run.html">Running FL experiments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="federation/config/index.html">Federation configuration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/armlet.html">Armlet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/experiment.html">Experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/hydra.html">Hydra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/paths.html">Paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/data.html">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/eval.html">Eval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/exp.html">Exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/logger.html">Logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/method.html">Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/save.html">Save</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="federation/index.html">Federation mode</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="federation/run.html">Running FL experiments</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="federation/config/index.html">Configuration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/data.html">Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/eval.html">Eval</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/exp.html">Exp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/logger.html">Logger</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/method.html">Method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/protocol.html">Protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/save.html">Save</a></li>
+<li class="toctree-l1"><a class="reference internal" href="federation/metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="federation/datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="federation/models.html">Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="federation/features/index.html">Other features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="federation/features/attack_module.html">Attack module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/features/data_selection_module.html">Data selection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/features/resume_training.html">Resume training</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="federation/tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="federation/tutorials/federation_mode.html">Understanding the <strong>federation mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/tutorials/data_pipeline.html">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
 </ul>
 </details></li>
 </ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="audit/index.html">Audit mode</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="audit/run.html">Performing post-hoc audit</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="audit/config/index.html">Configuration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="audit/config/audit.html">Audit</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Audit</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="audit/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit/post_hoc_audit.html">Post-hoc audit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit/online_audit.html">Online audit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit/config.html">Audit configuration</a></li>
 </ul>
-</details></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hyperparameters Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="hpo/run.html">Tuning hyperparameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpo/config.html">HPO configuration</a></li>
 </ul>
-</details></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Others</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="plot_module.html">Plot module</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">How to extend <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
 </ul>
 </div>
@@ -395,7 +412,7 @@
 <ol class="arabic simple">
 <li><p>Download and add the dataset in the folder <code class="docutils literal notranslate"><span class="pre">PROJECT_DIR/datasets/DATASET_NAME/</span></code>.</p></li>
 <li><p>Create a Python file with a function that integrates the dataset loading along with its raw preprocessing.</p></li>
-<li><p>Create a YAML config file with the name of the dataset in the folder <code class="docutils literal notranslate"><span class="pre">PROJECT_DIR/configs/data/dataset/</span></code> to provide the new option for the config group <code class="docutils literal notranslate"><span class="pre">data/dataset</span></code>.</p></li>
+<li><p>Create a YAML config file with the name of the dataset in the folder <code class="docutils literal notranslate"><span class="pre">PROJECT_DIR/configs_armlet/data/dataset/</span></code> to provide the new option for the config group <code class="docutils literal notranslate"><span class="pre">data/dataset</span></code>.</p></li>
 </ol>
 </section>
 <section id="add-new-ml-models">
@@ -422,12 +439,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="audit/config/audit.html"
+       href="plot_module.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Audit configuration</p>
+        <p class="prev-next-title">Plot module</p>
       </div>
     </a>
     <a class="right-next"

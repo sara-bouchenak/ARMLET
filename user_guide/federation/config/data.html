@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data configuration &#8212; ARMLET 0.2 documentation</title>
+    <title>Data configuration &#8212; ARMLET 0.3.2 documentation</title>
   
   
   
@@ -31,7 +31,7 @@
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../../../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../../../_static/documentation_options.js?v=71d9d8e6"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/tabs.js?v=3ee01567"></script>
@@ -51,7 +51,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Evaluation configuration" href="eval.html" />
-    <link rel="prev" title="Configuration" href="index.html" />
+    <link rel="prev" title="Paths configuration" href="paths.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -297,36 +297,53 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../config/index.html">Configuration prerequisites</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../config/armlet.html">Armlet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../config/experiment.html">Experiment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../config/hydra.html">Hydra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../config/paths.html">Paths</a></li>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Benchmark &amp; FL experiments</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../run.html">Running FL experiments</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Federation configuration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="armlet.html">Armlet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiment.html">Experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydra.html">Hydra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paths.html">Paths</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eval.html">Eval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exp.html">Exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logger.html">Logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="method.html">Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="save.html">Save</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Federation mode</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../run.html">Running FL experiments</a></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Configuration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="eval.html">Eval</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exp.html">Exp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="logger.html">Logger</a></li>
-<li class="toctree-l3"><a class="reference internal" href="method.html">Method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="protocol.html">Protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="save.html">Save</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/index.html">Other features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/attack_module.html">Attack module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/data_selection_module.html">Data selection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/resume_training.html">Resume training</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/federation_mode.html">Understanding the <strong>federation mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/data_pipeline.html">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
 </ul>
 </details></li>
 </ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../audit/index.html">Audit mode</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../audit/run.html">Performing post-hoc audit</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../audit/config/index.html">Configuration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../audit/config/audit.html">Audit</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Audit</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../audit/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../audit/post_hoc_audit.html">Post-hoc audit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../audit/online_audit.html">Online audit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../audit/config.html">Audit configuration</a></li>
 </ul>
-</details></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hyperparameters Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../hpo/run.html">Tuning hyperparameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hpo/config.html">HPO configuration</a></li>
 </ul>
-</details></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Others</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../extend.html">How to extend <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
 </ul>
 </div>
@@ -372,10 +389,7 @@
     <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">User Guide</a></li>
     
     
-    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Federation mode</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Configuration</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Federation configuration</a></li>
     
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Data configuration</span></li>
   </ul>
@@ -403,6 +417,7 @@ The configuration groups or values in <code class="docutils literal notranslate"
 <li><p><a class="reference internal" href="#config-data-dataset"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">dataset</span></code></span></a>: for loading the dataset and transforming it to the appropriate format;</p></li>
 <li><p><a class="reference internal" href="#config-data-splitter"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">splitter</span></code></span></a>: for splitting the data among the clients and the server (including the data distribution when partitionning);</p></li>
 <li><p><a class="reference internal" href="#config-data-processing"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">processing</span></code></span></a>: for performing data processing;</p></li>
+<li><p><a class="reference internal" href="#config-data-loader-format"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">loader_format</span></code></span></a>: <strong>optional</strong>, for specifying custom data loaders (as for instance lazy audio loader);</p></li>
 <li><p><a class="reference internal" href="#config-data-cleaning"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">cleaning</span></code></span></a>: <strong>optional</strong>, for performing data cleaning;</p></li>
 <li><p><a class="reference internal" href="#config-data-loading"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">loading</span></code></span></a>: <strong>optional</strong>, for loading static data (splitted, cleaned, tensors) that were save during previous experiments instead of loading the raw dataset;</p></li>
 <li><p><a class="reference internal" href="#config-data-saving"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">saving</span></code></span></a>: <strong>optional</strong>, for saving data at one or multiple specific steps of the data pipeline;</p></li>
@@ -410,7 +425,7 @@ The configuration groups or values in <code class="docutils literal notranslate"
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>See the tutorial <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/data_pipeline.html#">Understanding the data pipeline in armlet</a> to learn more about how this framework uses these configurations to perform the data pipeline.</p>
+<p>See the tutorial <a class="reference external" href="https://sara-bouchenak.github.io/ARMLET/user_guide/federation/tutorials/data_pipeline.html#">Understanding the data pipeline in armlet</a> to learn more about how this framework uses these configurations to perform the data pipeline.</p>
 </div>
 <section id="dataset-configuration">
 <h2>Dataset configuration<a class="headerlink" href="#dataset-configuration" title="Link to this heading">#</a></h2>
@@ -422,7 +437,7 @@ The configuration groups or values in <code class="docutils literal notranslate"
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>By default, <strong>ARMLET</strong> provides multiple dataset loading functions in <code class="docutils literal notranslate"><span class="pre">armlet.data.datasets</span></code> and pre-defined dataset YAML config files in the <code class="docutils literal notranslate"><span class="pre">ARMLET_DIR/configs/data/dataset</span></code> folder.</p>
+<p>By default, <strong>ARMLET</strong> provides multiple dataset loading functions in <code class="docutils literal notranslate"><span class="pre">armlet.data.datasets</span></code> and pre-defined dataset YAML config files in the <code class="docutils literal notranslate"><span class="pre">ARMLET_DIR/armlet/configs/data/dataset</span></code> folder.</p>
 </div>
 </section>
 <section id="data-splitter-configuration">
@@ -430,6 +445,7 @@ The configuration groups or values in <code class="docutils literal notranslate"
 <p id="config-data-splitter">The <code class="docutils literal notranslate"><span class="pre">splitter</span></code> field includes all the config values required to split the data.
 The majority of them are the same as the parameters of <a class="reference external" href="https://makgyver.github.io/fluke/config_data.html#other-fields">Fluke’s data other fields</a> and <a class="reference external" href="https://makgyver.github.io/fluke/config_data.html#data-distribution">Fluke’s data distribution field</a>:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_target_</span></code>: the class used to split the data. The default one is <code class="docutils literal notranslate"><span class="pre">armlet.data.splitter.ArmletDataSplitter</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">distribution</span></code>: config group for specifying the data distribution when partitionning (similar to the one provided by Fluke, but adapted to the data format required by <strong>ARMLET</strong>).
 The only mandatory config value in this group is <code class="docutils literal notranslate"><span class="pre">_target_</span></code>, which is the distribution function used during the data splitting step;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">client_split</span></code>: percentage of the client’s data that will be used as its test set;</p></li>
@@ -444,7 +460,7 @@ It requires to set <code class="docutils literal notranslate"><span class="pre">
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>By default, <strong>ARMLET</strong> provides some distribution functions in <code class="docutils literal notranslate"><span class="pre">armlet.data.splitter</span></code> and pre-defined distribution YAML config files in the <code class="docutils literal notranslate"><span class="pre">ARMLET_DIR/configs/data/splitter/distribution</span></code> folder.</p>
+<p>By default, <strong>ARMLET</strong> provides some distribution functions in <code class="docutils literal notranslate"><span class="pre">armlet.data.splitter</span></code> and pre-defined distribution YAML config files in the <code class="docutils literal notranslate"><span class="pre">ARMLET_DIR/armlet/configs/data/splitter/distribution</span></code> folder.</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -467,8 +483,17 @@ Each of these config groups requires the following config values:</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>ARMLET provides multiple data processing functions in <code class="docutils literal notranslate"><span class="pre">armlet.data.processing</span></code> and pre-defined YAML config files in the <code class="docutils literal notranslate"><span class="pre">ARMLET_DIR/configs/data/processing</span></code> folder.</p>
+<p>ARMLET provides multiple data processing functions in <code class="docutils literal notranslate"><span class="pre">armlet.data.processing</span></code> and pre-defined YAML config files in the <code class="docutils literal notranslate"><span class="pre">ARMLET_DIR/armlet/configs/data/processing</span></code> folder.</p>
 </div>
+</section>
+<section id="data-loader-format-configuration">
+<h2>Data loader format configuration<a class="headerlink" href="#data-loader-format-configuration" title="Link to this heading">#</a></h2>
+<p id="config-data-loader-format">The <code class="docutils literal notranslate"><span class="pre">loader_format</span></code> field is optional and serves to bypass the <code class="docutils literal notranslate"><span class="pre">FastDataLoader</span></code> class required by Fluke. It can be used when dealing with audio data to dynamically load data only when needed during training or evalution (lazy loading).
+It only requires:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_target_</span></code>: the function that convert the processed data to data loader;</p></li>
+<li><p>and additional config values depending on the chosen function (that will be dynamically pass to the function as arguments).</p></li>
+</ul>
 </section>
 <section id="data-cleaning-configuration">
 <h2>Data cleaning configuration<a class="headerlink" href="#data-cleaning-configuration" title="Link to this heading">#</a></h2>
@@ -498,9 +523,9 @@ The config values are:</p>
 The config values are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">save_dir</span></code>: directory where the data will be saved. A subfolder will be created, with a name that depends on the type of saving (e.g., “after_processing”, “no_cleaning”, etc.).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">save_data_before_cleaning</span></code>: boolean for saving data before cleaning (set to <code class="docutils literal notranslate"><span class="pre">False</span></code> by default);</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">save_data_after_cleaning</span></code>: boolean for saving data after cleaning (set to <code class="docutils literal notranslate"><span class="pre">False</span></code> by default);</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">save_data_after_processing</span></code>: boolean for saving data after processing (set to <code class="docutils literal notranslate"><span class="pre">False</span></code> by default). This can be particularly usefull when dealing with images as it will save tensors instead of raw images.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save_data_before_cleaning</span></code>: boolean for saving data before cleaning;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save_data_after_cleaning</span></code>: boolean for saving data after cleaning;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save_data_after_processing</span></code>: boolean for saving data after processing. This can be particularly usefull when dealing with images as it will save tensors instead of raw images.</p></li>
 </ul>
 </section>
 <section id="others-fields">
@@ -527,12 +552,12 @@ The config values are:</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="paths.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Configuration</p>
+        <p class="prev-next-title">Paths configuration</p>
       </div>
     </a>
     <a class="right-next"
@@ -566,6 +591,7 @@ The config values are:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-configuration">Dataset configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitter-configuration">Data splitter configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing-configuration">Data processing configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loader-format-configuration">Data loader format configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-configuration">Data cleaning configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-configuration">Data loading configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-saving-configuration">Data saving configuration</a></li>

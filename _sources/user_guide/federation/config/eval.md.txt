@@ -6,7 +6,7 @@ In federated learning, the evaluation can be performed in different ways.
 **ARMLET** offers the same options as the `eval` config group provided by [Fluke](https://makgyver.github.io/fluke/config_exp.html#evaluation-configuration), but allows users flexibility to determine the type of evaluation.
 
 - `_target_`: the class corresponding to the type of evaluation to perform. 
-Note that only `armlet.eval.evaluators.MultiCriteriaBinaryClassEval` evaluator is implemented for the moment;
+Note that only `armlet.eval.evaluators.MultiCriteriaBinaryClassEval` and `armlet.eval.evaluators.MultiClassEval` evaluators are implemented for the moment;
 
 - `metrics`: the torch metrics that will be computed during evaluation.
 Users must specify the classes of the metrics they want to evaluate in the *utility* and *fairness* sub-dictionaries.

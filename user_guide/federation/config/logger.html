@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Logger configuration &#8212; ARMLET 0.2 documentation</title>
+    <title>Logger configuration &#8212; ARMLET 0.3.2 documentation</title>
   
   
   
@@ -31,7 +31,7 @@
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../../../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../../../_static/documentation_options.js?v=71d9d8e6"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/tabs.js?v=3ee01567"></script>
@@ -297,36 +297,53 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../config/index.html">Configuration prerequisites</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../config/armlet.html">Armlet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../config/experiment.html">Experiment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../config/hydra.html">Hydra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../config/paths.html">Paths</a></li>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Benchmark &amp; FL experiments</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../run.html">Running FL experiments</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Federation configuration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="armlet.html">Armlet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiment.html">Experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydra.html">Hydra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paths.html">Paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eval.html">Eval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exp.html">Exp</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="method.html">Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="save.html">Save</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Federation mode</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../run.html">Running FL experiments</a></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Configuration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="data.html">Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="eval.html">Eval</a></li>
-<li class="toctree-l3"><a class="reference internal" href="exp.html">Exp</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Logger</a></li>
-<li class="toctree-l3"><a class="reference internal" href="method.html">Method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="protocol.html">Protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="save.html">Save</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/index.html">Other features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/attack_module.html">Attack module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/data_selection_module.html">Data selection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/resume_training.html">Resume training</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/federation_mode.html">Understanding the <strong>federation mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/data_pipeline.html">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
 </ul>
 </details></li>
 </ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../audit/index.html">Audit mode</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../audit/run.html">Performing post-hoc audit</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../audit/config/index.html">Configuration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../audit/config/audit.html">Audit</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Audit</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../audit/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../audit/post_hoc_audit.html">Post-hoc audit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../audit/online_audit.html">Online audit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../audit/config.html">Audit configuration</a></li>
 </ul>
-</details></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hyperparameters Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../hpo/run.html">Tuning hyperparameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hpo/config.html">HPO configuration</a></li>
 </ul>
-</details></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Others</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../extend.html">How to extend <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
 </ul>
 </div>
@@ -372,10 +389,7 @@
     <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">User Guide</a></li>
     
     
-    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Federation mode</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Configuration</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Federation configuration</a></li>
     
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Logger configuration</span></li>
   </ul>
@@ -401,11 +415,37 @@ Unlike in <a class="reference external" href="https://makgyver.github.io/fluke/c
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">_target_</span></code>: the class corresponding to the type of logging to perform.</p></li>
 </ul>
-<p><strong>ARMLET</strong> provides by default a minimal logger, named <code class="docutils literal notranslate"><span class="pre">armlet.utils.log.ArmletLog</span></code>, which saves the results in a JSON file.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>In <a class="reference external" href="https://makgyver.github.io/fluke/config_log.html">Log configuration</a> from Fluke documentation, you can find the loggers provided by Fluke, such as <cite>Local logger</cite>, <cite>Debug logger</cite>, <cite>Weights &amp; Biases logger</cite>, or <cite>Tensorboard logger</cite>.
-You can also find some guidelines for defining custom loggers.</p>
+<p><strong>ARMLET</strong> provides by default a logger, named <code class="docutils literal notranslate"><span class="pre">armlet.utils.log.ArmletLog</span></code>, which is in charge of calculating several communication and computational costs. At the end of the experiment, it saves the results in a JSON file.</p>
+<p>Regarding the communication costs, <strong>ARMLET</strong> can track the model size (in bits) and the number of model parameters, either for the server or each client.
+To activate this functionnality, users must add the config group <code class="docutils literal notranslate"><span class="pre">comm_costs_tracker</span></code> with the config values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">track_every</span></code>: the tracking frequency (in rounds);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clients_at_end_fit</span></code>: whether to calculate these metrics for each client (boolean);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">server_at_start_round</span></code>: whether to calculate these metrics for the server (boolean).</p></li>
+</ul>
+<p>In the following, you can find an example that describes the default settings (<code class="docutils literal notranslate"><span class="pre">armlet/configs/logger/default.yaml</span></code> config file):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">comm_costs_tracker</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">track_every</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${protocol.n_rounds}</span>
+<span class="w">  </span><span class="nt">clients_at_end_fit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">server_at_start_round</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>Moreover, <strong>ARMLET</strong> can calculate the time needed to reach target metrics.
+This feature can be enabled by adding the config group <code class="docutils literal notranslate"><span class="pre">metric_target</span></code> with as many config subgroups as there are metrics to monitor.
+The config subgroups must include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">threshold</span></code>: the threshold to reach for the corresponding metric;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">objective</span></code>: whether the metric value must be <code class="docutils literal notranslate"><span class="pre">above</span></code> or <code class="docutils literal notranslate"><span class="pre">below</span></code> the threshold.</p></li>
+</ul>
+<p>Here is an example of such config group (as in the <code class="docutils literal notranslate"><span class="pre">armlet/configs/logger/time_to_reach_target.yaml</span></code> config file):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">metric_target</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">accuracy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
+<span class="w">    </span><span class="nt">objective</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">above</span>
+<span class="w">  </span><span class="nt">f1</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
+<span class="w">    </span><span class="nt">objective</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">above</span>
+</pre></div>
 </div>
 </section>
 

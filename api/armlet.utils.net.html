@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>armlet.utils.net module &#8212; ARMLET 0.2 documentation</title>
+    <title>armlet.utils.net module &#8212; ARMLET 0.3.2 documentation</title>
   
   
   
@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>
@@ -50,7 +50,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="armlet.run module" href="armlet.run.html" />
+    <link rel="next" title="armlet.utils.tracker module" href="armlet.utils.tracker.html" />
     <link rel="prev" title="armlet.utils.log module" href="armlet.utils.log.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -301,27 +301,39 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="armlet.html">armlet package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="armlet.FL_pipeline.html">armlet.FL_pipeline package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="armlet.FL_pipeline.FL_algorithms.html">armlet.FL_pipeline.FL_algorithms package</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="armlet.FL_pipeline.data_selection.html">armlet.FL_pipeline.data_selection package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="armlet.FL_pipeline.data_selection.FL_algorithms.html">armlet.FL_pipeline.data_selection.FL_algorithms package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="armlet.FL_pipeline.data_selection.methods.html">armlet.FL_pipeline.data_selection.methods package</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="armlet.attack.html">armlet.attack package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="armlet.attack.mia.html">armlet.attack.mia package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.attack.mia.rmia.html">armlet.attack.mia.rmia module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.attack.mia.shokri.html">armlet.attack.mia.shokri module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.data.html">armlet.attack.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.evaluator.html">armlet.attack.evaluator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.metrics.html">armlet.attack.metrics module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.net.html">armlet.attack.net module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.splitter.html">armlet.attack.splitter module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="armlet.audit.html">armlet.audit package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="armlet.audit.auditor.html">armlet.audit.auditor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.audit.load_metrics.html">armlet.audit.load_metrics module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.configs.html">armlet.configs package</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="armlet.data.html">armlet.data package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="armlet.data.cleaning.html">armlet.data.cleaning package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.cleaning.missing_values.html">armlet.data.cleaning.missing_values package</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="armlet.data.processing.html">armlet.data.processing package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.audio.html">armlet.data.processing.audio module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.feature_encoding.html">armlet.data.processing.feature_encoding module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.format_conversion.html">armlet.data.processing.format_conversion module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.image_loading.html">armlet.data.processing.image_loading module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.image.html">armlet.data.processing.image module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.normalization.html">armlet.data.processing.normalization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.transforms.html">armlet.data.processing.transforms module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.utils.html">armlet.data.processing.utils module</a></li>
 </ul>
 </details></li>
@@ -337,13 +349,23 @@
 <li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html">armlet.eval.metrics module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="armlet.plot.html">armlet.plot package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.plot.basics_plot.html">armlet.plot.basics_plot module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.plot.plot_experiments.html">armlet.plot.plot_experiments module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.plot.save.html">armlet.plot.save module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.plot.specific_plot.html">armlet.plot.specific_plot module</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="armlet.utils.html">armlet.utils package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="armlet.utils.configs.html">armlet.utils.configs module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.utils.custom_loss.html">armlet.utils.custom_loss module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.utils.log.html">armlet.utils.log module</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">armlet.utils.net module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.utils.tracker.html">armlet.utils.tracker module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.federation.html">armlet.federation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.hpo.html">armlet.hpo module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="armlet.run.html">armlet.run module</a></li>
 </ul>
 </details></li>
@@ -416,6 +438,71 @@
   <section id="module-armlet.utils.net">
 <span id="armlet-utils-net-module"></span><h1>armlet.utils.net module<a class="headerlink" href="#module-armlet.utils.net" title="Link to this heading">#</a></h1>
 <dl class="py class">
+<dt class="sig sig-object py" id="armlet.utils.net.EuroSATBasicBlock">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.utils.net.</span></span><span class="sig-name descname"><span class="pre">EuroSATBasicBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inplanes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">planes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">downsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.EuroSATBasicBlock" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="armlet.utils.net.EuroSATBasicBlock.expansion">
+<span class="sig-name descname"><span class="pre">expansion</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#armlet.utils.net.EuroSATBasicBlock.expansion" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.utils.net.EuroSATBasicBlock.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.EuroSATBasicBlock.forward" title="Link to this definition">#</a></dt>
+<dd><p>Define the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="armlet.utils.net.EuroSATResNet20">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.utils.net.</span></span><span class="sig-name descname"><span class="pre">EuroSATResNet20</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fc_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.EuroSATResNet20" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.utils.net.EuroSATResNet20.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.EuroSATResNet20.forward" title="Link to this definition">#</a></dt>
+<dd><p>Define the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="armlet.utils.net.EuroSATVGG11">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.utils.net.</span></span><span class="sig-name descname"><span class="pre">EuroSATVGG11</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linear_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_norm_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.EuroSATVGG11" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.utils.net.EuroSATVGG11.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.EuroSATVGG11.forward" title="Link to this definition">#</a></dt>
+<dd><p>Define the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="armlet.utils.net.LogRegression">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.utils.net.</span></span><span class="sig-name descname"><span class="pre">LogRegression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.LogRegression" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
@@ -436,12 +523,55 @@ registered hooks while the latter silently ignores them.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="armlet.utils.net.M18">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.utils.net.</span></span><span class="sig-name descname"><span class="pre">M18</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.M18" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>M18 1D CNN for raw Speech Commands waveforms.</p>
+<p>Expected input shape is [batch_size, 1, 16000]. The model returns raw
+logits with shape [batch_size, num_classes] for CrossEntropyLoss.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.utils.net.M18.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#armlet.utils.net.M18.forward" title="Link to this definition">#</a></dt>
+<dd><p>Define the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="armlet.utils.net.MLP">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.utils.net.</span></span><span class="sig-name descname"><span class="pre">MLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_hidden_layer_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_hidden_layer_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">32</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.MLP" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.utils.net.</span></span><span class="sig-name descname"><span class="pre">MLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[64,</span> <span class="pre">32]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.MLP" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="armlet.utils.net.MLP.forward">
 <span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.MLP.forward" title="Link to this definition">#</a></dt>
+<dd><p>Define the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="armlet.utils.net.PurchaseMLP">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.utils.net.</span></span><span class="sig-name descname"><span class="pre">PurchaseMLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">600</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[1024,</span> <span class="pre">512,</span> <span class="pre">256,</span> <span class="pre">128]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">droprate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.PurchaseMLP" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.utils.net.PurchaseMLP.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.net.PurchaseMLP.forward" title="Link to this definition">#</a></dt>
 <dd><p>Define the computation performed at every call.</p>
 <p>Should be overridden by all subclasses.</p>
 <div class="admonition note">
@@ -523,11 +653,11 @@ registered hooks while the latter silently ignores them.</p>
       </div>
     </a>
     <a class="right-next"
-       href="armlet.run.html"
+       href="armlet.utils.tracker.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">armlet.run module</p>
+        <p class="prev-next-title">armlet.utils.tracker module</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -550,12 +680,33 @@ registered hooks while the latter silently ignores them.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.EuroSATBasicBlock"><code class="docutils literal notranslate"><span class="pre">EuroSATBasicBlock</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.EuroSATBasicBlock.expansion"><code class="docutils literal notranslate"><span class="pre">EuroSATBasicBlock.expansion</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.EuroSATBasicBlock.forward"><code class="docutils literal notranslate"><span class="pre">EuroSATBasicBlock.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.EuroSATResNet20"><code class="docutils literal notranslate"><span class="pre">EuroSATResNet20</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.EuroSATResNet20.forward"><code class="docutils literal notranslate"><span class="pre">EuroSATResNet20.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.EuroSATVGG11"><code class="docutils literal notranslate"><span class="pre">EuroSATVGG11</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.EuroSATVGG11.forward"><code class="docutils literal notranslate"><span class="pre">EuroSATVGG11.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.LogRegression"><code class="docutils literal notranslate"><span class="pre">LogRegression</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.LogRegression.forward"><code class="docutils literal notranslate"><span class="pre">LogRegression.forward()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.M18"><code class="docutils literal notranslate"><span class="pre">M18</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.M18.forward"><code class="docutils literal notranslate"><span class="pre">M18.forward()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.MLP"><code class="docutils literal notranslate"><span class="pre">MLP</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.MLP.forward"><code class="docutils literal notranslate"><span class="pre">MLP.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.PurchaseMLP"><code class="docutils literal notranslate"><span class="pre">PurchaseMLP</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.PurchaseMLP.forward"><code class="docutils literal notranslate"><span class="pre">PurchaseMLP.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.net.ResNet18"><code class="docutils literal notranslate"><span class="pre">ResNet18</span></code></a></li>

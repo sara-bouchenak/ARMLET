@@ -6,7 +6,7 @@
 
 2. Create a Python file with a function that integrates the dataset loading along with its raw preprocessing.
 
-3. Create a YAML config file with the name of the dataset in the folder `PROJECT_DIR/configs/data/dataset/` to provide the new option for the config group `data/dataset`.
+3. Create a YAML config file with the name of the dataset in the folder `PROJECT_DIR/configs_armlet/data/dataset/` to provide the new option for the config group `data/dataset`.
 
 ## Add new ML models
 

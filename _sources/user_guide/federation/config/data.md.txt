@@ -13,6 +13,8 @@ The configuration groups or values in `data` are:
 
 - [`processing`](config_data_processing): for performing data processing;
 
+- [`loader_format`](config_data_loader_format): **optional**, for specifying custom data loaders (as for instance lazy audio loader);
+
 - [`cleaning`](config_data_cleaning): **optional**, for performing data cleaning;
 
 - [`loading`](config_data_loading): **optional**, for loading static data (splitted, cleaned, tensors) that were save during previous experiments instead of loading the raw dataset;
@@ -24,7 +26,7 @@ The configuration groups or values in `data` are:
 ```{eval-rst}
 
 .. seealso::
-	See the tutorial `Understanding the data pipeline in armlet <https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/data_pipeline.html#>`_ to learn more about how this framework uses these configurations to perform the data pipeline.
+	See the tutorial `Understanding the data pipeline in armlet <https://sara-bouchenak.github.io/ARMLET/user_guide/federation/tutorials/data_pipeline.html#>`_ to learn more about how this framework uses these configurations to perform the data pipeline.
 
 ```
 
@@ -42,7 +44,7 @@ The `dataset` field requires two mandatory config values:
 ```{eval-rst}
 
 .. tip::
-  By default, **ARMLET** provides multiple dataset loading functions in ``armlet.data.datasets`` and pre-defined dataset YAML config files in the ``ARMLET_DIR/configs/data/dataset`` folder.
+  By default, **ARMLET** provides multiple dataset loading functions in ``armlet.data.datasets`` and pre-defined dataset YAML config files in the ``ARMLET_DIR/armlet/configs/data/dataset`` folder.
 
 ```
 
@@ -51,6 +53,8 @@ The `dataset` field requires two mandatory config values:
 
 The `splitter` field includes all the config values required to split the data.
 The majority of them are the same as the parameters of [Fluke's data other fields](https://makgyver.github.io/fluke/config_data.html#other-fields) and [Fluke's data distribution field](https://makgyver.github.io/fluke/config_data.html#data-distribution):
+
+- `_target_`: the class used to split the data. The default one is ``armlet.data.splitter.ArmletDataSplitter``.
 
 - `distribution`: config group for specifying the data distribution when partitionning (similar to the one provided by Fluke, but adapted to the data format required by **ARMLET**).
 The only mandatory config value in this group is `_target_`, which is the distribution function used during the data splitting step;
@@ -75,7 +79,7 @@ It requires to set `server_test` and `keep_test` to `false`;
 ```{eval-rst}
 
 .. tip::
-  By default, **ARMLET** provides some distribution functions in ``armlet.data.splitter`` and pre-defined distribution YAML config files in the ``ARMLET_DIR/configs/data/splitter/distribution`` folder.
+  By default, **ARMLET** provides some distribution functions in ``armlet.data.splitter`` and pre-defined distribution YAML config files in the ``ARMLET_DIR/armlet/configs/data/splitter/distribution`` folder.
 
 ```
 
@@ -110,9 +114,19 @@ Note that the name of the config groups only serves to organize the configs and 
 ```{eval-rst}
 
 .. tip::
-	ARMLET provides multiple data processing functions in ``armlet.data.processing`` and pre-defined YAML config files in the ``ARMLET_DIR/configs/data/processing`` folder.
+	ARMLET provides multiple data processing functions in ``armlet.data.processing`` and pre-defined YAML config files in the ``ARMLET_DIR/armlet/configs/data/processing`` folder.
 
 ```
+
+## Data loader format configuration
+(config_data_loader_format)=
+
+The `loader_format` field is optional and serves to bypass the ``FastDataLoader`` class required by Fluke. It can be used when dealing with audio data to dynamically load data only when needed during training or evalution (lazy loading).
+It only requires:
+
+- ``_target_``: the function that convert the processed data to data loader;
+
+- and additional config values depending on the chosen function (that will be dynamically pass to the function as arguments).
 
 ## Data cleaning configuration
 (config_data_cleaning)=
@@ -148,11 +162,11 @@ The config values are:
 
 - `save_dir`: directory where the data will be saved. A subfolder will be created, with a name that depends on the type of saving (e.g., "after_processing", "no_cleaning", etc.).
 
-- `save_data_before_cleaning`: boolean for saving data before cleaning (set to `False` by default);
+- `save_data_before_cleaning`: boolean for saving data before cleaning;
 
-- `save_data_after_cleaning`: boolean for saving data after cleaning (set to `False` by default);
+- `save_data_after_cleaning`: boolean for saving data after cleaning;
 
-- `save_data_after_processing`: boolean for saving data after processing (set to `False` by default). This can be particularly usefull when dealing with images as it will save tensors instead of raw images.
+- `save_data_after_processing`: boolean for saving data after processing. This can be particularly usefull when dealing with images as it will save tensors instead of raw images.
 
 ## Others fields
 (config_data_others)=

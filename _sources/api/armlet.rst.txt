@@ -8,9 +8,12 @@ Subpackages
    :maxdepth: 4
 
    armlet.FL_pipeline
+   armlet.attack
    armlet.audit
+   armlet.configs
    armlet.data
    armlet.eval
+   armlet.plot
    armlet.utils
 
 Submodules
@@ -19,6 +22,8 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   armlet.federation
+   armlet.hpo
    armlet.run
 
 Module contents

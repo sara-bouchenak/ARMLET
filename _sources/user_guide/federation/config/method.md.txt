@@ -43,8 +43,6 @@ It contains:
 
 - `loss`: config group that contains the information about the loss function (the same as the client loss config group), which will be used only for the server evaluation;
 
-- `time_to_accuracy_target`: value between 0 and 1 representing the accuracy target to achieve (used for calculating time to accuracy);
-
 - `weighted`: boolean specifying whether to weight the client’s contribution to the global model;
 
 - and additional config values or groups depending on the chosen FL algorithm.

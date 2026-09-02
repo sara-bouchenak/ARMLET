@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>User Guide &#8212; ARMLET 0.2 documentation</title>
+    <title>User Guide &#8212; ARMLET 0.3.2 documentation</title>
   
   
   
@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>
@@ -50,8 +50,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Configuration prerequisites" href="config/index.html" />
-    <link rel="prev" title="Understanding the data pipeline in armlet" href="../getting_started/tutorials/data_pipeline.html" />
+    <link rel="next" title="Running FL experiments" href="federation/run.html" />
+    <link rel="prev" title="Tutorials" href="../getting_started/tutorials.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -297,36 +297,53 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="config/index.html">Configuration prerequisites</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="config/armlet.html">Armlet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config/experiment.html">Experiment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config/hydra.html">Hydra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config/paths.html">Paths</a></li>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Benchmark &amp; FL experiments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="federation/run.html">Running FL experiments</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="federation/config/index.html">Federation configuration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/armlet.html">Armlet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/experiment.html">Experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/hydra.html">Hydra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/paths.html">Paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/data.html">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/eval.html">Eval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/exp.html">Exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/logger.html">Logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/method.html">Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/config/save.html">Save</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="federation/index.html">Federation mode</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="federation/run.html">Running FL experiments</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="federation/config/index.html">Configuration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/data.html">Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/eval.html">Eval</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/exp.html">Exp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/logger.html">Logger</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/method.html">Method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/protocol.html">Protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="federation/config/save.html">Save</a></li>
+<li class="toctree-l1"><a class="reference internal" href="federation/metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="federation/datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="federation/models.html">Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="federation/features/index.html">Other features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="federation/features/attack_module.html">Attack module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/features/data_selection_module.html">Data selection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/features/resume_training.html">Resume training</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="federation/tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="federation/tutorials/federation_mode.html">Understanding the <strong>federation mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="federation/tutorials/data_pipeline.html">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
 </ul>
 </details></li>
 </ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="audit/index.html">Audit mode</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="audit/run.html">Performing post-hoc audit</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="audit/config/index.html">Configuration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="audit/config/audit.html">Audit</a></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Audit</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="audit/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit/post_hoc_audit.html">Post-hoc audit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit/online_audit.html">Online audit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audit/config.html">Audit configuration</a></li>
 </ul>
-</details></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hyperparameters Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="hpo/run.html">Tuning hyperparameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpo/config.html">HPO configuration</a></li>
 </ul>
-</details></li>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Others</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extend.html">How to extend <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
 </ul>
 </div>
@@ -387,14 +404,23 @@
                   
   <section id="user-guide">
 <span id="id1"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading">#</a></h1>
-<p><strong>ARMLET</strong> provides different modes that can be accessed with the argument <code class="docutils literal notranslate"><span class="pre">--config-name=MODE_NAME</span></code> (for running the default configurations related to the chosen mode) or the config value <code class="docutils literal notranslate"><span class="pre">armlet.mode=MODE_NAME</span></code> (in this case, some config values should be specified manually). There are:</p>
+<p><strong>ARMLET</strong> offers several services, which can be used by selecting the proper mode using the argument <code class="docutils literal notranslate"><span class="pre">--config-name=MODE_NAME</span></code> or <code class="docutils literal notranslate"><span class="pre">-cn</span> <span class="pre">MODE_NAME</span></code>.
+The different modes are:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="federation/index.html#federation-mode"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">federation</span></code></span></a>: to run federated learning experiments;</p></li>
-<li><p><a class="reference internal" href="audit/index.html#audit-mode"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">audit</span></code></span></a>: to perform post-hoc audit of past FL experiments;</p></li>
+<li><p><a class="reference internal" href="federation/run.html#federation-run"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">federation</span></code></span></a>: to run federated learning experiments;</p></li>
+<li><p><a class="reference internal" href="hpo/run.html#hpo-run"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">hpo</span></code></span></a>: to tune any parameters of the federation mode using <a class="reference external" href="https://docs.ray.io/en/latest/tune/index.html">Ray Tune</a>;</p></li>
+<li><p><a class="reference internal" href="audit/post_hoc_audit.html#audit-run-post-hoc"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">post_hoc_audit</span></code></span></a>: to perform post-hoc audit of past FL experiments;</p></li>
 <li><p>and other modes that are currently in development and will be available soon.</p></li>
 </ul>
-<p>On these subpages, you will find more detailed information on how to use these modes.
-Furthermore, we explain all the configurations of <strong>ARMLET</strong> and add information on how to extend our framework.</p>
+<p><strong>ARMLET</strong> also includes <a class="reference internal" href="plot_module.html#ug-plot-module"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">plot</span></code></span></a>, an independant module for analyzing and plotting experiment results.</p>
+<p>On these subpages, you will find more detailed information on how to use these modes or modules.
+Furthermore, we explain all the configurations of <strong>ARMLET</strong> and add information on <a class="reference internal" href="extend.html"><span class="doc std std-doc">how to extend our framework</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -410,20 +436,20 @@ Furthermore, we explain all the configurations of <strong>ARMLET</strong> and ad
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../getting_started/tutorials/data_pipeline.html"
+       href="../getting_started/tutorials.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></p>
+        <p class="prev-next-title">Tutorials</p>
       </div>
     </a>
     <a class="right-next"
-       href="config/index.html"
+       href="federation/run.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Configuration prerequisites</p>
+        <p class="prev-next-title">Running FL experiments</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

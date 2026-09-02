@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>armlet.utils.custom_loss module &#8212; ARMLET 0.2 documentation</title>
+    <title>armlet.utils.custom_loss module &#8212; ARMLET 0.3.2 documentation</title>
   
   
   
@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>
@@ -301,27 +301,39 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="armlet.html">armlet package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="armlet.FL_pipeline.html">armlet.FL_pipeline package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="armlet.FL_pipeline.FL_algorithms.html">armlet.FL_pipeline.FL_algorithms package</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="armlet.FL_pipeline.data_selection.html">armlet.FL_pipeline.data_selection package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="armlet.FL_pipeline.data_selection.FL_algorithms.html">armlet.FL_pipeline.data_selection.FL_algorithms package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="armlet.FL_pipeline.data_selection.methods.html">armlet.FL_pipeline.data_selection.methods package</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="armlet.attack.html">armlet.attack package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="armlet.attack.mia.html">armlet.attack.mia package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.attack.mia.rmia.html">armlet.attack.mia.rmia module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.attack.mia.shokri.html">armlet.attack.mia.shokri module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.data.html">armlet.attack.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.evaluator.html">armlet.attack.evaluator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.metrics.html">armlet.attack.metrics module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.net.html">armlet.attack.net module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.attack.splitter.html">armlet.attack.splitter module</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="armlet.audit.html">armlet.audit package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="armlet.audit.auditor.html">armlet.audit.auditor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.audit.load_metrics.html">armlet.audit.load_metrics module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.configs.html">armlet.configs package</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="armlet.data.html">armlet.data package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="armlet.data.cleaning.html">armlet.data.cleaning package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.cleaning.missing_values.html">armlet.data.cleaning.missing_values package</a></li>
 </ul>
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="armlet.data.processing.html">armlet.data.processing package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.audio.html">armlet.data.processing.audio module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.feature_encoding.html">armlet.data.processing.feature_encoding module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.format_conversion.html">armlet.data.processing.format_conversion module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.image_loading.html">armlet.data.processing.image_loading module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.image.html">armlet.data.processing.image module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.normalization.html">armlet.data.processing.normalization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.transforms.html">armlet.data.processing.transforms module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="armlet.data.processing.utils.html">armlet.data.processing.utils module</a></li>
 </ul>
 </details></li>
@@ -337,13 +349,23 @@
 <li class="toctree-l3"><a class="reference internal" href="armlet.eval.metrics.html">armlet.eval.metrics module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="armlet.plot.html">armlet.plot package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="armlet.plot.basics_plot.html">armlet.plot.basics_plot module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.plot.plot_experiments.html">armlet.plot.plot_experiments module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.plot.save.html">armlet.plot.save module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.plot.specific_plot.html">armlet.plot.specific_plot module</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="armlet.utils.html">armlet.utils package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="armlet.utils.configs.html">armlet.utils.configs module</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">armlet.utils.custom_loss module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.utils.log.html">armlet.utils.log module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="armlet.utils.net.html">armlet.utils.net module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="armlet.utils.tracker.html">armlet.utils.tracker module</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.federation.html">armlet.federation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="armlet.hpo.html">armlet.hpo module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="armlet.run.html">armlet.run module</a></li>
 </ul>
 </details></li>
@@ -421,6 +443,18 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MarginRankingLoss</span></code></p>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="armlet.utils.custom_loss.IntegerCrossEntropyLoss">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">armlet.utils.custom_loss.</span></span><span class="sig-name descname"><span class="pre">IntegerCrossEntropyLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_smoothing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.custom_loss.IntegerCrossEntropyLoss" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="armlet.utils.custom_loss.IntegerCrossEntropyLoss.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#armlet.utils.custom_loss.IntegerCrossEntropyLoss.forward" title="Link to this definition">#</a></dt>
+<dd><p>Runs the forward pass.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -471,6 +505,10 @@
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.custom_loss.BinaryHingeLoss"><code class="docutils literal notranslate"><span class="pre">BinaryHingeLoss</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.custom_loss.IntegerCrossEntropyLoss"><code class="docutils literal notranslate"><span class="pre">IntegerCrossEntropyLoss</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#armlet.utils.custom_loss.IntegerCrossEntropyLoss.forward"><code class="docutils literal notranslate"><span class="pre">IntegerCrossEntropyLoss.forward()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Run your FL first experiment &#8212; ARMLET 0.2 documentation</title>
+    <title>Run your FL first experiment &#8212; ARMLET 0.3.2 documentation</title>
   
   
   
@@ -31,7 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../_static/documentation_options.js?v=71d9d8e6"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>
@@ -50,7 +50,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorials" href="tutorials/index.html" />
+    <link rel="next" title="Tutorials" href="tutorials.html" />
     <link rel="prev" title="Installation" href="install.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -300,11 +300,7 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Run your FL first experiment</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/federation_mode.html">Understanding the <strong>federation mode</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/data_pipeline.html">Understanding the <strong>data pipeline</strong> in <code class="docutils literal notranslate"><span class="pre">armlet</span></code></a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 </ul>
 </div>
 </nav></div>
@@ -366,7 +362,7 @@
                 <article class="bd-article">
                   
   <section id="run-your-fl-first-experiment">
-<span id="run-first-exp"></span><h1>Run your FL first experiment<a class="headerlink" href="#run-your-fl-first-experiment" title="Link to this heading">#</a></h1>
+<span id="gs-run-first-exp"></span><h1>Run your FL first experiment<a class="headerlink" href="#run-your-fl-first-experiment" title="Link to this heading">#</a></h1>
 <p><strong>ARMLET</strong> is based on <a class="reference external" href="https://hydra.cc/">Hydra</a> for simplifying the launch of experiments and ensuring high reproductibily with config files.
 In the following, we provide few guidelines for running your first experiment.</p>
 <div class="admonition seealso">
@@ -377,19 +373,24 @@ In the following, we provide few guidelines for running your first experiment.</
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>armlet
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you are in <code class="docutils literal notranslate"><span class="pre">PROJECT_DIR</span></code>, you must (a) create a folder <code class="docutils literal notranslate"><span class="pre">datasets</span></code> and add your datasets or (b) change the <code class="docutils literal notranslate"><span class="pre">paths.data_dir</span></code> config value.
+For running default configuration fastly without error, just copy and paste <code class="docutils literal notranslate"><span class="pre">ARMLET_DIR/datasets</span></code> to <code class="docutils literal notranslate"><span class="pre">PROJECT_DIR</span></code>.</p>
+</div>
 <p>Config values (e.g., <code class="docutils literal notranslate"><span class="pre">exp.seed</span></code>) or config groups (e.g., <code class="docutils literal notranslate"><span class="pre">data/dataset</span></code>) can be directly overrided from the command line.
 Note that <code class="docutils literal notranslate"><span class="pre">+</span></code> need to be added before the config values or groups that do not have default values.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>armlet<span class="w"> </span>exp.seed<span class="o">=</span><span class="m">1</span><span class="w"> </span>data/dataset<span class="o">=</span>ars<span class="w"> </span>+data/loading<span class="o">=</span>default
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>armlet<span class="w"> </span>exp.seed<span class="o">=</span><span class="m">1</span><span class="w"> </span>data/dataset<span class="o">=</span>tabular/ars<span class="w"> </span>+data/saving<span class="o">=</span>after_processing
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>For more information about configuration files, config values, or config groups, see <a class="reference internal" href="../user_guide/config/index.html#config"><span class="std std-ref">Configuration prerequisites</span></a> as well as <a class="reference internal" href="../user_guide/federation/config/index.html#config-federation-mode"><span class="std std-ref">Configuration for federation mode</span></a>.</p>
+<p>For more information about configuration files, config values, or config groups, see <a class="reference internal" href="../user_guide/federation/config/index.html#config-federation-mode"><span class="std std-ref">Federation configuration</span></a>.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can also run multiple experiments sequentially in a single command-line or use experiment config files.
-For more information, see <a class="reference internal" href="../user_guide/federation/run.html#run-federation"><span class="std std-ref">Running FL experiments</span></a>.</p>
+For more information, see <a class="reference internal" href="../user_guide/federation/run.html#federation-run"><span class="std std-ref">Running FL experiments</span></a>.</p>
 </div>
 </section>
 
@@ -413,7 +414,7 @@ For more information, see <a class="reference internal" href="../user_guide/fede
       </div>
     </a>
     <a class="right-next"
-       href="tutorials/index.html"
+       href="tutorials.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

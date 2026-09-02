@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - /experiment/examples/datasets/default.yaml
+  - /data/cleaning: remove_mv.yaml
+  - override /data/dataset: tabular/adult.yaml
+  - override /data/processing: tabular.yaml
+  - override /method/hyperparameters/model: log_regression.yaml
+  - override /eval: binary_only_global.yaml

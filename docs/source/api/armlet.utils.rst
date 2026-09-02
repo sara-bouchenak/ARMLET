@@ -11,6 +11,7 @@ Submodules
    armlet.utils.custom_loss
    armlet.utils.log
    armlet.utils.net
+   armlet.utils.tracker
 
 Module contents
 ---------------

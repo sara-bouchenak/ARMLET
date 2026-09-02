@@ -1,0 +1,31 @@
+# @package _global_
+
+defaults:
+  - /experiment/examples/datasets/default.yaml
+  - /data/loader_format: audio_lazy.yaml
+  - override /data/dataset: audio/audiomnist.yaml
+  - override /data/processing: audio_lazy.yaml
+  - override /method/hyperparameters/model: m18.yaml
+  - override /method/hyperparameters/client/optimizer: adam.yaml
+  - override /method/hyperparameters/client/scheduler: exponential_lr.yaml
+  - override /eval: multiclass_fluke.yaml
+  - override /exp: gpu.yaml
+
+data:
+  loader_format:
+    sample_rate: 16000 #48000
+    num_samples: 16000 #48000
+    normalization: peak
+    allow_resample: True #False
+    allow_multichannel_to_mono: True
+    num_workers: 4
+    pin_memory: True
+
+method:
+  hyperparameters:
+    client:
+      batch_size: 128
+      local_epochs: 10
+      optimizer:
+        lr: 0.001
+        weight_decay: 0.0005

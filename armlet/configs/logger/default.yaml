@@ -1,0 +1,6 @@
+_target_: armlet.utils.log.ArmletLog
+
+comm_costs_tracker:
+  track_every: ${protocol.n_rounds}
+  clients_at_end_fit: True
+  server_at_start_round: True

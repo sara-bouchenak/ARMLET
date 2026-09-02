@@ -137,12 +137,12 @@ class ArmletDataSplitter:
             self.dist_cfg, X=clients_X_tr, y=clients_Y_tr, n=n_clients,
         )
         return assignments_tr
-    
+
     def _compute_test_val_assignments(self, n_clients, clients_data):
         clients_X, clients_Y = clients_data
         if clients_X is not None and clients_Y is not None:
             if self.uniform_test:
-                assignments = self.iid(clients_X, clients_Y, n_clients)
+                assignments = self.iid(X=clients_X, n=n_clients)
             else:
                 assignments = hydra.utils.instantiate(
                     self.dist_cfg, X=clients_X, y=clients_Y, n=n_clients,
@@ -189,7 +189,7 @@ class ArmletDataSplitter:
         return server_te_data, server_val_data
 
     @staticmethod
-    def iid(X: pd.DataFrame, y: pd.DataFrame, n: int) -> list[np.ndarray]:
+    def iid(X: pd.DataFrame, n: int, **kwargs) -> list[np.ndarray]:
 
         assert X.shape[0] >= n, "# of instances must be > than #clients"
 
@@ -205,11 +205,12 @@ class ArmletDataSplitter:
 
     @staticmethod
     def label_dirichlet_skew(
-        X: pd.DataFrame,
         y: pd.DataFrame,
         n: int,
         alpha: float = 0.1,
         min_sample_per_class: int = 0,
+        seed = None,
+        **kwargs,
     ) -> list[np.ndarray]:
 
         assert alpha > 0, "alpha must be > 0"
@@ -220,7 +221,11 @@ class ArmletDataSplitter:
         unique_classes = list(np.unique(label_array))
 
         # Sample Dirichlet proportion
-        proportions = np.random.dirichlet([alpha]*n, size=len(unique_classes))
+        if seed is not None:
+            rng = np.random.default_rng(seed)
+            proportions = rng.dirichlet([alpha]*n, size=len(unique_classes))
+        else:
+            proportions = np.random.dirichlet([alpha]*n, size=len(unique_classes))
 
         # Initialize client allocations
         client_indices = defaultdict(list)
@@ -257,13 +262,12 @@ class ArmletDataSplitter:
 
     @staticmethod
     def safe_label_dirichlet_skew(
-        X: pd.DataFrame,
-        y: pd.DataFrame,
         n: int,
-        alpha: float = 0.1,
+        min_sample_per_class: int,
+        **kwargs,
     ) -> list[np.ndarray]:
 
-        assignments = ArmletDataSplitter.label_dirichlet_skew(X, y, n, alpha)
+        assignments = ArmletDataSplitter.label_dirichlet_skew(n=n, **kwargs)
 
         client_have_no_data = False
 
@@ -274,7 +278,11 @@ class ArmletDataSplitter:
                 client_have_no_data = True
 
         if client_have_no_data:
-            assignments = ArmletDataSplitter.label_dirichlet_skew(X, y, n, alpha, min_sample_per_class=1)
+            assignments = ArmletDataSplitter.label_dirichlet_skew(
+                n=n,
+                min_sample_per_class=min_sample_per_class,
+                **kwargs,
+            )
 
         return assignments
 

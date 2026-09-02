@@ -1,0 +1,11 @@
+# @package _global_
+
+defaults:
+  - /experiment/examples/datasets/audio/speech_commands_m18.yaml
+  - /data/loader_format: audio_lazy.yaml
+  - override /data/processing: audio_lazy.yaml
+
+method:
+  hyperparameters:
+    client:
+      batch_size: 512

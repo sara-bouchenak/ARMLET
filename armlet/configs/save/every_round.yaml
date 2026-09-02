@@ -1,0 +1,3 @@
+path: ${concat:${paths.output_dir},/}
+save_every: 1
+global_only: false

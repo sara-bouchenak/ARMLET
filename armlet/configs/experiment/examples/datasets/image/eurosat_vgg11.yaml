@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - /experiment/examples/datasets/default.yaml
+  - override /data/dataset: image/eurosat.yaml
+  - override /data/processing: eurosat.yaml
+  - override /method/hyperparameters/model: vgg11_eurosat.yaml 
+  - override /eval: multiclass.yaml
+  - override /exp: gpu.yaml

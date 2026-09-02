@@ -1,0 +1,10 @@
+defaults:
+  - default.yaml
+
+metric_types_to_audit:
+  perf_global: True
+  perf_locals: False
+  perf_prefit: False
+  perf_postfit: False
+  comp_costs: True
+  comm_costs: True

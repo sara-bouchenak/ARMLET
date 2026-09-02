@@ -1,0 +1,13 @@
+preprocess_image_data:
+  _target_: armlet.data.processing.image.preprocess_image_data
+  _apply_directly_to_subdata_: True
+  flatten_y: True
+  y_dtype: int64
+  transforms:
+    - _target_: armlet.data.processing.transforms.DivTransform
+      factor: 255.0
+    - _target_: armlet.data.processing.transforms.ReshapeTransform 
+      size: [3, 32, 32]
+    - _target_: torchvision.transforms.Normalize
+      mean: [0.4914, 0.4822, 0.4465]
+      std: [0.2023, 0.1994, 0.2010]

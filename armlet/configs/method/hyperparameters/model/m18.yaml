@@ -1,0 +1,14 @@
+# @package method.hyperparameters
+
+defaults:
+  - default.yaml
+
+model:
+  _target_: armlet.utils.net.M18
+  n_input: 1
+  stride: 4
+  n_channel: 64
+
+client:
+  loss:
+    _target_: torch.nn.CrossEntropyLoss

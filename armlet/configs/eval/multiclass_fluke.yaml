@@ -1,0 +1,7 @@
+_target_: fluke.evaluation.ClassificationEval
+eval_every: 1
+
+pre_fit: true
+post_fit: true
+locals: true
+server: true

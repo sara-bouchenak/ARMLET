@@ -1,4 +1,3 @@
-import time
 from typing import Any, Sequence
 from torch.nn import Module
 from copy import deepcopy
@@ -24,8 +23,11 @@ class ArmletClient(Client):
         train_set: FastDataLoader | DataLoader,
         test_set: FastDataLoader | DataLoader,
         val_set: FastDataLoader | None,
+        other_data: dict[str, FastDataLoader | DataLoader | None],
         optimizer_cfg: OptimizerConfigurator,
         loss_fn: Module,
+        model_cfg,
+        attack_cfg,
         local_epochs: int,
         fine_tuning_epochs: int = 0,
         clipping: float = 0,
@@ -35,14 +37,45 @@ class ArmletClient(Client):
         super().__init__(index, train_set, test_set, optimizer_cfg, loss_fn, local_epochs, fine_tuning_epochs, clipping, persistency, **kwargs)
         self.val_set = val_set
 
+        self.attack_evaluator = None
+        if attack_cfg is not None:
+            shadow_data = {
+                key.replace("shadow_clients_", ""): val
+                for key, val in other_data.items()
+                if "shadow_clients" in key
+            }
+            self.attack_evaluator = hydra.utils.instantiate(
+                attack_cfg.eval,
+                _recursive_= False,
+                train_set=train_set,
+                test_set=test_set,
+                attack_cfg=attack_cfg.exclude("eval"),
+                shadow_data=shadow_data,
+                model_cfg=model_cfg,
+                optimizer_cfg=optimizer_cfg,
+                loss_fn=loss_fn,
+                device=self.device,
+            )
+
     def evaluate(self, evaluator: Evaluator, test_set: FastDataLoader) -> dict[str, float]:
         model = self.model
+
         if test_set is not None and model is not None:
-            evaluation = evaluator.evaluate(
+            metrics = evaluator.evaluate(
                 self._last_round, model, test_set, device=self.device, loss_fn=self.hyper_params.loss_fn
             )
-            return evaluation
-        return {}
+        else:
+            metrics = {}
+
+        if self.attack_evaluator is not None and self.model is not None:
+            attack_evaluation = self.attack_evaluator.evaluate(
+                round=self._last_round,
+                model=self.model,
+                device=self.device,
+            )
+            metrics.update(attack_evaluation)
+
+        return metrics
 
 
 class ArmletServer(Server):
@@ -52,7 +85,12 @@ class ArmletServer(Server):
         model: Module,
         test_set: FastDataLoader | None,
         val_set:  FastDataLoader | None,
+        other_data: dict[str, FastDataLoader | DataLoader | None],
         clients: Sequence[Client],
+        model_cfg,
+        optimizer_cfg: OptimizerConfigurator,
+        loss_fn: Module,
+        attack_cfg,
         weighted: bool = False,
         lr: float = 1,
         **kwargs,
@@ -60,15 +98,31 @@ class ArmletServer(Server):
         super().__init__(model, test_set, clients, weighted, lr, **kwargs)
         self.val_set = val_set
 
-        if "time_to_accuracy_target" in kwargs.keys():
-            self.time_to_accuracy_target = kwargs["time_to_accuracy_target"]
-        else:
-            self.time_to_accuracy_target = None
-
         if "loss" in kwargs.keys():
             self.loss_fn = hydra.utils.instantiate(kwargs["loss"])
         else:
             self.loss_fn = None
+
+        self.attack_evaluator = None
+        if attack_cfg is not None:
+            train_set = other_data["server_train"]
+            shadow_data = {
+                key.replace("shadow_server_", ""): val
+                for key, val in other_data.items()
+                if "shadow_server" in key
+            }
+            self.attack_evaluator = hydra.utils.instantiate(
+                attack_cfg.eval,
+                _recursive_= False,
+                train_set=train_set,
+                test_set=test_set,
+                attack_cfg=attack_cfg.exclude("eval"),
+                shadow_data=shadow_data,
+                model_cfg=model_cfg,
+                optimizer_cfg=optimizer_cfg,
+                loss_fn=loss_fn,
+                device=self.device,
+            )
 
     def fit(
         self, n_rounds: int = 10,
@@ -76,26 +130,8 @@ class ArmletServer(Server):
         finalize: bool = True,
         **kwargs,
     ) -> None:
-
-        self.start_fit_time = time.time()
+        self.notify("start_FL_process")
         super().fit(n_rounds, eligible_perc, finalize, **kwargs)
-        end_fit_time = time.time()
-
-        training_time = (end_fit_time - self.start_fit_time)
-        self.notify(
-                event="track_item",
-                round=-1,
-                item="training_time",
-                value=training_time,
-            )
-
-        training_time_per_participant_per_round = training_time / (self.n_clients * eligible_perc * n_rounds)
-        self.notify(
-                event="track_item",
-                round=-1,
-                item="training_time_per_participant_per_round",
-                value=training_time_per_participant_per_round,
-            )
 
     def evaluate(self, evaluator: Evaluator, test_set: FastDataLoader) -> dict[str, float]:
 
@@ -105,24 +141,22 @@ class ArmletServer(Server):
             )
         else:
             metrics = {}
+        self.notify("after_server_eval", metrics=metrics)
 
-        if self.time_to_accuracy_target is not None and "accuracy" in metrics.keys():
-
-            if metrics["accuracy"] >= self.time_to_accuracy_target:
-                self.time_to_accuracy_target = None
-    
-                target_accuracy_time = time.time()
-                time_to_accuracy = target_accuracy_time - self.start_fit_time
-
-                self.notify(
-                        event="track_item",
-                        round=-1,
-                        item="time_to_accuracy",
-                        value=time_to_accuracy,
-                    )
+        if self.attack_evaluator is not None and self.model is not None:
+            attack_evaluation = self.attack_evaluator.evaluate(
+                round=self.rounds+1,
+                model=self.model,
+                device=self.device,
+            )
+            metrics.update(attack_evaluation)
 
         return metrics
 
+    def load(self, path: str) -> dict[str, Any]:
+        state = super().load(path)
+        self.rounds +=1 # fix Fluke bug
+        return state
 
 class ArmletCentralizedFL(CentralizedFL):
 
@@ -131,13 +165,27 @@ class ArmletCentralizedFL(CentralizedFL):
         hyperparameters: DDict | dict[str, Any],
         n_clients: int,
         data_splitter: DataSplitter,
-        val_data: dict,
+        additional_data: dict,
         clients: list[Client] = None,
         server: Server = None,
         **kwargs
     ):
-        self.clients_val = val_data["clients_val"]
-        self.server_val = val_data["server_val"]
+
+        self.clients_val = additional_data["clients_val"]
+        self.server_val = additional_data["server_val"]
+
+        self.other_server_data = {
+            key: val
+            for key, val in additional_data.items()
+            if ("server" in key) and (key != "server_val")
+        }
+
+        self.other_clients_data = {
+            key: val
+            for key, val in additional_data.items()
+            if ("clients" in key) and (key != "client_val")
+        }
+
         hyper_params = hyperparameters
 
         if (clients is not None and server is None) or (clients is None and server is not None):
@@ -183,6 +231,12 @@ class ArmletCentralizedFL(CentralizedFL):
         for client in self.clients:
             client.set_channel(self.server.channel)
 
+        if "resume" in kwargs.keys() and kwargs["resume"]:
+            resume_cfg = kwargs["resume"]
+            assert "path" in resume_cfg
+            round = resume_cfg["round"] if "round" in resume_cfg.keys() else None
+            self.load(resume_cfg["path"], round)
+
     def get_client_class(self) -> type[Client]:
         return ArmletClient
 
@@ -190,8 +244,23 @@ class ArmletCentralizedFL(CentralizedFL):
         return ArmletServer
 
     def init_server(self, model: Any, data: FastDataLoader, config: DDict) -> Server:
+        optimizer_cfg = OptimizerConfigurator(
+            optimizer_cfg=self.hyper_params.client.optimizer,
+            scheduler_cfg=self.hyper_params.client.scheduler,
+        )
+        loss = hydra.utils.instantiate(self.hyper_params.client.loss)
+        attack_cfg = self.hyper_params.attack if "attack" in self.hyper_params.keys() else None
         server: Server = self.get_server_class()(
-            model=model, test_set=data, val_set=self.server_val, clients=self.clients, **config
+            model=model,
+            test_set=data,
+            val_set=self.server_val,
+            other_data=self.other_server_data,
+            clients=self.clients,
+            model_cfg=self.hyper_params.model,
+            optimizer_cfg=optimizer_cfg,
+            loss_fn=deepcopy(loss),
+            attack_cfg=attack_cfg,
+            **config,
         )
         if FlukeENV().get_save_options()[0] is not None:
             server.attach(self)
@@ -205,17 +274,22 @@ class ArmletCentralizedFL(CentralizedFL):
     ) -> Sequence[Client]:
         self._fix_opt_cfg(config.optimizer)
         optimizer_cfg = OptimizerConfigurator(
-            optimizer_cfg=config.optimizer, scheduler_cfg=config.scheduler
+            optimizer_cfg=config.optimizer,
+            scheduler_cfg=config.scheduler,
         )
         loss = hydra.utils.instantiate(config.loss)
+        attack_cfg = self.hyper_params.attack if "attack" in self.hyper_params.keys() else None
         clients = [
             self.get_client_class()(
                 index=i,
                 train_set=clients_tr_data[i],
                 test_set=clients_te_data[i],
                 val_set=self.clients_val[i],
+                other_data={key: val[i] for key, val in self.other_clients_data.items()},
                 optimizer_cfg=optimizer_cfg,
                 loss_fn=deepcopy(loss),
+                model_cfg=self.hyper_params.model,
+                attack_cfg=attack_cfg,
                 **config.exclude("optimizer", "loss", "batch_size", "scheduler"),
             )
             for i in range(self.n_clients)

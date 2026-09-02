@@ -1,0 +1,10 @@
+defaults:
+  - dataset: tabular/dc.yaml
+  - splitter: union_clients_test.yaml
+  - processing: tabular.yaml
+  - others: default
+  #- cleaning: remove_mv.yaml
+  #- loading: static.yaml
+  #- saving: after_processing.yaml
+
+seed: 42

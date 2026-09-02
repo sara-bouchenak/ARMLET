@@ -1,0 +1,8 @@
+defaults:
+  - default.yaml
+
+run:
+  dir: ${paths.root_dir}/outputs/default/${now:%Y-%m-%d}_${now:%H-%M-%S}/dataset=${data.dataset.dataset_name}
+
+sweep:
+  dir: ${paths.root_dir}/outputs/default/${now:%Y-%m-%d}_${now:%H-%M-%S}/dataset=${data.dataset.dataset_name}

@@ -1,3 +1,0 @@
-weighted: true
-time_to_accuracy_target: null
-loss: ${method.hyperparameters.client.loss}

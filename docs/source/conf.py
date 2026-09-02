@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 project = 'ARMLET'
 copyright = '2026, Baudouin NALINE'
 author = 'Baudouin NALINE'
-release = '0.2'
+release = '0.3.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -47,7 +47,6 @@ apidoc_modules = [
     {
         'path': '../../armlet',
         'destination': 'api',
-        'exclude_patterns': ['**/FL_decentralized/*', '**/results_analysis/*'],
         'max_depth': 4,
         'follow_links': False,
         'separate_modules': True,

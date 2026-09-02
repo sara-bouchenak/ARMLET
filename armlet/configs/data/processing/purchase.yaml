@@ -1,0 +1,5 @@
+conversion_to_tensors:
+  _target_: armlet.data.processing.format_conversion.convert_dataframes_to_tensors
+  _apply_directly_to_subdata_: True
+  X_dtype: float32
+  y_dtype: long

@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - /experiment/examples/datasets/default.yaml
+  - override /data/dataset: image/celeba.yaml
+  - override /data/processing: celeba.yaml
+  - override /method/hyperparameters/model: resnet18.yaml 
+  - override /eval: binary_only_global.yaml
+  - override /exp: gpu.yaml

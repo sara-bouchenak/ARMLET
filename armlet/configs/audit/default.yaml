@@ -1,0 +1,45 @@
+metric_types_to_audit:
+  perf_global: True
+  perf_locals: True
+  perf_prefit: True
+  perf_postfit: True
+  comp_costs: True
+  comm_costs: True
+
+last_n_rounds: 20
+agg_func: mean
+
+utility_metrics:
+
+  accuracy:
+    objective: above
+    threshold_medium: 82
+    threshold_good: 83
+    last_n_rounds: 10
+    agg_func: null
+
+  recall:
+    objective: above
+    threshold_medium: 80
+    threshold_good: 82
+
+fairness_metrics:
+
+  age_eod:
+    objective: below
+    threshold_medium: 10
+    threshold_good: 5
+
+  gender_eod:
+    objective: below
+    threshold_medium: 10
+    threshold_good: 5
+
+cost_metrics:
+
+  tot_model_size_in_bits:
+    objective: below
+    threshold_medium: 12000
+    threshold_good: 10000
+    last_n_rounds: 1
+    agg_func: null

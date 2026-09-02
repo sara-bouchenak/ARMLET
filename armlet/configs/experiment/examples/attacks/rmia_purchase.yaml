@@ -1,0 +1,16 @@
+# @package _global_
+
+defaults:
+  - /experiment/examples/attacks/default
+  - /method/hyperparameters/attack: rmia.yaml
+
+method:
+  hyperparameters:
+    attack:
+      shadow_train:
+        num_ref_models: 4
+        n_epochs: 10
+      signal_conversion:
+        temperature: 2.0
+      score_aggregation:
+        offline_a: 0.33

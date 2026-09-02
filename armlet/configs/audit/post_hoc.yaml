@@ -1,0 +1,12 @@
+defaults:
+  - default.yaml
+
+exp_dir: ${paths.root_dir}/outputs/example/post_hoc_audit
+
+cost_metrics:
+  training_time:
+    objective: below
+    threshold_medium: 350
+    threshold_good: 300
+    last_n_rounds: 1
+    agg_func: null

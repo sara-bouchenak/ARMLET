@@ -1,0 +1,111 @@
+# @package _global_
+
+armlet:
+  mode: federation
+
+paths:
+  root_dir: .
+  data_dir: ${paths.root_dir}/datasets
+  output_dir: ${hydra:runtime.output_dir}
+
+data:
+  dataset:
+    dataset_name: DC
+    _target_: armlet.data.datasets.load_DC_dataset
+    path: ./datasets/DC/raw_data/dutch_census_2001.txt
+    sensitive_attributes: [age, gender]
+    train_size: 0.8
+
+  splitter:
+    distribution:
+      _target_: armlet.data.splitter.ArmletDataSplitter.iid
+    _target_: armlet.data.splitter.ArmletDataSplitter
+    client_split: 0.2
+    client_val_split: 0.5
+    keep_test: false
+    server_test: false
+    server_test_union: true
+    server_split: 0.0
+    server_val_split: 0.0
+    uniform_test: false
+
+  processing:
+    one_hot_encoding:
+      _target_: armlet.data.processing.feature_encoding.one_hot_encoding_pipeline
+      _apply_directly_to_subdata_: false
+    conversion_to_num:
+      _target_: armlet.data.processing.format_conversion.convert_bool_and_cat_to_num
+      _apply_directly_to_subdata_: true
+    normalization:
+      _target_: armlet.data.processing.normalization.normalization_pipeline
+      _apply_directly_to_subdata_: false
+      cols_to_exclude: ${data.dataset.sensitive_attributes}
+    conversion_to_tensors:
+      _target_: armlet.data.processing.format_conversion.convert_dataframes_to_tensors
+      _apply_directly_to_subdata_: true
+      sensitive_attributes: ${data.dataset.sensitive_attributes}
+
+  others:
+    sampling_perc: 1.0
+
+  seed: 42
+
+exp:
+  device: cpu
+  seed: 42
+  inmemory: true
+  train: true
+
+protocol:
+  eligible_perc: 1.0
+  n_clients: 10
+  n_rounds: 150
+
+method:
+
+  _target_: armlet.FL_pipeline.FL_algorithms.ArmletCentralizedFL
+
+  hyperparameters:
+
+    client:
+      batch_size: 128
+      local_epochs: 10
+      loss:
+        _target_: torch.nn.BCELoss
+      optimizer:
+        name: SGD
+        lr: 0.001
+        weight_decay: 0.01
+      scheduler:
+        name: StepLR
+        gamma: 1
+        step_size: 1
+
+    server:
+      weighted: true
+      loss: ${method.hyperparameters.client.loss}
+
+    model:
+      _target_: armlet.utils.net.LogRegression
+      input_size: null #auto
+      num_classes: null #auto
+
+eval:
+  _target_: armlet.eval.evaluators.MultiCriteriaBinaryClassEval
+  eval_every: 1
+  pre_fit: true
+  post_fit: true
+  locals: true
+  server: true
+  sensitive_attributes: ${data.dataset.sensitive_attributes}
+  metrics:
+    fairness: armlet.eval.metrics.BinaryFairnessMetrics
+
+logger:
+  _target_: armlet.utils.log.ArmletLog
+  comm_costs_tracker:
+    track_every: ${protocol.n_rounds}
+    clients_at_end_fit: true
+    server_at_start_round: true
+
+save: {}

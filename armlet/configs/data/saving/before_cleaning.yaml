@@ -1,0 +1,4 @@
+save_dir: ${paths.data_dir}/${data.dataset.dataset_name}
+save_data_before_cleaning: True
+save_data_after_cleaning: False
+save_data_after_processing: False

@@ -1,0 +1,8 @@
+# @package _global_
+
+defaults:
+  - override /hydra: example.yaml
+
+protocol:
+  n_clients: 2
+  n_rounds: 2

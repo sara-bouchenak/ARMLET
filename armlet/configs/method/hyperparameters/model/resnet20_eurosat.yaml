@@ -1,0 +1,20 @@
+# @package method.hyperparameters
+
+defaults:
+  - default.yaml
+
+model:
+  _target_: armlet.utils.net.EuroSATResNet20
+  fc_size: 256
+
+client:
+
+  batch_size: 64
+
+  loss:
+    _target_: armlet.utils.custom_loss.IntegerCrossEntropyLoss
+
+  optimizer:
+    name: Adagrad
+    lr: 0.001
+    weight_decay: 0.0

@@ -8,6 +8,7 @@ Submodules
    :maxdepth: 4
 
    armlet.audit.auditor
+   armlet.audit.load_metrics
 
 Module contents
 ---------------

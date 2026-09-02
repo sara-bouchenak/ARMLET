@@ -14,11 +14,11 @@ def apply_processing_to_data(data, function, **func_args):
         if "clients" in key:
             for id_client, client_data in subdata.items():
                 if client_data != None:
-                    processed_client_data = function(client_data, key)
+                    processed_client_data = function(client_data, data_key=key)
                     data[key][id_client] = processed_client_data
         else:
             if subdata != None:
-                processed_server_data = function(subdata, key)
+                processed_server_data = function(subdata, data_key=key)
                 data[key] = processed_server_data
     return data
 

@@ -1,0 +1,5 @@
+# @package _global_
+
+defaults:
+  - /experiment/examples/attacks/default
+  - /method/hyperparameters/attack: shokri.yaml

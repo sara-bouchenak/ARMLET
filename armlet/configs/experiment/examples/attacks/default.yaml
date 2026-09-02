@@ -1,0 +1,25 @@
+# @package _global_
+defaults:
+  - override /data/splitter: shadow.yaml
+  - override /data/dataset: tabular/purchase.yaml
+  - override /data/processing: purchase.yaml
+  - override /method/hyperparameters/model: mlp_purchase.yaml
+  - override /eval: multiclass.yaml
+  - override /hydra: example.yaml
+
+protocol:
+  n_clients: 2
+  n_rounds: 10
+
+data:
+  seed: 42
+  splitter:
+    shadow_perc: 0.5
+    client_split: 0.2
+    client_val_split: 0.5
+    keep_test: true
+    server_test: true
+    server_test_union: false
+    server_split: 0.0
+    server_val_split: 0.0
+    uniform_test: false

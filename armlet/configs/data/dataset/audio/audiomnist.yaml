@@ -1,0 +1,7 @@
+dataset_name: AudioMNIST
+_target_: armlet.data.datasets.load_${data.dataset.dataset_name}_dataset
+path: ${paths.data_dir}/${data.dataset.dataset_name}/raw_data
+test_speakers: ["56", "57", "58", "59", "60"]
+max_samples_per_class: null
+max_total_samples: null
+num_classes: 10

@@ -1,14 +1,36 @@
 (config_federation_mode)=
 
-# Configuration
+# Federation configuration
 
-In this page, we provide an overview of all the main configuration groups and values that can be used in **ARMLET** when running FL experiments (with the `federation` mode of `armlet`).
+In this page, we provide an overview of all the main configuration groups and values that can be used in **ARMLET** when running FL experiments (with the `federation` mode of **ARMLET**).
+This way of managing configurations relies on YAML and is based on the one proposed by [Fluke](https://makgyver.github.io/fluke/configuration.html), which uses [Hydra](https://hydra.cc/).
 
-See [Configuration prerequisites](config) for any information about the general configuration groups and values of **ARMLET**.
+```{eval-rst}
 
-## Main configuration categories of the `federation` mode
+.. important::
+  For the following or any other configuration explanations, we distinguish between two types of configuration elements:
+  the **configuration values** (e.g., ``exp.seed``), which can be accessed using a ``.``,
+  and the **configuration groups** (e.g., ``data/dataset``), which refer to a configuration file containing one or more config values and must be accessed using a ``/``.
 
-The main configuration groups related to the `federation` mode are:
+```
+
+In **ARMLET**, we compose both config groups and config values to run experiments with the desired configurations.
+The config values are grouped into different categories (see below), which are organized into several subfolders within the ``ARMLET_DIR/armlet/configs`` folder.
+These subfolders contain many pre-defined YAML config files that can be used when running experiments.
+
+## Configuration categories
+
+First, the general configuration groups used in each **ARMLET** mode (including the `federation` mode) are:
+
+- [`armlet`](config_armlet): for choosing the mode of **ARMLET**;
+
+- [`experiment`](config_experiment): for composing multiple configurations;
+
+- [`hydra`](config_hydra): for managing Hydra;
+
+- [`paths`](config_paths): for the general paths (datasets and outputs).
+
+Then, the configuration groups specific to the `federation` mode are:
 
 - [`data`](config_data): for everything related to data;
 
@@ -28,7 +50,7 @@ The main configuration groups related to the `federation` mode are:
 
 .. seealso::
   All the essential config values are explained in the subpages, but the different options (i.e., config files) for each config group are not detailed.
-  Please look at the ``ARMLET_DIR/configs`` folder to explore the different config group possibilities.
+  Please look at the ``ARMLET_DIR/armlet/configs`` folder to explore the different config group possibilities.
 
 ```
 
@@ -45,18 +67,16 @@ armlet:
 
 paths:
   root_dir: .
-  data_dir: ./datasets
-  log_dir: ./logs
+  data_dir: ${paths.root_dir}/datasets
   output_dir: ${hydra:runtime.output_dir}
 
-
 data:
-
   dataset:
-    dataset_name: Adult
-    _target_: armlet.data.datasets.load_Adult_dataset
-    path: ./datasets/Adult/raw_data
-    sensitive_attributes: [age, gender, race]
+    dataset_name: DC
+    _target_: armlet.data.datasets.load_DC_dataset
+    path: ./datasets/DC/raw_data/dutch_census_2001.txt
+    sensitive_attributes: [age, gender]
+    train_size: 0.8
 
   splitter:
     distribution:
@@ -70,11 +90,6 @@ data:
     server_split: 0.0
     server_val_split: 0.0
     uniform_test: false
-
-  cleaning:
-    missing_values:
-      _target_: armlet.data.cleaning.missing_values.RemoveMV
-    name: default
 
   processing:
     one_hot_encoding:
@@ -120,38 +135,40 @@ method:
       loss:
         _target_: torch.nn.BCELoss
       optimizer:
-        lr: 0.001
         name: SGD
+        lr: 0.001
         weight_decay: 0.01
       scheduler:
-        gamma: 1
         name: StepLR
+        gamma: 1
         step_size: 1
+
+    server:
+      weighted: true
+      loss: ${method.hyperparameters.client.loss}
 
     model:
       _target_: armlet.utils.net.LogRegression
-      input_size: 99
-      num_classes: 1
-
-    server:
-      loss:
-        _target_: torch.nn.BCELoss
-      time_to_accuracy_target: null
-      weighted: true
+      input_size: null #auto
+      num_classes: null #auto
 
 eval:
   _target_: armlet.eval.evaluators.MultiCriteriaBinaryClassEval
   eval_every: 1
+  pre_fit: true
+  post_fit: true
   locals: true
+  server: true
+  sensitive_attributes: ${data.dataset.sensitive_attributes}
   metrics:
     fairness: armlet.eval.metrics.BinaryFairnessMetrics
-  post_fit: true
-  pre_fit: true
-  server: true
 
 logger:
   _target_: armlet.utils.log.ArmletLog
-  json_log_dir: ${paths.output_dir}
+  comm_costs_tracker:
+    track_every: ${protocol.n_rounds}
+    clients_at_end_fit: true
+    server_at_start_round: true
 
 save: {}
 
@@ -163,6 +180,10 @@ save: {}
     :maxdepth: 2
     :hidden:
 
+    Armlet<armlet>
+    Experiment<experiment>
+    Hydra<hydra>
+    Paths<paths>
     Data<data>
     Eval<eval>
     Exp<exp>

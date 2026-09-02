@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - /experiment/examples/datasets/default.yaml
+  - override /data/dataset: image/fairface.yaml
+  - override /data/processing: fairface.yaml
+  - override /method/hyperparameters/model: vgg11.yaml 
+  - override /eval: binary_only_global.yaml
+  - override /exp: gpu.yaml

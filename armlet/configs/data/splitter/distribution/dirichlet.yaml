@@ -1,0 +1,4 @@
+_target_: armlet.data.splitter.ArmletDataSplitter.safe_label_dirichlet_skew
+alpha: 1.0
+min_sample_per_class: 20
+seed: ${data.seed}

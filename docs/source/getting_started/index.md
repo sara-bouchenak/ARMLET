@@ -12,6 +12,6 @@ On these subpages, you will find everything you need to get started with **ARMLE
 
     install
     run_first_exp
-    tutorials/index
+    tutorials
 
 ```

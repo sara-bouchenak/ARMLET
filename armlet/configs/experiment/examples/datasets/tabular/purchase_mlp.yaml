@@ -1,0 +1,8 @@
+# @package _global_
+
+defaults:
+  - /experiment/examples/datasets/default.yaml
+  - override /data/dataset: tabular/purchase.yaml
+  - override /data/processing: purchase.yaml
+  - override /method/hyperparameters/model: mlp_purchase.yaml
+  - override /eval: multiclass.yaml

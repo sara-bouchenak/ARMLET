@@ -1,0 +1,14 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - armlet: federation.yaml
+  - hydra: default.yaml
+  - paths: default.yaml
+  - data: default.yaml
+  - exp: cpu.yaml
+  - protocol: default.yaml
+  - method: default.yaml
+  - eval: binary_class.yaml
+  - logger: default.yaml
+  - save: no_model_saving.yaml

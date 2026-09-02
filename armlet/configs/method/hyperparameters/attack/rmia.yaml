@@ -1,0 +1,28 @@
+_target_: armlet.attack.mia.rmia.RMIA
+
+eval:
+  _target_: armlet.attack.evaluator.MIAEvaluator
+  eval_every: 1
+  eval_min_epoch: 2
+  tpr_fpr: 0.001
+  best_balanced_asr: True
+  delta_metrics: False
+
+shadow_train:
+  seed: 0
+  num_ref_models: 5
+  ref_val_ratio: 0.1
+  n_epochs: 10 #ref_epochs
+  print_every: 5
+
+signal_conversion:
+  signal: sm_taylor_softmax_relative
+  temperature: 1.0
+  taylor_m: 0.6
+  taylor_n: 4
+
+score_aggregation:
+  offline: True
+  offline_a: 1.0
+  proportiontocut: 0.0
+  gamma: 2.0

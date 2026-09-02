@@ -1,0 +1,12 @@
+# @package method.hyperparameters
+
+defaults:
+  - default.yaml
+
+model:
+  _target_: armlet.utils.net.MLP
+  hidden_sizes: [64, 32]
+
+client:
+  loss: 
+    _target_: torch.nn.BCEWithLogitsLoss

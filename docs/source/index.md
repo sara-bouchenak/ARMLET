@@ -9,18 +9,21 @@ It is designed to be modular and flexible, so that adding features is meant to b
 
 ```bash
 ├── armlet/
-│   ├── audit/                      # Module for performing post-hoc audit
+│   ├── attack/                     # Attack module to evaluate model privacy during training (e.g., membership inference attacks)
+│   ├── audit/                      # Audit module (e.g., load past experiment results, post-hoc audit of these metrics, online audit)
+│   ├── configs/                    # Configuation files for ARMLET
 │   ├── data/                       # Data loading pipeline (loading, splitting, cleaning, processing, ...)
-│   ├── eval/                       # Evaluator for binary classification, including multi-criteria metrics
-│   ├── FL_pipeline/                # Modules occuring during the FL process
-│   │   ├── data_selection/         # Data selection module
-│   │   └── FL_algorithms/          # Custom FL algorithms based on fluke template (client, server, ...)
-│   ├── results_analysis/           # Independant module for loading and analyzing experiments results
-│   └── utils/                      # Configs, loggers, losses, pytorch models
-├── configs/                        # Configuation files for experiments
-├── datasets/                       # Datasets
+│   ├── eval/                       # Evaluator integrating multi-criteria metrics
+│   ├── FL_pipeline/                # Modules occuring during the FL pipeline
+│   │   └── FL_algorithms/          # FL algorithms based on fluke template (client, server, ...)
+│   ├── plot/                       # Plot module for analyzing and plotting experiment results
+│   ├── utils/                      # Configs, loggers, trackers, losses, pytorch models
+│   ├── federation.py               # Federation mode pipeline
+│   ├── hpo.py                      # HPO module for tuning hyperparameters
+│   └── run.py                      # Main function when calling armlet
+├── datasets/                       # Datasets folder
 ├── docs/                           # ARMLET documentation
-├── outputs/                        # Experiments outputs
+├── outputs/                        # Outputs of the experiments (federation, audit, hpo)
 ├── tutorials/                      # Tutorials
 ├── LICENSE
 ├── README.md

@@ -13,7 +13,7 @@ def normalization_pipeline(data, cols_to_exclude: list[str] = []):
     norm_cols = df.columns.tolist()
     norm_cols = [col for col in norm_cols if col not in cols_to_exclude]
 
-    if norm_cols != []:
+    if norm_cols:
 
         scaler = StandardScaler()
         scaler.fit(df[norm_cols])
@@ -29,7 +29,7 @@ def normalization_pipeline(data, cols_to_exclude: list[str] = []):
     else:
         return data
 
-def transform_data_with_scaler(subdata, data_key, scaler, norm_cols):
+def transform_data_with_scaler(subdata, scaler, norm_cols, **kwargs):
     X, y = subdata
     X[norm_cols] = scaler.transform(X[norm_cols])
     return X, y

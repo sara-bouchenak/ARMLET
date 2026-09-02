@@ -1,0 +1,5 @@
+defaults:
+  - cpu.yaml
+
+device: cuda
+inmemory: true

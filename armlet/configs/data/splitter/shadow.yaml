@@ -1,0 +1,5 @@
+defaults:
+  - union_clients_test.yaml
+
+_target_: armlet.attack.splitter.ShadowDataSplitter
+shadow_perc: 0.5

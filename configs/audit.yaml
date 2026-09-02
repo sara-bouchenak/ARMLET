@@ -1,8 +1,0 @@
-# @package _global_
-
-defaults:
-  - _self_
-  - armlet: audit.yaml
-  - hydra: audit.yaml
-  - paths: default.yaml
-  - audit: post_hoc.yaml

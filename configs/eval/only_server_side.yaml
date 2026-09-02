@@ -1,7 +1,0 @@
-defaults:
-  - default.yaml
-
-pre_fit: false
-post_fit: false
-locals: true
-server: true

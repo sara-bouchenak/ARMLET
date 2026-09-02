@@ -1,0 +1,2 @@
+weighted: true
+loss: ${method.hyperparameters.client.loss}

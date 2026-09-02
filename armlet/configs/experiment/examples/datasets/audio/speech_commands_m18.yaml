@@ -1,0 +1,19 @@
+# @package _global_
+
+defaults:
+  - /experiment/examples/datasets/default.yaml
+  - override /data/dataset: audio/speech_commands.yaml
+  - override /data/processing: audio.yaml
+  - override /method/hyperparameters/model: m18.yaml
+  - override /method/hyperparameters/client/optimizer: adam.yaml
+  - override /method/hyperparameters/client/scheduler: exponential_lr.yaml
+  - override /eval: multiclass_fluke.yaml
+  - override /exp: gpu.yaml
+
+method:
+  hyperparameters:
+    client:
+      batch_size: 64
+      optimizer:
+        lr: 0.001
+        weight_decay: 0.0005

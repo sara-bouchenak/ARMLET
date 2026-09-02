@@ -1,0 +1,3 @@
+path: ${concat:${paths.output_dir},/}
+save_every: ${protocol.n_rounds}
+global_only: false

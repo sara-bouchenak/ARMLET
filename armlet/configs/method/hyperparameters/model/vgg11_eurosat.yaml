@@ -1,0 +1,21 @@
+# @package method.hyperparameters
+
+defaults:
+  - default.yaml
+
+model:
+  _target_: armlet.utils.net.EuroSATVGG11
+  linear_size: 2048
+  group_norm_groups: 4
+
+client:
+
+  batch_size: 32
+
+  loss:
+    _target_: armlet.utils.custom_loss.IntegerCrossEntropyLoss
+
+  optimizer:
+    name: Adam
+    lr: 0.001
+    weight_decay: 0.0

@@ -11,7 +11,7 @@ def one_hot_encoding_pipeline(data):
 
     categorical_cols = df_X.select_dtypes(include=["object"]).columns.tolist()
 
-    if categorical_cols != []:
+    if categorical_cols:
     
         one_hot_encoder = OneHotEncoder()
         one_hot_encoder.fit(df_X[categorical_cols])
@@ -27,7 +27,7 @@ def one_hot_encoding_pipeline(data):
     else:
         return data
 
-def transform_data_with_one_hot_encoding(subdata, data_key, one_hot_encoder, categorical_cols):
+def transform_data_with_one_hot_encoding(subdata, one_hot_encoder, categorical_cols, **kwargs):
     X, y = subdata
     one_hot_array = one_hot_encoder.transform(X[categorical_cols]).toarray()
     one_hot_df = pd.DataFrame(one_hot_array, columns=one_hot_encoder.get_feature_names_out())

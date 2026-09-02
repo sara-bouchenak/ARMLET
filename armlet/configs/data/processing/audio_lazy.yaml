@@ -1,0 +1,4 @@
+validate_audio_metadata:
+  _target_: armlet.data.processing.audio.validate_audio_metadata
+  _apply_directly_to_subdata_: True
+  num_classes: ${data.dataset.num_classes}

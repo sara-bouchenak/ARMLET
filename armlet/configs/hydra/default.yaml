@@ -1,0 +1,12 @@
+run:
+  dir: ${paths.root_dir}/outputs/${armlet.mode}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+
+sweep:
+  dir: ${paths.root_dir}/outputs/${armlet.mode}/${now:%Y-%m-%d}_${now:%H-%M-%S}
+  subdir: hydra_job=${hydra.job.num},${sanitize_override_dirname:${hydra.job.override_dirname}}
+
+job:
+  config:
+    override_dirname:
+      exclude_keys:
+        - experiment

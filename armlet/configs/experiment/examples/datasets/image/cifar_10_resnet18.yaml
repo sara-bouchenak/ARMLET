@@ -1,0 +1,20 @@
+# @package _global_
+defaults:
+  - /experiment/examples/datasets/default.yaml
+  - override /data/dataset: image/cifar_10.yaml
+  - override /data/processing: cifar_10.yaml
+  - override /method/hyperparameters/model: resnet18.yaml 
+  - override /method/hyperparameters/client/optimizer: adam.yaml 
+  - override /method/hyperparameters/client/scheduler: exponential_lr.yaml
+  - override /eval: multiclass_fluke.yaml
+  - override /exp: gpu.yaml
+
+method:
+  hyperparameters:
+    client:
+      batch_size: 512
+      optimizer:
+        lr: 0.001
+        weight_decay: 5e-4
+      loss:
+        _target_: torch.nn.CrossEntropyLoss

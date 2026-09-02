@@ -7,6 +7,9 @@ import pandas as pd
 import glob
 import os
 import pyreadstat
+import pickle
+import torch
+import torchvision
 
 from armlet.data.utils import dataframe_train_test_split
 
@@ -388,3 +391,287 @@ def load_FairFace_dataset(
         data_dict[set_name] = (X, y)
 
     return data_dict
+
+
+def unpickle(file_path):
+    with open(file_path, "rb") as fo:
+        data_dict = pickle.load(fo, encoding="latin1")
+    return data_dict
+
+
+def load_CIFAR_10_dataset(path: str, **kwargs):
+    file_names = [f"data_batch_{i}" for i in range(1, 6)]
+    train_data_paths = [os.path.join(path, file_name) for file_name in file_names]
+
+    train_data_dicts = [unpickle(train_path) for train_path in train_data_paths]
+    x_train = np.vstack([batch["data"] for batch in train_data_dicts])
+    x_train = pd.DataFrame({"image_data": list(x_train)})
+    x_train["image_data"] = x_train["image_data"].apply(lambda x: torch.from_numpy(x))
+    y_train = []
+    for batch in train_data_dicts:
+        y_train.extend(batch["labels"])
+    y_train = pd.DataFrame({"label": y_train}, dtype="int64")
+
+    test_path = os.path.join(path, "test_batch")
+    test_data_dict = unpickle(test_path)
+    x_test = pd.DataFrame({"image_data": list(test_data_dict["data"])})
+    x_test["image_data"] = x_test["image_data"].apply(lambda x: torch.from_numpy(x))
+    y_test = pd.DataFrame({"label": test_data_dict["labels"]}, dtype="int64")
+
+    return {"train": (x_train, y_train), "test": (x_test, y_test)}
+
+def load_Purchase_dataset(
+    path: str,
+    train_data_file: str = "purchase_train_data.npy",
+    train_labels_file: str = "purchase_train_labels.npy",
+    test_data_file: str = "purchase_test_data.npy",
+    test_labels_file: str = "purchase_test_labels.npy",
+    **kwargs,
+) -> dict:
+
+    train_X = np.load(os.path.join(path, train_data_file))
+    train_y = np.load(os.path.join(path, train_labels_file)).astype(np.int64)
+    test_X = np.load(os.path.join(path, test_data_file))
+    test_y = np.load(os.path.join(path, test_labels_file)).astype(np.int64)
+
+    feature_names = [f"feature_{idx}" for idx in range(train_X.shape[1])]
+    return {
+        "train": (
+            pd.DataFrame(train_X, columns=feature_names),
+            pd.DataFrame(train_y, columns=["label"]),
+        ),
+        "test": (
+            pd.DataFrame(test_X, columns=feature_names),
+            pd.DataFrame(test_y, columns=["label"]),
+        ),
+    }
+
+def load_EuroSAT_dataset(
+    path: str,
+    train_size: float = 0.8,
+    download: bool = True,
+    train_subset_size: int | None = None,
+    test_subset_size: int | None = None,
+    split_strategy: str = "torch_random_split",
+    **kwargs,
+) -> dict:
+
+    try:
+        dataset = torchvision.datasets.EuroSAT(path, download=download)
+    except Exception as exc:
+        if not download:
+            raise
+        import ssl
+
+        print(f"[EuroSAT] download failed. Retrying without SSL verification. Error: {exc}")
+        ssl._create_default_https_context = ssl._create_unverified_context
+        dataset = torchvision.datasets.EuroSAT(path, download=True)
+
+    samples = getattr(dataset, "samples", None)
+    if samples is None:
+        samples = [(path_, target) for path_, target in zip(dataset._image_files, dataset.targets)]
+
+    X = pd.DataFrame({"image_path": [sample_path for sample_path, _ in samples]})
+    y = pd.DataFrame({"label": [int(label) for _, label in samples]})
+
+    train_idx, test_idx = _train_test_indices(
+        labels=y["label"].to_numpy(),
+        train_size=float(train_size),
+        strategy=split_strategy,
+    )
+
+    if train_subset_size is not None and train_subset_size > 0 and train_subset_size < len(train_idx):
+        train_idx = np.random.choice(train_idx, size=int(train_subset_size), replace=False)
+    if test_subset_size is not None and test_subset_size > 0 and test_subset_size < len(test_idx):
+        test_idx = np.random.choice(test_idx, size=int(test_subset_size), replace=False)
+
+    return {
+        "train": (
+            X.iloc[train_idx].reset_index(drop=True),
+            y.iloc[train_idx].reset_index(drop=True),
+        ),
+        "test": (
+            X.iloc[test_idx].reset_index(drop=True),
+            y.iloc[test_idx].reset_index(drop=True),
+        ),
+    }
+
+def _train_test_indices(labels: np.ndarray, train_size: float, strategy: str):
+    if strategy == "torch_random_split":
+        n_train = int(train_size * len(labels))
+        indices = torch.randperm(len(labels)).numpy()
+        return indices[:n_train], indices[n_train:]
+    if strategy == "stratified":
+        return _stratified_train_test_indices(labels, train_size=train_size)
+    raise ValueError(f"Unknown EuroSAT split_strategy={strategy!r}.")
+
+def _stratified_train_test_indices(labels: np.ndarray, train_size: float):
+    train_indices = []
+    test_indices = []
+    for class_label in np.unique(labels):
+        class_indices = np.where(labels == class_label)[0]
+        np.random.shuffle(class_indices)
+        n_train = int(train_size * len(class_indices))
+        train_indices.extend(class_indices[:n_train].tolist())
+        test_indices.extend(class_indices[n_train:].tolist())
+
+    train_indices = np.asarray(train_indices, dtype=int)
+    test_indices = np.asarray(test_indices, dtype=int)
+    np.random.shuffle(train_indices)
+    np.random.shuffle(test_indices)
+    return train_indices, test_indices
+    
+def load_Speech_commands_dataset(
+    path: str,
+    max_samples_per_class: int | None = None,
+    max_total_samples: int | None = None,
+    **kwargs,
+):
+
+    ### data source:http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz
+    ### extract the tar.gz file into "speech_commands" in the datasets dir, e.g. armlet/data/datasets/speech_commands
+
+    assert os.path.isdir(path), "Speech Commands dataset directory does not exist."
+
+    validation_file = os.path.join(path, "validation_list.txt")
+    testing_file = os.path.join(path, "testing_list.txt")
+
+    with open(validation_file, "r") as f:
+        validation_paths = set(line.strip() for line in f if line.strip())
+
+    with open(testing_file, "r") as f:
+        testing_paths = set(line.strip() for line in f if line.strip()) 
+
+    classes = [
+        "backward","bed", "bird", "cat", "dog", "down", "eight", "five", "follow",
+        "forward", "four", "go", "happy", "house", "learn", "left", "marvin", "nine",
+        "no", "off", "on", "one", "right", "seven", "sheila", "six", "stop", "three", "tree", 
+        "two", "up", "visual", "wow", "yes", "zero",
+    ]
+    label_mapping = {
+        class_name: class_id
+        for class_id, class_name in enumerate(classes)
+    }
+
+    data_list = []
+    for class_name in classes:
+        class_path = os.path.join(path, class_name)
+        files_path = sorted(glob.glob(os.path.join(class_path, "*.wav")))
+        for audio_path in files_path:
+            relative_path = os.path.relpath(
+                audio_path,
+                path,
+            ).replace(os.path.sep, "/")
+
+            if relative_path in testing_paths:
+                set_name = "test"
+            elif relative_path in validation_paths:
+                set_name = "validation"
+            else:
+                set_name = "train"
+
+            data_list.append(
+                {
+                    "audio_path": audio_path,
+                    "relative_path": relative_path,
+                    "class_name": class_name,
+                    "label": label_mapping[class_name],
+                    "set": set_name,
+                }
+            )
+
+    df = pd.DataFrame(data_list)
+
+    if max_samples_per_class is not None:
+        df = (
+            df.groupby("class_name", group_keys=False)
+            .head(max_samples_per_class)
+            .reset_index(drop=True)
+        )
+
+    if max_total_samples is not None:
+        df = df.head(max_total_samples).reset_index(drop=True)
+
+    mask_train = df["set"].isin(["train", "validation"])
+    mask_test = df["set"] == "test"
+
+    X_train = df.loc[mask_train, ["audio_path"]].reset_index(drop=True)
+    y_train = df.loc[mask_train, ["label"]].astype("int64").reset_index(drop=True)
+
+    X_test = df.loc[mask_test, ["audio_path"]].reset_index(drop=True)
+    y_test = df.loc[mask_test, ["label"]].astype("int64").reset_index(drop=True)
+
+    return {
+        "train": (X_train, y_train),
+        "test": (X_test, y_test)
+    } 
+
+def load_AudioMNIST_dataset(
+    path: str,
+    test_speakers: list[str | int] | None = None,
+    max_samples_per_class: int | None = None,
+    max_total_samples: int | None = None,
+    **kwargs,
+):
+    ### data source: https://github.com/soerenab/AudioMNIST/tree/master/data
+    ### curl the data dir from the repo above into AudioMNIST in the datasets dir, e.g. armlet/data/datasets/AudioMNIST/data
+    
+    assert os.path.isdir(path), "AudioMNIST dataset directory does not exist."
+
+    if test_speakers is None:
+        test_speakers = ["56", "57", "58", "59", "60"]
+    test_speakers = {str(speaker_id).zfill(2) for speaker_id in test_speakers}
+
+    files_path = sorted(glob.glob(os.path.join(path, "*", "*.wav")))
+    assert files_path, f"No AudioMNIST WAV files found under {path}."
+
+    data_list = []
+    for audio_path in files_path:
+        filename = os.path.splitext(os.path.basename(audio_path))[0]
+        digit, speaker_id, recording_id = filename.split("_")
+        speaker_id = speaker_id.zfill(2)
+
+        data_list.append(
+            {
+                "audio_path": audio_path,
+                "speaker_id": speaker_id,
+                "recording_id": int(recording_id),
+                "label": int(digit),
+                "set": "test" if speaker_id in test_speakers else "train",
+            }
+        )
+
+    df = pd.DataFrame(data_list)
+
+    if max_samples_per_class is not None:
+        df = (
+            df.groupby(["set", "label"], group_keys=False)
+            .head(max_samples_per_class)
+            .reset_index(drop=True)
+        )
+
+    if max_total_samples is not None:
+        df = df.head(max_total_samples).reset_index(drop=True)
+
+    assert df["label"].min() >= 0
+    assert df["label"].max() < 10
+
+    mask_train = df["set"] == "train"
+    mask_test = df["set"] == "test"
+    assert mask_train.any(), "AudioMNIST train split is empty."
+    assert mask_test.any(), "AudioMNIST test split is empty."
+
+    X_train = df.loc[
+        mask_train, ["audio_path", "speaker_id", "recording_id"]
+    ].reset_index(drop=True)
+    y_train = df.loc[mask_train, ["label"]].astype("int64").reset_index(drop=True)
+
+    X_test = df.loc[
+        mask_test, ["audio_path", "speaker_id", "recording_id"]
+    ].reset_index(drop=True)
+    y_test = df.loc[mask_test, ["label"]].astype("int64").reset_index(drop=True)
+
+    return {
+        "train": (X_train, y_train),
+        "test": (X_test, y_test),
+    }

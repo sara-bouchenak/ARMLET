@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - /experiment/examples/benchmark/default.yaml
+  - override /data/dataset: tabular/heart.yaml
+
+data:
+  seed: 200
+
+method:
+
+  hyperparameters:
+
+    server:
+      time_to_accuracy_target: 0.7
+
+    client:
+      batch_size: 128

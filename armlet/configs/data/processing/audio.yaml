@@ -1,0 +1,13 @@
+validate_audio_metadata:
+  _target_: armlet.data.processing.audio.validate_audio_metadata
+  _apply_directly_to_subdata_: True
+  num_classes: ${data.dataset.num_classes}
+
+preprocess_audio_data:
+  _target_: armlet.data.processing.audio.preprocess_audio_data
+  _apply_directly_to_subdata_: True
+  sample_rate: 16000
+  num_samples: 16000
+  normalization: peak
+  allow_resample: False
+  allow_multichannel_to_mono: True

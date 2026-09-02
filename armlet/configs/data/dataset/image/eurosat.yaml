@@ -1,0 +1,8 @@
+dataset_name: EuroSAT
+_target_: armlet.data.datasets.load_${data.dataset.dataset_name}_dataset
+path: ${paths.data_dir}/${data.dataset.dataset_name}/raw_data
+train_size: 0.8
+split_strategy: torch_random_split
+download: true
+train_subset_size: null
+test_subset_size: null

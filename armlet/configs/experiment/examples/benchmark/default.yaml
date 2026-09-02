@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - override /data/splitter: union_clients_test.yaml
+  - override /data/splitter/distribution: iid.yaml
+  - override /save: no_model_saving.yaml
+  - override /eval: binary_only_global.yaml
+  - override /method: default.yaml
+  - override /hydra: example.yaml
+
+protocol:
+  n_clients: 10
+  n_rounds: 150

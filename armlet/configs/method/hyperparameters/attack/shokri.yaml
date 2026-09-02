@@ -1,0 +1,38 @@
+_target_: armlet.attack.mia.shokri.ShokriMIA
+
+eval:
+  _target_: armlet.attack.evaluator.MIAEvaluator
+  eval_every: 1
+  eval_min_epoch: 2 #50
+  tpr_fpr: 0.001
+  best_balanced_asr: False
+  delta_metrics: False
+
+shadow_train:
+  n_epochs: 50
+  print_every: 10
+
+attack_train:
+
+  top_k: False
+  n_class_top_k: 1
+
+  n_epochs: 50
+  print_every: 10
+
+  batch_size: 1024
+  num_workers: 0
+  val_split: 0.1
+
+  model:
+    _target_: armlet.attack.net.AttackMLP
+    hidden_size: 128
+    out_classes: 1
+
+  optimizer:
+    _target_: torch.optim.Adam
+    lr: 0.001
+    weight_decay: 0.0
+
+  loss:
+    _target_: torch.nn.BCEWithLogitsLoss

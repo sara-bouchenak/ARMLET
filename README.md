@@ -7,6 +7,7 @@ It is designed to be modular and flexible, so that adding features is meant to b
 
 ## Table of Contents
 
+- [Repository structure](#repository-structure)
 - [Main Features](#main-features)
 - [How to install ARMLET](#how-to-install-armlet)
 - [Run your first FL experiment](#run-your-first-fl-experiment)
@@ -14,6 +15,32 @@ It is designed to be modular and flexible, so that adding features is meant to b
 - [Tutorials](#tutorials)
 - [Authors and main contributors](#authors-and-main-contributors)
 - [Acknowledgments](#acknowledgments)
+
+## Repository Structure
+
+```bash
+├── armlet/
+│   ├── attack/                     # Attack module to evaluate model privacy during training (e.g., membership inference attacks)
+│   ├── audit/                      # Audit module (e.g., load past experiment results, post-hoc audit of these metrics, online audit)
+│   ├── configs/                    # Configuation files for ARMLET
+│   ├── data/                       # Data loading pipeline (loading, splitting, cleaning, processing, ...)
+│   ├── eval/                       # Evaluator integrating multi-criteria metrics
+│   ├── FL_pipeline/                # Modules occuring during the FL pipeline
+│   │   └── FL_algorithms/          # FL algorithms based on fluke template (client, server, ...)
+│   ├── plot/                       # Plot module for analyzing and plotting experiment results
+│   ├── utils/                      # Configs, loggers, trackers, losses, pytorch models
+│   ├── federation.py               # Federation mode pipeline
+│   ├── hpo.py                      # HPO module for tuning hyperparameters
+│   └── run.py                      # Main function when calling armlet
+├── datasets/                       # Datasets folder
+├── docs/                           # ARMLET documentation
+├── outputs/                        # Outputs of the experiments (federation, audit, hpo)
+├── tutorials/                      # Tutorials
+├── LICENSE
+├── README.md
+├── pyproject.toml
+└── requirements.txt
+```
 
 ## Main Features
 
@@ -63,7 +90,7 @@ Then, run `armlet` to launch a single experiment with the default configuration 
 armlet
 ```
 
-To use your own configurations, see the following documentation page: [Running experiments](https://sara-bouchenak.github.io/ARMLET/user_guide/run_exp.html).
+To use your own configurations, see the following documentation page: [Running experiments](https://sara-bouchenak.github.io/ARMLET/user_guide/federation/run.html).
 
 ## Documentation
 
@@ -73,14 +100,15 @@ You will find detailed information on how the package works, how to install and 
 ## Tutorials
 
 we provide several tutorials in **ARMLET** to help you get started with our framework:
-- [Understanding the **federation mode** in ``armlet``](https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/federation_mode.html)
-- [Understanding the **data pipeline** in ``armlet``](https://sara-bouchenak.github.io/ARMLET/getting_started/tutorials/data_pipeline.html)
+- [Understanding the **federation mode** in ``armlet``](https://sara-bouchenak.github.io/ARMLET/user_guide/federation/tutorials/federation_mode.html)
+- [Understanding the **data pipeline** in ``armlet``](https://sara-bouchenak.github.io/ARMLET/user_guide/federation/tutorials/data_pipeline.html)
 
 ## Authors and main contributors
 
 - [Baudouin Naline](https://github.com/bnaline), LIRIS Lab, CNRS & INSA Lyon - *Idealization*, *Design*, *Development*, *Tutorial*, and *Documentation*
 - [James Sudlow](https://github.com/JamesSudlow), LIRIS Lab, CNRS & INSA Lyon - *Development*
-- Artur Vieira Pereira, LIRIS Lab, CNRS & INSA Lyon - *Development*
+- [Artur Vieira Pereira](https://github.com/arturvpereira), LIRIS Lab, CNRS & INSA Lyon - *Development*
+- [Ba Cong PHAM](https://github.com/eggspression), LIRIS Lab, CNRS & INSA Lyon - *Development*
 - [Sara Bouchenak](https://github.com/sara-bouchenak), LIRIS Lab, INSA Lyon - *Supervision*
 
 ## Acknowledgments

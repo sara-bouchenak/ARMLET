@@ -1,0 +1,8 @@
+_target_: armlet.data.processing.format_conversion.convert_lazy_audio_to_data_loaders
+sample_rate: 16000
+num_samples: 16000
+normalization: peak
+allow_resample: False
+allow_multichannel_to_mono: True
+num_workers: 4
+pin_memory: True

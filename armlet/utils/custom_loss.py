@@ -10,3 +10,8 @@ class BinaryHingeLoss(torch.nn.MarginRankingLoss):
         zeros = torch.zeros(x.shape)
         normalized_y = 2*y - 1
         return super().__call__(normalized_x, zeros, normalized_y)
+
+
+class IntegerCrossEntropyLoss(torch.nn.CrossEntropyLoss):
+    def forward(self, input: torch.Tensor, target: torch.Tensor):
+        return super().forward(input, target.squeeze(-1).long())

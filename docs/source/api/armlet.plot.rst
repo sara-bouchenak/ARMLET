@@ -9,7 +9,6 @@ Submodules
 
    armlet.plot.basics_plot
    armlet.plot.plot_experiments
-   armlet.plot.radar_plot
    armlet.plot.save
    armlet.plot.specific_plot
 

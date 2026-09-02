@@ -8,7 +8,6 @@ Subpackages
    :maxdepth: 4
 
    armlet.FL_pipeline.FL_algorithms
-   armlet.FL_pipeline.data_selection
 
 Module contents
 ---------------
